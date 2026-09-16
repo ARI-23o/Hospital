@@ -1,93 +1,34 @@
 import React, { useState } from 'react';
 import { 
   ClipboardList, Stethoscope, FileCheck, Shield, HelpCircle, 
-  ChevronDown, CheckCircle2, Phone, Sparkles, HeartPulse, Search
+  ChevronDown, CheckCircle2, Phone, Search, Sparkles
 } from 'lucide-react';
 import MarqueeTicker from '../components/MarqueeTicker';
+import { fullFaqsList } from '../data/faqsData';
 
 export default function PatientInfoPage({ setActiveTab }) {
   const [activeSection, setActiveSection] = useState('faqs');
-  const [openFaq, setOpenFaq] = useState(0); // First FAQ open by default
+  const [openFaq, setOpenFaq] = useState(null);
   const [faqSearch, setFaqSearch] = useState('');
 
   const sections = [
-    { id: 'faqs', label: 'Nephrology FAQs', fullLabel: 'Frequently Asked Questions (Nephrology)', icon: HelpCircle },
+    { id: 'faqs', label: 'All 36 FAQs', fullLabel: 'Complete Frequently Asked Questions (36 FAQs)', icon: HelpCircle },
     { id: 'before', label: 'Before Visit', fullLabel: 'Before Your Visit Checklist', icon: ClipboardList },
     { id: 'during', label: 'During Visit', fullLabel: 'During Your Visit & OPD Workflow', icon: Stethoscope },
     { id: 'after', label: 'After Visit', fullLabel: 'After Your Visit & Home Care', icon: FileCheck },
     { id: 'insurance', label: 'Insurance', fullLabel: 'Insurance & Payment Support', icon: Shield },
   ];
 
-  // Comprehensive FAQs copied & adapted from Sahyadri Hospitals Nephrology & clinical standards
-  const allFaqs = [
-    {
-      q: "What is the difference between a nephrologist and an urologist?",
-      a: "A Nephrologist (like Dr. Sagar Sarda) is a medical specialist focused on the internal function of the kidneys, managing conditions like Chronic Kidney Disease (CKD), acute kidney injury, dialysis, proteinuria, hypertension, and fluid/electrolyte balance to delay or prevent kidney failure without surgery. An Urologist is a surgeon specializing in anatomical and structural problems of the urinary tract and male reproductive system, such as surgical removal of kidney stones, prostate enlargement (BPH), and urinary tract blockages. Both specialties collaborate closely to deliver total kidney and urinary wellness.",
-      category: 'general'
-    },
-    {
-      q: "What are the early signs of kidney disease?",
-      a: "Kidney problems often develop silently with few symptoms in the early stages. However, common early warning signs include: swelling in the legs, ankles, feet, or face (edema); persistent high blood pressure; unexplained fatigue and weakness; foamy or bubbly urine; changes in urination frequency (especially at night); and mild nausea or loss of appetite.",
-      category: 'symptoms'
-    },
-    {
-      q: "Is dialysis the only option for kidney problems?",
-      a: "No. Dialysis is not the only option. In fact, most kidney conditions identified early can be effectively managed without immediate dialysis through targeted renoprotective medications (such as SGLT2 inhibitors and RAAS blockers), strict blood pressure and glucose control, individualized low-protein renal diets, and routine monitoring under a nephrologist.",
-      category: 'treatment'
-    },
-    {
-      q: "Why is early detection important in kidney care?",
-      a: "Because kidney disease often shows no obvious symptoms until 50% to 70% of functional nephrons are damaged, early detection through routine screenings (Serum Creatinine, eGFR, and Urine Microalbumin) is crucial. Early medical intervention can stabilize renal function, delay disease progression for years, and avoid emergency dialysis.",
-      category: 'screening'
-    },
-    {
-      q: "What are the main causes of kidney failure?",
-      a: "Kidney failure can result from progressive chronic kidney disease (CKD) or sudden acute injury. Globally and in India, the leading causes include: Diabetes Mellitus (Diabetic Nephropathy), Hypertension (High Blood Pressure), Glomerulonephritis (inflammation of kidney filtering units), Polycystic Kidney Disease (genetic), and untreated urinary obstructions or chronic kidney stones.",
-      category: 'causes'
-    },
-    {
-      q: "Why is kidney disease often called a 'silent condition'?",
-      a: "The kidneys have a remarkable compensatory capacity. They can continue filtering blood and removing wastes even when partially damaged without causing noticeable pain or discomfort. As a result, patients often feel completely normal during Stages 1, 2, and 3 until a routine blood or urine test reveals elevated creatinine or protein leakage.",
-      category: 'general'
-    },
-    {
-      q: "How can chronic kidney disease (CKD) progression be delayed?",
-      a: "CKD progression is slowed through strict blood pressure control (<130/80 mmHg), tight glycemic control in diabetics, adherence to prescribed renoprotective medicines (SGLT2 inhibitors, ACE/ARBs), reducing dietary sodium and animal protein, maintaining proper hydration, and strictly avoiding over-the-counter painkillers (NSAIDs like Ibuprofen/Diclofenac) which are toxic to kidneys.",
-      category: 'treatment'
-    },
-    {
-      q: "What medical reports should I carry for my consultation with Dr. Sagar Sarda?",
-      a: "Please bring all recent blood tests (Serum Creatinine, Blood Urea Nitrogen, Serum Electrolytes, Complete Blood Count, HbA1c), Urine Routine & Microalbumin reports, Ultrasound Abdomen/KUB scans, previous prescription sheets, discharge summaries, and home blood pressure/blood sugar logs.",
-      category: 'opd'
-    },
-    {
-      q: "Do I need to be on an empty stomach (fasting) for my visit?",
-      a: "For general nephrology consultations, fasting is not required. However, if you plan to get fasting blood glucose, lipid profile, or specific diagnostic biochemistry done on the same morning at our in-house laboratory, 8 to 10 hours of overnight fasting is recommended.",
-      category: 'opd'
-    },
-    {
-      q: "How can I prevent the recurrence of kidney stones?",
-      a: "Key preventive steps include consuming 2.5 to 3 liters of clean water daily (to maintain pale urine), restricting dietary sodium, moderating animal protein, avoiding excess oxalate-rich foods (if diagnosed with calcium oxalate stones), and undergoing a 24-hour urine metabolic evaluation to identify the exact biochemical trigger.",
-      category: 'stones'
-    },
-    {
-      q: "What is the role of High-Flux Hemodialysis?",
-      a: "High-Flux Hemodialysis utilizes advanced synthetic biocompatible membranes with larger pores and higher clearance rates, effectively removing larger middle-molecule uremic toxins as well as small solutes. This results in superior dialysis adequacy, reduced systemic inflammation, better cardiovascular preservation, and enhanced patient comfort.",
-      category: 'dialysis'
-    },
-    {
-      q: "What should I do in case of a sudden spike in blood pressure or sudden swelling?",
-      a: "Sudden facial or leg swelling, shortness of breath on lying flat, or severe spikes in blood pressure (systolic >180 mmHg) require immediate clinical attention. Contact our 24/7 hospital helpline (+91 98765 43210) or visit our OPD suite immediately for prompt triaging.",
-      category: 'emergency'
-    }
-  ];
-
   const filteredFaqs = faqSearch.trim() === ''
-    ? allFaqs
-    : allFaqs.filter(f => 
+    ? fullFaqsList
+    : fullFaqsList.filter(f => 
         f.q.toLowerCase().includes(faqSearch.toLowerCase()) || 
         f.a.toLowerCase().includes(faqSearch.toLowerCase())
       );
+
+  const midpoint = Math.ceil(filteredFaqs.length / 2);
+  const leftColumnFaqs = filteredFaqs.slice(0, midpoint);
+  const rightColumnFaqs = filteredFaqs.slice(midpoint);
 
   return (
     <div className="space-y-10 sm:space-y-16 pb-16">
@@ -99,10 +40,10 @@ export default function PatientInfoPage({ setActiveTab }) {
             Patient Support & Knowledge Hub
           </span>
           <h1 className="text-2xl sm:text-4xl font-extrabold mt-3 tracking-tight">
-            Patient Information & FAQs
+            Frequently Asked Questions ({fullFaqsList.length} Questions)
           </h1>
           <p className="text-xs sm:text-base text-slate-200 mt-2 font-normal leading-relaxed">
-            Clear answers to common questions about Nephrology, Urology, Dialysis, and preparing for your consultation.
+            All 36 clinical questions covering Nephrology, Urology, Dialysis, and preparing for your hospital visit.
           </p>
         </div>
       </section>
@@ -138,9 +79,9 @@ export default function PatientInfoPage({ setActiveTab }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Desktop Left Sidebar */}
-          <div className="hidden lg:block lg:col-span-4 bg-white rounded-3xl p-5 shadow-soft border border-slate-100 space-y-2 sticky top-28">
+          <div className="hidden lg:block lg:col-span-3 bg-white rounded-3xl p-5 shadow-soft border border-slate-100 space-y-2 sticky top-28">
             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider px-3 py-2">
-              Patient Guide Sections
+              Patient Guide
             </h3>
             {sections.map((sec) => {
               const Icon = sec.icon;
@@ -149,20 +90,20 @@ export default function PatientInfoPage({ setActiveTab }) {
                 <button
                   key={sec.id}
                   onClick={() => setActiveSection(sec.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-semibold transition-all text-left ${
+                  className={`w-full flex items-center gap-2.5 px-3.5 py-3 rounded-2xl text-xs sm:text-sm font-semibold transition-all text-left ${
                     isActive
                       ? 'bg-[#0F2D59] text-white shadow-md font-bold'
                       : 'text-slate-700 hover:bg-slate-50'
                   }`}
                 >
-                  <Icon className={`w-5 h-5 ${isActive ? 'text-teal-300' : 'text-teal-600'}`} />
-                  <span>{sec.fullLabel}</span>
+                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-teal-300' : 'text-teal-600'}`} />
+                  <span className="truncate">{sec.fullLabel}</span>
                 </button>
               );
             })}
 
             <div className="mt-6 pt-4 border-t border-slate-100 p-4 bg-teal-50/70 rounded-2xl">
-              <p className="text-xs font-bold text-[#0F2D59] mb-1">Have a specific question?</p>
+              <p className="text-xs font-bold text-[#0F2D59] mb-1">Have a medical question?</p>
               <p className="text-[11px] text-slate-600 mb-3">Our medical desk is available Mon - Sat (9 AM - 7 PM).</p>
               <a
                 href="tel:+919876543210"
@@ -174,9 +115,9 @@ export default function PatientInfoPage({ setActiveTab }) {
           </div>
 
           {/* Right Content Area */}
-          <div className="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 shadow-card border border-slate-100 min-h-[420px]">
+          <div className="lg:col-span-9 bg-white rounded-3xl p-5 sm:p-8 shadow-card border border-slate-100 min-h-[420px]">
             
-            {/* 1. FAQs Section (Copied from Sahyadri Hospital Nephrology + Clinical Essentials) */}
+            {/* 1. Complete 36 FAQs Section (2-Column Grid matching Sahyadri Hospital screenshot) */}
             {activeSection === 'faqs' && (
               <div className="space-y-6 animate-fadeIn">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
@@ -185,50 +126,84 @@ export default function PatientInfoPage({ setActiveTab }) {
                       Frequently Asked Questions
                     </h3>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      Authentic medical guidance based on hospital nephrology protocols
+                      Showing {filteredFaqs.length} of {fullFaqsList.length} total questions
                     </p>
                   </div>
 
                   {/* FAQ Search Bar */}
-                  <div className="relative w-full sm:w-64">
+                  <div className="relative w-full sm:w-72">
                     <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                     <input
                       type="text"
-                      placeholder="Search questions (e.g. dialysis, stones)..."
+                      placeholder="Search across all 36 FAQs (e.g. stones, CKD, BPH)..."
                       value={faqSearch}
                       onChange={(e) => setFaqSearch(e.target.value)}
-                      className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-teal-500"
+                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-teal-500"
                     />
                   </div>
                 </div>
 
-                {/* FAQs Accordion List */}
-                <div className="space-y-3">
-                  {filteredFaqs.map((faq, idx) => {
-                    const isOpen = openFaq === idx;
-                    return (
-                      <div
-                        key={idx}
-                        className={`rounded-2xl border transition-all overflow-hidden ${
-                          isOpen ? 'border-teal-500 bg-teal-50/20 shadow-xs' : 'border-slate-200 hover:border-slate-300'
-                        }`}
-                      >
-                        <button
-                          onClick={() => setOpenFaq(isOpen ? null : idx)}
-                          className="w-full p-4 text-left flex items-center justify-between font-bold text-xs sm:text-sm text-[#0F2D59] gap-3"
+                {/* 2-Column FAQs Grid (Exact Sahyadri Hospital Style) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+                  
+                  {/* Column 1 */}
+                  <div className="space-y-3">
+                    {leftColumnFaqs.map((faq) => {
+                      const isOpen = openFaq === faq.id;
+                      return (
+                        <div
+                          key={faq.id}
+                          className={`rounded-2xl border transition-all overflow-hidden ${
+                            isOpen ? 'border-teal-500 bg-teal-50/20 shadow-xs' : 'border-slate-200 hover:border-slate-300'
+                          }`}
                         >
-                          <span>{faq.q}</span>
-                          <ChevronDown className={`w-4 h-4 text-teal-600 shrink-0 transition-transform ${isOpen ? 'rotate-180 text-teal-700' : ''}`} />
-                        </button>
-                        {isOpen && (
-                          <div className="px-4 pb-4 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 animate-fadeIn">
-                            {faq.a}
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
+                          <button
+                            onClick={() => setOpenFaq(isOpen ? null : faq.id)}
+                            className="w-full p-3.5 sm:p-4 text-left flex items-center justify-between font-bold text-xs sm:text-sm text-[#0F2D59] gap-3"
+                          >
+                            <span>{faq.q}</span>
+                            <ChevronDown className={`w-4 h-4 text-teal-600 shrink-0 transition-transform ${isOpen ? 'rotate-180 text-teal-700' : ''}`} />
+                          </button>
+                          {isOpen && (
+                            <div className="px-4 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100 animate-fadeIn">
+                              {faq.a}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Column 2 */}
+                  <div className="space-y-3">
+                    {rightColumnFaqs.map((faq) => {
+                      const isOpen = openFaq === faq.id;
+                      return (
+                        <div
+                          key={faq.id}
+                          className={`rounded-2xl border transition-all overflow-hidden ${
+                            isOpen ? 'border-teal-500 bg-teal-50/20 shadow-xs' : 'border-slate-200 hover:border-slate-300'
+                          }`}
+                        >
+                          <button
+                            onClick={() => setOpenFaq(isOpen ? null : faq.id)}
+                            className="w-full p-3.5 sm:p-4 text-left flex items-center justify-between font-bold text-xs sm:text-sm text-[#0F2D59] gap-3"
+                          >
+                            <span>{faq.q}</span>
+                            <ChevronDown className={`w-4 h-4 text-teal-600 shrink-0 transition-transform ${isOpen ? 'rotate-180 text-teal-700' : ''}`} />
+                          </button>
+                          {isOpen && (
+                            <div className="px-4 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100 animate-fadeIn">
+                              {faq.a}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+
                 </div>
+
               </div>
             )}
 
@@ -242,10 +217,10 @@ export default function PatientInfoPage({ setActiveTab }) {
 
                 <div className="space-y-3">
                   {[
-                    { title: "Carry your previous medical reports", desc: "Past kidney function tests (KFT), urine tests, ultrasound KUB scans, and blood pressure logs." },
-                    { title: "Bring a complete list of current medications", desc: "Include all prescription drugs, ayurvedic/herbal supplements, pain relievers, and insulin dosages." },
-                    { title: "Note down your symptoms and questions", desc: "Write down when swelling started, urine changes, weakness, or questions you wish to ask the doctor." },
-                    { title: "Arrive 10-15 minutes early", desc: "Allows sufficient time for registration, blood pressure measurement, and vital signs documentation." },
+                    { title: 'Carry your previous medical reports', desc: 'Past kidney function tests (KFT), urine tests, ultrasound KUB scans, and blood pressure logs.' },
+                    { title: 'Bring a complete list of current medications', desc: 'Include all prescription drugs, ayurvedic/herbal supplements, pain relievers, and insulin dosages.' },
+                    { title: 'Note down your symptoms and questions', desc: 'Write down when swelling started, urine changes, weakness, or questions you wish to ask the doctor.' },
+                    { title: 'Arrive 10-15 minutes early', desc: 'Allows sufficient time for registration, blood pressure measurement, and vital signs documentation.' },
                   ].map((item, idx) => (
                     <div key={idx} className="flex items-start gap-3 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-100">
                       <CheckCircle2 className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
@@ -294,10 +269,10 @@ export default function PatientInfoPage({ setActiveTab }) {
 
                 <div className="space-y-3">
                   {[
-                    { title: "Strict Medication Adherence", desc: "Never stop or alter kidney or blood pressure medications without consulting Dr. Sagar Sarda." },
-                    { title: "Avoid Over-the-Counter Painkillers (NSAIDs)", desc: "Common pain medications like ibuprofen or diclofenac can cause rapid kidney injury." },
-                    { title: "Home Blood Pressure & Fluid Logging", desc: "Record your daily morning BP and monitor foot swelling or sudden weight changes." },
-                    { title: "Repeat Lab Tests Ahead of Next Follow-up", desc: "Have follow-up Creatinine and Electrolyte tests done 1-2 days prior to your next OPD appointment." },
+                    { title: 'Strict Medication Adherence', desc: 'Never stop or alter kidney or blood pressure medications without consulting Dr. Sagar Sarda.' },
+                    { title: 'Avoid Over-the-Counter Painkillers (NSAIDs)', desc: 'Common pain medications like ibuprofen or diclofenac can cause rapid kidney injury.' },
+                    { title: 'Home Blood Pressure & Fluid Logging', desc: 'Record your daily morning BP and monitor foot swelling or sudden weight changes.' },
+                    { title: 'Repeat Lab Tests Ahead of Next Follow-up', desc: 'Have follow-up Creatinine and Electrolyte tests done 1-2 days prior to your next OPD appointment.' },
                   ].map((item, idx) => (
                     <div key={idx} className="flex items-start gap-3 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-100">
                       <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
