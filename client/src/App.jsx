@@ -12,6 +12,7 @@ import PatientInfoPage from './pages/PatientInfoPage';
 import FacilitiesPage from './pages/FacilitiesPage';
 import ContactPage from './pages/ContactPage';
 import AppointmentPage from './pages/AppointmentPage';
+import FaqPage from './pages/FaqPage';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
@@ -35,6 +36,8 @@ export default function App() {
         return <FacilitiesPage setActiveTab={setActiveTab} />;
       case 'patient-info':
         return <PatientInfoPage setActiveTab={setActiveTab} />;
+      case 'faqs':
+        return <FaqPage setActiveTab={setActiveTab} />;
       case 'contact':
         return <ContactPage setActiveTab={setActiveTab} />;
       case 'appointment':

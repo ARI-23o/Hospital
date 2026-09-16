@@ -7,20 +7,15 @@ export default function Footer({ setActiveTab }) {
   const quickNav = [
     { label: 'Home', id: 'home' },
     { label: 'About Us', id: 'about' },
+    { label: 'Specialties & Services', id: 'services' },
     { label: 'Doctor Profile', id: 'doctor' },
-    { label: 'Facilities', id: 'facilities' },
-  ];
-
-  const specialtyLinks = [
-    { label: 'Nephrology & Kidney Care', id: 'services' },
-    { label: 'Urology & Urinary Care', id: 'services' },
-    { label: 'Hemodialysis Unit', id: 'facilities' },
-    { label: 'All Services & Treatments', id: 'services' },
+    { label: 'Facilities & Dialysis Unit', id: 'facilities' },
   ];
 
   const patientLinks = [
     { label: 'Book Appointment', id: 'appointment' },
-    { label: 'Patient Information & FAQs', id: 'patient-info' },
+    { label: 'Patient Guide & Checklists', id: 'patient-info' },
+    { label: 'Frequently Asked Questions (FAQs)', id: 'faqs' },
     { label: 'Contact & Location', id: 'contact' },
   ];
 
@@ -89,13 +84,13 @@ export default function Footer({ setActiveTab }) {
             </ul>
           </div>
 
-          {/* Column 3: Specialties (lg:col-span-3) */}
+          {/* Column 3: Patient Support & FAQs (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-3">
             <h4 className="text-xs font-bold text-teal-400 uppercase tracking-wider">
-              Specialties & Care
+              Patient Care & Help
             </h4>
             <ul className="space-y-1.5 text-xs">
-              {specialtyLinks.map((item, idx) => (
+              {patientLinks.map((item, idx) => (
                 <li key={idx}>
                   <button
                     onClick={() => handleNav(item.id)}

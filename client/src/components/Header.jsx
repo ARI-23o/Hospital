@@ -18,8 +18,6 @@ export default function Header({ activeTab, setActiveTab }) {
     { id: 'about', label: 'About' },
     { id: 'services', label: 'Specialties & Services' },
     { id: 'doctor', label: 'Doctor Profile' },
-    { id: 'facilities', label: 'Facilities' },
-    { id: 'patient-info', label: 'Patient Info' },
     { id: 'contact', label: 'Contact Us' },
   ];
 
