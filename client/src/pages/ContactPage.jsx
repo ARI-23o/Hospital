@@ -12,7 +12,7 @@ export default function ContactPage({ setActiveTab }) {
   const [status, setStatus] = useState({ loading: false, success: false, error: '' });
 
   const MAP_URL = "https://maps.app.goo.gl/f1P5sEp6G8aWFc39A";
-  const MAP_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.662993132626!2d79.2959868!3d19.9495898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd2d56cd0476929%3A0x99b7c10995248e85!2sDr.%20Sagar%20Sarda&#39;s%20Chandrapur%20Kidney%20Care!5e0!3m2!1sen!2sin!4v1710565000000!5m2!1sen!2sin";
+  const MAP_EMBED_URL = "https://maps.google.com/maps?q=19.9495898,79.2959868&t=&z=16&ie=UTF8&iwloc=&output=embed";
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
