@@ -6,11 +6,16 @@
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "client": "cd client && npm run dev",
-    "server": "cd server && npm run dev",
-    "build": "cd client && npm install && npm run build && cd ../server && npm install",
+    "server": "node server/src/index.js",
+    "build": "cd client && npm install && npm run build",
     "start": "node server/src/index.js"
   },
   "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
     "concurrently": "^8.2.2"
   }
 }
