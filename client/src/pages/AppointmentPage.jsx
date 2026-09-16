@@ -21,6 +21,8 @@ export default function AppointmentPage({ setActiveTab }) {
   const [loading, setLoading] = useState(false);
   const [confirmedBooking, setConfirmedBooking] = useState(null);
   const [error, setError] = useState('');
+  const [bookedSlots, setBookedSlots] = useState([]);
+  const [slotsLoading, setSlotsLoading] = useState(false);
 
   const timeSlots = [
     '09:30 AM - 10:00 AM',
@@ -33,6 +35,35 @@ export default function AppointmentPage({ setActiveTab }) {
     '05:30 PM - 06:00 PM',
     '06:30 PM - 07:00 PM'
   ];
+
+  // Fetch booked slots whenever appointment_date changes
+  useEffect(() => {
+    const fetchBookedSlots = async () => {
+      if (!formData.appointment_date) return;
+      setSlotsLoading(true);
+      try {
+        const res = await fetch(`/api/appointments/booked-slots?date=${formData.appointment_date}`);
+        if (res.ok) {
+          const booked = await res.json();
+          setBookedSlots(Array.isArray(booked) ? booked : []);
+
+          // If currently selected slot is already booked, pick first available
+          if (Array.isArray(booked) && booked.includes(formData.time_slot)) {
+            const firstAvailable = timeSlots.find(s => !booked.includes(s));
+            if (firstAvailable) {
+              setFormData(prev => ({ ...prev, time_slot: firstAvailable }));
+            }
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch booked slots:', err);
+      } finally {
+        setSlotsLoading(false);
+      }
+    };
+
+    fetchBookedSlots();
+  }, [formData.appointment_date]);
 
   const consultationReasons = [
     'Chronic Kidney Disease (CKD) Consultation',
@@ -202,9 +233,16 @@ export default function AppointmentPage({ setActiveTab }) {
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1 text-xs sm:text-sm">
-                      Preferred Time Slot <span className="text-rose-500">*</span>
-                    </label>
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="block font-semibold text-slate-700 text-xs sm:text-sm">
+                        Preferred Time Slot <span className="text-rose-500">*</span>
+                      </label>
+                      {bookedSlots.length > 0 && (
+                        <span className="text-[10px] text-amber-600 font-bold bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                          {bookedSlots.length} slot(s) filled today
+                        </span>
+                      )}
+                    </div>
                     <select
                       name="time_slot"
                       value={formData.time_slot}
@@ -212,9 +250,19 @@ export default function AppointmentPage({ setActiveTab }) {
                       required
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 bg-slate-50/50 font-medium"
                     >
-                      {timeSlots.map((slot, idx) => (
-                        <option key={idx} value={slot}>{slot}</option>
-                      ))}
+                      {timeSlots.map((slot, idx) => {
+                        const isBooked = bookedSlots.includes(slot);
+                        return (
+                          <option 
+                            key={idx} 
+                            value={slot}
+                            disabled={isBooked}
+                            className={isBooked ? 'text-slate-400 bg-slate-100 italic' : 'text-slate-800 font-medium'}
+                          >
+                            {slot} {isBooked ? '— (❌ Booked / Full)' : '— (✅ Available)'}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                 </div>

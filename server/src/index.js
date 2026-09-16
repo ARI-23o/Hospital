@@ -161,6 +161,72 @@ app.patch("/api/appointments/:id/status", (req, res) => {
   }
 });
 
+// 3.1 Booked Slots for a Date (to prevent double bookings)
+app.get("/api/appointments/booked-slots", (req, res) => {
+  try {
+    const { date } = req.query;
+    if (!date) {
+      return res.json([]);
+    }
+    const rows = db.prepare(`
+      SELECT time_slot FROM appointments
+      WHERE appointment_date = ? AND status != 'Cancelled'
+    `).all(date);
+
+    const bookedSlots = rows.map(r => r.time_slot);
+    res.json(bookedSlots);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch booked slots", details: err.message });
+  }
+});
+
+// 3.2 Live OPD Queue Status & Management
+app.get("/api/opd/queue", (req, res) => {
+  try {
+    let queue = db.prepare("SELECT * FROM opd_queue WHERE id = 1").get();
+    if (!queue) {
+      db.prepare(`
+        INSERT INTO opd_queue (id, current_token, next_token, estimated_wait_mins, status, doctor_name)
+        VALUES (1, 14, 18, 20, 'active', 'Dr. Sagar Damodar Sarda')
+      `).run();
+      queue = db.prepare("SELECT * FROM opd_queue WHERE id = 1").get();
+    }
+    res.json(queue);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch OPD queue status", details: err.message });
+  }
+});
+
+app.post("/api/opd/queue", (req, res) => {
+  try {
+    const { current_token, next_token, estimated_wait_mins, status } = req.body;
+
+    const current = db.prepare("SELECT * FROM opd_queue WHERE id = 1").get();
+    if (!current) {
+      db.prepare(`
+        INSERT INTO opd_queue (id, current_token, next_token, estimated_wait_mins, status)
+        VALUES (1, 1, 2, 15, 'active')
+      `).run();
+    }
+
+    const updatedCurrentToken = current_token !== undefined ? parseInt(current_token, 10) : current.current_token;
+    const updatedNextToken = next_token !== undefined ? parseInt(next_token, 10) : current.next_token;
+    const updatedWaitMins = estimated_wait_mins !== undefined ? parseInt(estimated_wait_mins, 10) : current.estimated_wait_mins;
+    const updatedStatus = status || current.status;
+
+    db.prepare(`
+      UPDATE opd_queue
+      SET current_token = ?, next_token = ?, estimated_wait_mins = ?, status = ?, updated_at = CURRENT_TIMESTAMP
+      WHERE id = 1
+    `).run(updatedCurrentToken, updatedNextToken, updatedWaitMins, updatedStatus);
+
+    const updatedQueue = db.prepare("SELECT * FROM opd_queue WHERE id = 1").get();
+    res.json({ message: "OPD Queue successfully updated!", queue: updatedQueue });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to update OPD queue", details: err.message });
+  }
+});
+
 // 4. Contact Inquiries Endpoints
 app.post("/api/inquiries", (req, res) => {
   try {

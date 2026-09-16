@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
   UserCheck, Calendar, Phone, Mail, Clock, FileText, CheckCircle2, 
-  XCircle, RefreshCw, Search, MessageSquare, AlertCircle, Filter
+  XCircle, RefreshCw, Search, MessageSquare, AlertCircle, Filter, 
+  Activity, ArrowRight, Play, Pause, Power, RotateCcw, Sparkles
 } from 'lucide-react';
 
 export default function AdminPortal({ setActiveTab }) {
@@ -13,6 +14,48 @@ export default function AdminPortal({ setActiveTab }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+
+  // Live OPD Queue State
+  const [queueData, setQueueData] = useState({
+    current_token: 14,
+    next_token: 18,
+    estimated_wait_mins: 20,
+    status: 'active'
+  });
+  const [queueLoading, setQueueLoading] = useState(false);
+
+  const fetchQueue = async () => {
+    try {
+      const res = await fetch('/api/opd/queue');
+      if (res.ok) {
+        const data = await res.json();
+        setQueueData(data);
+      }
+    } catch (err) {
+      console.error('Failed to load OPD queue:', err);
+    }
+  };
+
+  const updateQueue = async (updates) => {
+    setQueueLoading(true);
+    try {
+      const res = await fetch('/api/opd/queue', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates)
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setQueueData(data.queue);
+        setMessage('⚡ Live OPD Queue updated successfully & synced with homepage!');
+        setTimeout(() => setMessage(''), 3500);
+      }
+    } catch (err) {
+      console.error('Failed to update queue:', err);
+    } finally {
+      setQueueLoading(false);
+    }
+  };
 
   const fetchAppointments = async () => {
     setLoading(true);
@@ -46,6 +89,7 @@ export default function AdminPortal({ setActiveTab }) {
   useEffect(() => {
     fetchAppointments();
     fetchInquiries();
+    fetchQueue();
   }, [filterStatus, filterDate]);
 
   const updateStatus = async (id, newStatus) => {
@@ -86,23 +130,23 @@ export default function AdminPortal({ setActiveTab }) {
           </div>
           <div>
             <span className="text-[10px] sm:text-xs font-bold bg-teal-400/20 text-teal-300 px-2 py-0.5 rounded-full border border-teal-400/30">
-              Doctor Management
+              Doctor & Reception Desk
             </span>
             <h2 className="text-xl sm:text-2xl font-extrabold text-white mt-1">
               Dr. Sagar Sarda — Clinical Portal
             </h2>
             <p className="text-xs text-slate-200">
-              Review appointments & incoming inquiries
+              Real-Time OPD Queue Control & Appointment Management
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-2 w-full md:w-auto">
           <button
-            onClick={() => { fetchAppointments(); fetchInquiries(); }}
+            onClick={() => { fetchAppointments(); fetchInquiries(); fetchQueue(); }}
             className="flex-1 md:flex-initial bg-white/10 hover:bg-white/20 text-white font-semibold text-xs px-3.5 py-2.5 rounded-xl border border-white/20 transition flex items-center justify-center gap-1.5"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} /> Refresh
+            <RefreshCw className={`w-3.5 h-3.5 ${loading || queueLoading ? 'animate-spin' : ''}`} /> Refresh
           </button>
           <button
             onClick={() => setActiveTab('appointment')}
@@ -119,6 +163,137 @@ export default function AdminPortal({ setActiveTab }) {
           {message}
         </div>
       )}
+
+      {/* LIVE OPD QUEUE CONTROLLER CARD */}
+      <div className="bg-white rounded-3xl p-5 sm:p-7 shadow-card border-2 border-teal-500/30 space-y-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+              <h3 className="text-base sm:text-lg font-extrabold text-[#0F2D59]">
+                Live OPD Queue & Token Controller
+              </h3>
+            </div>
+            <p className="text-xs text-slate-500">
+              Changes made here update the Homepage real-time queue counter instantly for waiting patients.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl text-xs font-bold">
+            <span className="text-slate-500 px-2">Status:</span>
+            <button
+              onClick={() => updateQueue({ status: 'active' })}
+              className={`px-2.5 py-1 rounded-lg transition ${queueData.status === 'active' ? 'bg-emerald-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'}`}
+            >
+              🟢 In Session
+            </button>
+            <button
+              onClick={() => updateQueue({ status: 'break' })}
+              className={`px-2.5 py-1 rounded-lg transition ${queueData.status === 'break' ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'}`}
+            >
+              🟡 On Break
+            </button>
+            <button
+              onClick={() => updateQueue({ status: 'closed' })}
+              className={`px-2.5 py-1 rounded-lg transition ${queueData.status === 'closed' ? 'bg-rose-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'}`}
+            >
+              🔴 Closed
+            </button>
+          </div>
+        </div>
+
+        {/* Live Controller Dashboard */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          
+          {/* Current Token Control */}
+          <div className="bg-teal-50/80 rounded-2xl p-4 border border-teal-100 flex flex-col justify-between space-y-3">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-700 block">Current Token Inside</span>
+              <div className="flex items-baseline gap-2 mt-1">
+                <span className="text-3xl sm:text-4xl font-extrabold text-teal-900">#{queueData.current_token}</span>
+                <span className="text-xs font-medium text-teal-700">In Doctor Cabin</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => updateQueue({ 
+                  current_token: queueData.current_token + 1,
+                  next_token: Math.max(queueData.next_token, queueData.current_token + 2)
+                })}
+                className="flex-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-3 rounded-xl text-xs transition shadow-sm flex items-center justify-center gap-1.5"
+              >
+                <span>Call Next Token (#{queueData.current_token + 1})</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+              {queueData.current_token > 1 && (
+                <button
+                  onClick={() => updateQueue({ current_token: queueData.current_token - 1 })}
+                  className="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 font-bold px-3 py-2 rounded-xl text-xs transition"
+                  title="Previous Token"
+                >
+                  -1
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Next Available Token Allotment */}
+          <div className="bg-sky-50/80 rounded-2xl p-4 border border-sky-100 flex flex-col justify-between space-y-3">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-sky-700 block">Next Available Token</span>
+              <div className="flex items-baseline gap-2 mt-1">
+                <span className="text-3xl sm:text-4xl font-extrabold text-sky-900">#{queueData.next_token}</span>
+                <span className="text-xs font-medium text-sky-700">For Walk-In / Online</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => updateQueue({ next_token: queueData.next_token + 1 })}
+                className="flex-1 bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-3 rounded-xl text-xs transition shadow-sm"
+              >
+                + Issue Walk-In Token
+              </button>
+              <button
+                onClick={() => updateQueue({ current_token: 1, next_token: 2 })}
+                className="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 font-semibold px-2.5 py-2 rounded-xl text-xs transition flex items-center gap-1"
+                title="Reset daily queue back to #1"
+              >
+                <RotateCcw className="w-3 h-3 text-slate-500" /> Reset
+              </button>
+            </div>
+          </div>
+
+          {/* Estimated Wait Time Selector */}
+          <div className="bg-amber-50/80 rounded-2xl p-4 border border-amber-100 flex flex-col justify-between space-y-3">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 block">Estimated Wait Time</span>
+              <div className="flex items-baseline gap-2 mt-1">
+                <span className="text-3xl sm:text-4xl font-extrabold text-amber-900">~{queueData.estimated_wait_mins}m</span>
+                <span className="text-xs font-medium text-amber-700">Minutes / Turn</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-4 gap-1">
+              {[10, 15, 20, 30].map((mins) => (
+                <button
+                  key={mins}
+                  onClick={() => updateQueue({ estimated_wait_mins: mins })}
+                  className={`py-1.5 text-xs font-bold rounded-lg border transition ${
+                    queueData.estimated_wait_mins === mins
+                      ? 'bg-amber-500 text-white border-amber-600'
+                      : 'bg-white text-slate-700 border-slate-200 hover:bg-amber-100'
+                  }`}
+                >
+                  {mins}m
+                </button>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
 
       {/* Tabs */}
       <div className="flex items-center space-x-2 border-b border-slate-200 pb-2 overflow-x-auto custom-scrollbar">

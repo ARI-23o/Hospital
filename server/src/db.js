@@ -53,7 +53,26 @@ export function initDB() {
       treatments TEXT,
       icon_name TEXT NOT NULL
     );
+
+    CREATE TABLE IF NOT EXISTS opd_queue (
+      id INTEGER PRIMARY KEY,
+      current_token INTEGER NOT NULL DEFAULT 1,
+      next_token INTEGER NOT NULL DEFAULT 2,
+      estimated_wait_mins INTEGER NOT NULL DEFAULT 15,
+      status TEXT NOT NULL DEFAULT 'active',
+      doctor_name TEXT NOT NULL DEFAULT 'Dr. Sagar Damodar Sarda',
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
   `);
+
+  // Seed default OPD queue row if empty
+  const queueRow = db.prepare("SELECT * FROM opd_queue WHERE id = 1").get();
+  if (!queueRow) {
+    db.prepare(`
+      INSERT INTO opd_queue (id, current_token, next_token, estimated_wait_mins, status, doctor_name)
+      VALUES (1, 14, 18, 20, 'active', 'Dr. Sagar Damodar Sarda')
+    `).run();
+  }
 
   // Seed sample services if empty
   const count = db.prepare("SELECT COUNT(*) as cnt FROM services").get();
