@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Phone, MapPin, Clock, HeartPulse, UserCheck, Menu, X, Calendar, ChevronRight } from 'lucide-react';
 
 export default function Header({ activeTab, setActiveTab }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Compact header on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About Us' },
+    { id: 'about', label: 'About' },
     { id: 'services', label: 'Services' },
-    { id: 'doctor', label: 'Doctor Profile' },
+    { id: 'doctor', label: 'Doctor' },
     { id: 'facilities', label: 'Facilities' },
-    { id: 'patient-info', label: 'Patient Information' },
-    { id: 'contact', label: 'Contact Us' },
+    { id: 'patient-info', label: 'Patient Info' },
+    { id: 'contact', label: 'Contact' },
   ];
 
   const handleNavClick = (id) => {
@@ -21,78 +31,80 @@ export default function Header({ activeTab, setActiveTab }) {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 transition-all duration-300 animate-fade-in">
       
-      {/* Top emergency & clinic announcement bar */}
-      <div className="bg-[#0F2D59] text-white text-[11px] sm:text-xs py-2 px-3 sm:px-4 border-b border-slate-800">
+      {/* 1. Essential Top Announcement Bar (Minimal & Compact) */}
+      <div className="bg-[#0F2D59] text-white text-[11px] py-1.5 px-3 sm:px-6 border-b border-slate-800">
         <div className="max-w-7xl mx-auto flex justify-between items-center gap-2">
-          <div className="flex items-center space-x-2 sm:space-x-4 truncate">
+          
+          <div className="flex items-center space-x-3 truncate">
             <a 
               href="https://maps.app.goo.gl/f1P5sEp6G8aWFc39A"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 text-teal-300 font-medium hover:underline truncate"
+              className="flex items-center gap-1 text-teal-300 hover:text-white transition truncate font-medium"
             >
-              <MapPin className="w-3.5 h-3.5 text-teal-400 shrink-0" />
-              <span className="truncate">Chandrapur, Maharashtra</span>
+              <MapPin className="w-3 h-3 text-teal-400 shrink-0" />
+              <span className="truncate">Behind LIC Office, Chandrapur, Maharashtra</span>
             </a>
-            <span className="hidden md:inline text-slate-400">|</span>
-            <span className="hidden md:flex items-center gap-1.5 text-slate-200">
-              <Clock className="w-3.5 h-3.5 text-teal-400 shrink-0" /> Mon - Sat: 9:00 AM - 7:00 PM
+            <span className="hidden md:inline text-slate-500">|</span>
+            <span className="hidden md:flex items-center gap-1 text-slate-300">
+              <Clock className="w-3 h-3 text-teal-400 shrink-0" /> Mon - Sat: 9:00 AM - 7:00 PM
             </span>
           </div>
 
-          <div className="flex items-center space-x-2 shrink-0">
+          <div className="flex items-center space-x-3 shrink-0 text-[11px]">
             <a 
               href="tel:+919876543210" 
-              className="flex items-center gap-1 font-semibold text-teal-300 hover:text-white transition"
+              className="flex items-center gap-1 font-bold text-teal-300 hover:text-white transition"
             >
-              <Phone className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-              <span className="hidden sm:inline">OPD Helpline:</span> +91 98765 43210
+              <Phone className="w-3 h-3 text-emerald-400 animate-pulse" />
+              <span>+91 98765 43210</span>
             </a>
             <button 
               onClick={() => handleNavClick('admin')} 
-              className="hidden sm:flex bg-slate-700/80 hover:bg-slate-700 text-slate-200 text-[11px] px-2 py-0.5 rounded items-center gap-1 transition"
+              className="hidden sm:inline-flex bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px] px-2 py-0.5 rounded items-center gap-1 transition border border-slate-700"
               title="Doctor Management Portal"
             >
               <UserCheck className="w-3 h-3 text-teal-300" /> Dr. Portal
             </button>
           </div>
+
         </div>
       </div>
 
-      {/* Main Navbar */}
+      {/* 2. Main Desktop / Mobile Navigation Bar (Height ~72px) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+        <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-16' : 'h-[72px]'}`}>
           
-          {/* Hospital Logo */}
+          {/* Clinic Logo */}
           <div 
             onClick={() => handleNavClick('home')} 
-            className="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer group"
+            className="flex items-center space-x-2.5 cursor-pointer group shrink-0"
           >
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-tr from-[#0F2D59] via-[#0D9488] to-[#10B981] flex items-center justify-center shadow-md shadow-teal-500/10 group-hover:scale-105 transition-transform shrink-0">
-              <HeartPulse className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#0F2D59] via-[#0D9488] to-[#10B981] flex items-center justify-center shadow-md shadow-teal-500/10 group-hover:scale-105 transition-transform shrink-0">
+              <HeartPulse className="w-6 h-6 text-white" />
             </div>
             <div>
-              <div className="flex items-center gap-1">
-                <span className="text-base sm:text-xl font-extrabold tracking-tight text-[#0F2D59]">Chandrapur</span>
-                <span className="text-base sm:text-xl font-extrabold tracking-tight text-[#0D9488]">Kidney Care</span>
+              <div className="flex items-center gap-1 leading-none">
+                <span className="text-lg font-extrabold tracking-tight text-[#0F2D59]">Chandrapur</span>
+                <span className="text-lg font-extrabold tracking-tight text-[#0D9488]">Kidney Care</span>
               </div>
-              <p className="text-[9px] sm:text-[11px] font-medium text-slate-500 tracking-wider uppercase truncate max-w-[200px] sm:max-w-none">
-                Nephrology Clinic • Dr. Sagar Sarda
+              <p className="text-[10px] font-medium text-slate-500 tracking-wider uppercase mt-0.5">
+                Dr. Sagar Sarda • Nephrologist
               </p>
             </div>
           </div>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links (Compact 7 Labels, No Wrapping) */}
           <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 relative ${
                   activeTab === item.id
-                    ? 'text-[#0F2D59] bg-teal-50/80 shadow-sm border border-teal-100 font-bold'
+                    ? 'text-[#0F2D59] bg-teal-50/90 font-bold border border-teal-100/80 shadow-xs'
                     : 'text-slate-600 hover:text-[#0F2D59] hover:bg-slate-50'
                 }`}
               >
@@ -101,17 +113,19 @@ export default function Header({ activeTab, setActiveTab }) {
             ))}
           </nav>
 
-          {/* Action CTAs & Mobile Hamburger */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
+          {/* Desktop Right Button & Mobile Toggle */}
+          <div className="flex items-center space-x-2">
+            
+            {/* Single-line Book Appointment Button with hover lift */}
             <button
               onClick={() => handleNavClick('appointment')}
-              className="hidden sm:flex bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-semibold text-sm px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg shadow-md shadow-emerald-600/20 transition-all items-center gap-2"
+              className="hidden sm:inline-flex bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl shadow-md shadow-emerald-600/20 hover:shadow-emerald-600/30 btn-hover-effect whitespace-nowrap items-center gap-1.5"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
-              Book Appointment
+              <Calendar className="w-4 h-4 text-emerald-200" />
+              <span>Book Appointment</span>
             </button>
 
-            {/* Mobile Hamburger Toggle */}
+            {/* Mobile Hamburger Toggle Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 active:scale-95 transition"
@@ -119,17 +133,18 @@ export default function Header({ activeTab, setActiveTab }) {
             >
               {isMobileMenuOpen ? <X className="w-6 h-6 text-slate-900" /> : <Menu className="w-6 h-6 text-slate-900" />}
             </button>
+
           </div>
 
         </div>
       </div>
 
-      {/* Mobile Fullscreen / Slide Drawer Menu */}
+      {/* 3. Mobile Slide-Out Drawer Navigation */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[104px] z-40 bg-slate-950/60 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white border-b border-slate-200 shadow-2xl p-4 sm:p-6 max-h-[80vh] overflow-y-auto custom-scrollbar space-y-3 animate-slideDown">
+        <div className="lg:hidden fixed inset-0 top-[100px] z-40 bg-slate-950/60 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white border-b border-slate-200 shadow-2xl p-4 sm:p-6 max-h-[82vh] overflow-y-auto custom-scrollbar space-y-3">
             
-            <div className="text-xs font-bold text-slate-400 uppercase tracking-wider px-2">
+            <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-2">
               Menu Navigation
             </div>
 
@@ -150,13 +165,12 @@ export default function Header({ activeTab, setActiveTab }) {
               ))}
             </div>
 
-            {/* Mobile Quick Action Buttons inside Drawer */}
             <div className="pt-3 border-t border-slate-100 space-y-2">
               <button
                 onClick={() => handleNavClick('appointment')}
                 className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm"
               >
-                <Calendar className="w-4 h-4" /> Book an Appointment
+                <Calendar className="w-4 h-4" /> Book Appointment
               </button>
 
               <button

@@ -8,22 +8,76 @@
   }
 }
 
-.subtle-glass {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-.gradient-mesh {
-  background: radial-gradient(circle at 10% 20%, rgba(224, 242, 254, 0.6) 0%, rgba(240, 253, 250, 0.6) 50%, rgba(255, 255, 255, 0.9) 100%);
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.gradient-teal-navy {
-  background: linear-gradient(135deg, #0F2D59 0%, #0D9488 100%);
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-right {
+  animation: fadeInRight 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Micro Transitions */
+.card-hover-effect {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease;
+}
+.card-hover-effect:hover {
+  transform: translateY(-4px);
+}
+
+.btn-hover-effect {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.btn-hover-effect:hover {
+  transform: translateY(-1.5px);
+}
+.btn-hover-effect:active {
+  transform: translateY(0);
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
+  height: 5px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
   background: #f1f5f9;
