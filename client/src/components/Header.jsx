@@ -81,16 +81,20 @@ export default function Header({ activeTab, setActiveTab }) {
             onClick={() => handleNavClick('home')} 
             className="flex items-center space-x-2.5 cursor-pointer group shrink-0"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#0F2D59] via-[#0D9488] to-[#10B981] flex items-center justify-center shadow-md shadow-teal-500/10 group-hover:scale-105 transition-transform shrink-0">
-              <HeartPulse className="w-6 h-6 text-white" />
+            <div className="w-11 h-11 rounded-xl bg-white p-1 border border-slate-200 shadow-sm flex items-center justify-center group-hover:scale-105 transition-transform shrink-0 overflow-hidden">
+              <img
+                src="/hospital_logo.png"
+                alt="Chandrapur Kidney Care"
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <div className="flex items-center gap-1 leading-none">
                 <span className="text-lg font-extrabold tracking-tight text-[#0F2D59]">Chandrapur</span>
                 <span className="text-lg font-extrabold tracking-tight text-[#0D9488]">Kidney Care</span>
               </div>
-              <p className="text-[10px] font-medium text-slate-500 tracking-wider uppercase mt-0.5">
-                Kidney & Urology Care • Dr. Sagar Sarda
+              <p className="text-[10px] font-semibold text-slate-500 tracking-wider uppercase mt-0.5">
+                Care • Compassion • Commitment
               </p>
             </div>
           </div>

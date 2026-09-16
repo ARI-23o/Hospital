@@ -84,7 +84,7 @@ export default function AboutPage({ setActiveTab }) {
                 <strong>Chandrapur Kidney Care</strong> is dedicated to providing accessible, compassionate, and patient-centered care for kidney and urinary health in Chandrapur, Maharashtra.
               </p>
               <p>
-                Founded under the guidance of <strong className="text-[#0F2D59]">Dr. Sagar Sarda</strong> (Consultant Nephrologist, MD, DM Nephrology), our goal is to help patients understand their conditions, receive appropriate specialist care, and make informed decisions about their health.
+                Founded under the guidance of <strong className="text-[#0F2D59]">Dr. Sagar Damodar Sarda</strong> (MBBS, MD Medicine, DM Nephrology - Consultant Nephrologist & Kidney Transplant Physician), our goal is to help patients understand their conditions, receive world-class specialist care, and make informed decisions about their health.
               </p>
               <p>
                 Our services cover Nephrology and Urology, with care tailored to the needs of each patient. From kidney disease management and dialysis guidance to urological consultations, we aim to make quality healthcare easier to access.
@@ -142,7 +142,7 @@ export default function AboutPage({ setActiveTab }) {
               <div className="rounded-2xl overflow-hidden bg-slate-900 relative shadow-md group">
                 <img
                   src="/doctor_sagar_sarda.jpg"
-                  alt="Dr. Sagar Sarda Consultant Nephrologist"
+                  alt="Dr. Sagar Damodar Sarda Consultant Nephrologist & Kidney Transplant Physician"
                   className="w-full h-80 sm:h-96 object-cover object-top transition duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0F2D59] via-[#0F2D59]/20 to-transparent"></div>
@@ -151,9 +151,9 @@ export default function AboutPage({ setActiveTab }) {
                   <span className="text-[10px] font-bold bg-teal-500 text-white px-2.5 py-0.5 rounded-full uppercase">
                     Lead Consultant
                   </span>
-                  <h3 className="text-xl font-bold mt-1">Dr. Sagar Sarda</h3>
-                  <p className="text-xs text-teal-200">Consultant Nephrologist • MD, DM (Nephrology)</p>
-                  <p className="text-[11px] text-slate-300 mt-1">Chandrapur Kidney Care</p>
+                  <h3 className="text-xl font-bold mt-1">Dr. Sagar Damodar Sarda</h3>
+                  <p className="text-xs text-teal-200">MBBS, MD Medicine, DM Nephrology</p>
+                  <p className="text-[11px] text-slate-300 mt-0.5">Consultant Nephrologist & Kidney Transplant Physician</p>
                 </div>
               </div>
             </div>

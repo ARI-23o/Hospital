@@ -208,16 +208,16 @@ export default function HomePage({ setActiveTab }) {
                 <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-teal-400 to-blue-500 p-0.5 shadow-sm shrink-0 overflow-hidden group-hover:scale-105 transition-transform">
                   <img
                     src="/doctor_sagar_sarda.jpg"
-                    alt="Dr. Sagar Sarda"
+                    alt="Dr. Sagar Damodar Sarda"
                     className="w-full h-full object-cover object-top rounded-full"
                   />
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h4 className="font-bold text-white text-sm group-hover:text-teal-300 transition">Dr. Sagar Sarda</h4>
+                    <h4 className="font-bold text-white text-sm group-hover:text-teal-300 transition">Dr. Sagar Damodar Sarda</h4>
                     <span className="bg-teal-500/20 text-teal-300 border border-teal-500/30 text-[10px] font-bold px-2 py-0.5 rounded">Lead Consultant</span>
                   </div>
-                  <p className="text-xs text-slate-300 truncate">MD (General Medicine) • DM (Nephrology)</p>
+                  <p className="text-xs text-slate-300 truncate">MBBS, MD Medicine, DM Nephrology • Transplant Physician</p>
                 </div>
                 <ChevronRight className="w-4 h-4 text-teal-400 group-hover:translate-x-1 transition-transform" />
               </motion.div>

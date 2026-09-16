@@ -39,26 +39,33 @@ export default function Footer({ setActiveTab }) {
           {/* Column 1: Hospital Info (lg:col-span-4) */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center space-x-2.5">
-              <div className="w-10 h-10 rounded-xl bg-teal-500 flex items-center justify-center text-white font-bold shadow-md shadow-teal-500/20 shrink-0">
-                <HeartPulse className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-xl bg-white p-1 border border-slate-700 shadow-md flex items-center justify-center shrink-0 overflow-hidden">
+                <img
+                  src="/hospital_logo.png"
+                  alt="Chandrapur Kidney Care"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <span className="text-lg font-bold text-white tracking-tight">
                   Chandrapur <span className="text-teal-400">Kidney Care</span>
                 </span>
+                <p className="text-[10px] text-teal-300 font-semibold uppercase tracking-wider">
+                  सेवा • करुणा • बांधिलकी
+                </p>
                 <p className="text-[10px] text-slate-400 uppercase tracking-wider">
-                  Kidney & Urology Care • Chandrapur
+                  Care • Compassion • Commitment
                 </p>
               </div>
             </div>
             
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              Comprehensive center for kidney and urinary health under Dr. Sagar Sarda (MD, DM Nephrology). Dedicated to evidence-based nephrology and urology care in Chandrapur, Maharashtra.
+              Super-speciality kidney center led by Dr. Sagar Damodar Sarda (MBBS, MD Medicine, DM Nephrology - Consultant Nephrologist & Kidney Transplant Physician).
             </p>
 
             <div className="inline-flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700 text-[11px] text-teal-300">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>Specialist Kidney & Urology Consultations</span>
+              <span>Doctor-Led Kidney & Transplant Physician Care</span>
             </div>
           </div>
 

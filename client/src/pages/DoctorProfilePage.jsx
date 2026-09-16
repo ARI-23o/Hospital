@@ -16,9 +16,9 @@ export default function DoctorProfilePage({ setActiveTab }) {
   const doctorsList = [
     {
       id: 'dr-sagar-sarda',
-      name: 'Dr. Sagar Sarda',
-      designation: 'Lead Consultant Nephrologist',
-      degrees: 'MD (General Medicine), DM (Nephrology)',
+      name: 'Dr. Sagar Damodar Sarda',
+      designation: 'Consultant Nephrologist & Kidney Transplant Physician',
+      degrees: 'MBBS, MD Medicine, DM Nephrology',
       experience: '12+ Years Experience',
       sessions: '15,000+ Dialysis Sessions Supervised',
       department: 'Nephrology & Renal Medicine',
@@ -28,9 +28,10 @@ export default function DoctorProfilePage({ setActiveTab }) {
       opdTimings: 'Mon - Sat: 09:00 AM - 01:30 PM & 04:30 PM - 07:30 PM',
       location: 'Chandrapur Kidney Care (Main OPD Suite)',
       languages: 'English, Marathi, Hindi',
-      about: 'Dr. Sagar Sarda is a renowned super-specialist Nephrologist dedicated to evidence-based medical kidney care, dialysis supervision, hypertension management, and renal preservation in Chandrapur, Maharashtra.',
+      about: 'Dr. Sagar Damodar Sarda is a super-specialist Nephrologist & Kidney Transplant Physician dedicated to evidence-based medical kidney care, kidney transplantation guidance, dialysis supervision, and hypertension management in Chandrapur, Maharashtra.',
       expertise: [
         'Chronic Kidney Disease (CKD Stages 1-5)',
+        'Kidney Transplant Evaluation & Post-Transplant Care',
         'Hemodialysis Prescription & AV Fistula Care',
         'Hypertension & Renovascular Disease',
         'Kidney Stone Medical Evaluation & Prevention',
@@ -38,8 +39,8 @@ export default function DoctorProfilePage({ setActiveTab }) {
         'Diabetic Kidney Disease Screening'
       ],
       credentials: [
-        'MD (General Medicine) — Top Tier Medical University',
-        'DM (Nephrology) — Super-Specialty Gold Standard Training',
+        'MBBS, MD Medicine, DM Nephrology',
+        'Consultant Nephrologist & Kidney Transplant Physician',
         'Member of Indian Society of Nephrology (ISN)',
         '12+ Years Dedicated Clinical Experience in Central India'
       ]
@@ -118,7 +119,7 @@ export default function DoctorProfilePage({ setActiveTab }) {
             Our Doctors & Specialist Panel
           </h1>
           <p className="text-xs sm:text-base text-slate-200 mt-2 font-normal leading-relaxed">
-            Led by Senior Consultant Nephrologist Dr. Sagar Sarda (MD, DM Nephrology) alongside visiting urology consultants and round-the-clock dialysis medical officers.
+            Led by Senior Consultant Nephrologist & Kidney Transplant Physician Dr. Sagar Damodar Sarda (MBBS, MD Medicine, DM Nephrology) alongside visiting urology consultants and round-the-clock dialysis medical officers.
           </p>
 
           {/* Specialty Filter Tabs (Sahyadri Hospital Style) */}
@@ -254,21 +255,21 @@ export default function DoctorProfilePage({ setActiveTab }) {
                 <div className="w-full h-72 sm:h-80 mx-auto rounded-2xl bg-slate-900 overflow-hidden shadow-xl border-2 border-teal-500/40 relative group">
                   <img
                     src="/doctor_sagar_sarda.jpg"
-                    alt="Dr. Sagar Sarda Consultant Nephrologist"
+                    alt="Dr. Sagar Damodar Sarda Consultant Nephrologist & Kidney Transplant Physician"
                     className="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A1D37]/90 via-transparent to-transparent"></div>
                   <div className="absolute bottom-3 left-3 right-3 text-center text-white">
                     <span className="text-[10px] sm:text-[11px] font-bold bg-teal-500 text-white px-3 py-0.5 rounded-full uppercase shadow">
-                      Lead Consultant Nephrologist
+                      Consultant Nephrologist & Transplant Physician
                     </span>
                   </div>
                 </div>
 
                 <div className="mt-4">
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F2D59]">Dr. Sagar Sarda</h3>
-                  <p className="text-teal-700 font-semibold text-xs sm:text-sm mt-0.5">MD, DM (Nephrology)</p>
-                  <p className="text-xs text-slate-500">Chandrapur Kidney Care</p>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F2D59]">Dr. Sagar Damodar Sarda</h3>
+                  <p className="text-teal-700 font-semibold text-xs sm:text-sm mt-0.5">MBBS, MD Medicine, DM Nephrology</p>
+                  <p className="text-xs text-slate-500">Chandrapur Kidney Care • Lead Nephrologist</p>
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-slate-200 flex justify-around text-center">
@@ -295,21 +296,22 @@ export default function DoctorProfilePage({ setActiveTab }) {
               <div className="bg-sky-50/70 border-l-4 border-teal-500 p-4 sm:p-5 rounded-r-2xl relative">
                 <Quote className="w-6 h-6 text-teal-400/40 absolute top-3 right-3" />
                 <p className="text-slate-800 italic text-xs sm:text-base leading-relaxed">
-                  "My goal is to provide evidence-based kidney care with compassion, ensuring every patient receives personalized treatment, thorough education, and compassionate clinical support."
+                  "Our mission is to deliver world-class nephrology, dialysis management, and kidney transplant care with utmost compassion and clinical precision to the people of Chandrapur and Central India."
                 </p>
-                <p className="text-right text-xs font-bold text-[#0F2D59] mt-2">— Dr. Sagar Sarda</p>
+                <p className="text-right text-xs font-bold text-[#0F2D59] mt-2">— Dr. Sagar Damodar Sarda</p>
               </div>
 
               <div>
                 <h4 className="font-bold text-[#0F2D59] text-sm sm:text-base mb-2 flex items-center gap-2">
-                  <GraduationCap className="w-4 h-4 text-teal-600" /> Academic & Clinical Credentials
+                  <GraduationCap className="w-4 h-4 text-teal-600" /> Academic & Clinical Qualifications
                 </h4>
                 <div className="space-y-1.5 text-xs sm:text-sm text-slate-600">
                   {[
-                    'MD (General Medicine) — Top Tier Medical College',
-                    'DM (Nephrology) — Super-Specialty Gold Standard Training',
-                    'Extensive experience supervising 15,000+ Hemodialysis Sessions',
-                    'Specialist in Delaying Dialysis & Non-Transplant Kidney Care',
+                    'MBBS — Recognized Medical University',
+                    'MD (Medicine) — Advanced Physician Training',
+                    'DM (Nephrology) — Super-Specialist Kidney Care & Dialysis',
+                    'Consultant Nephrologist & Kidney Transplant Physician',
+                    'Supervised 15,000+ Hemodialysis Sessions with 0-compromise safety protocols',
                     'Member of Indian Society of Nephrology (ISN)'
                   ].map((cred, idx) => (
                     <div key={idx} className="flex items-start gap-2">
