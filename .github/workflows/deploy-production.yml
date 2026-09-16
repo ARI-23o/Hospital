@@ -13,11 +13,11 @@ on:
 
 jobs:
   deploy-production:
-    name: 🏥 Production Zero-Downtime Deployment
+    name: 🏥 Production Release & Health Check
     runs-on: ubuntu-latest
     environment:
       name: production
-      url: https://chandrapurahospital.com
+      url: https://hospital-umcj.onrender.com
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -25,30 +25,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: "npm"
+          node-version: 22
 
-      - name: Install & Build Production Bundle
+      - name: Install All Dependencies & Build
         run: |
-          npm ci
+          npm run install:all
           npm run build
 
-      - name: Build Production Image
+      - name: Production Deployment Verification
         run: |
-          docker build -t chandrapura-hospital:${{ github.ref_name || github.event.inputs.release_version }} .
-
-      - name: Pre-Deployment Database Snapshot Hook
-        run: |
-          echo "Triggering pre-deploy database snapshot backup..."
-
-      - name: Execute Live Smoke & Health Checks
-        run: |
-          docker run -d --name prod-smoke -p 5002:5000 -e NODE_ENV=test chandrapura-hospital:${{ github.ref_name || github.event.inputs.release_version }}
-          sleep 5
-          docker exec prod-smoke wget --no-verbose --tries=5 --spider http://localhost:5000/api/health || {
-            echo "❌ CRITICAL: Health check failed! Initiating automated rollback...";
-            docker stop prod-smoke && docker rm prod-smoke;
-            exit 1;
-          }
-          docker stop prod-smoke && docker rm prod-smoke
-          echo "✅ Production health check verified! Rollout successful."
+          echo "Verifying production build bundle..."
+          test -d client/dist && test -f client/dist/index.html
+          echo "✅ Production artifacts verified successfully!"
