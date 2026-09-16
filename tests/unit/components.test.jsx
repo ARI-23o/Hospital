@@ -5,6 +5,7 @@ import { LanguageProvider, useLanguage } from "../../client/src/context/Language
 import Footer from "../../client/src/components/Footer";
 import MarqueeTicker from "../../client/src/components/MarqueeTicker";
 import KidneyHealthCalculator from "../../client/src/components/KidneyHealthCalculator";
+import App from "../../client/src/App";
 
 // Helper component to test LanguageContext consumer
 function TestLangConsumer() {
@@ -113,5 +114,40 @@ describe("KidneyHealthCalculator Component", () => {
     fireEvent.click(assessBtn);
 
     expect(screen.getByText(/Moderate Risk/i)).toBeInTheDocument();
+  });
+});
+
+describe("App & All Pages Integration", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("renders the entire App without crashing", () => {
+    const { container } = render(<App />);
+    expect(container).toBeInTheDocument();
+    expect(screen.getAllByText(/Chandrapur/i).length).toBeGreaterThan(0);
+  });
+
+  it("renders all individual pages without runtime errors", async () => {
+    const pages = [
+      (await import("../../client/src/pages/HomePage")).default,
+      (await import("../../client/src/pages/AboutPage")).default,
+      (await import("../../client/src/pages/ServicesPage")).default,
+      (await import("../../client/src/pages/DoctorProfilePage")).default,
+      (await import("../../client/src/pages/FacilitiesPage")).default,
+      (await import("../../client/src/pages/PatientInfoPage")).default,
+      (await import("../../client/src/pages/FaqPage")).default,
+      (await import("../../client/src/pages/ContactPage")).default,
+      (await import("../../client/src/pages/AppointmentPage")).default,
+    ];
+
+    for (const PageComponent of pages) {
+      const { unmount } = render(
+        <LanguageProvider>
+          <PageComponent setActiveTab={vi.fn()} />
+        </LanguageProvider>
+      );
+      unmount();
+    }
   });
 });

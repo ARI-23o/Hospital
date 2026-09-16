@@ -34,6 +34,7 @@ import {
   HeartHandshake,
   HelpCircle,
   ExternalLink,
+  ShieldCheck,
 } from "lucide-react";
 import ThreeKidneyVisualizer from "../components/ThreeKidneyVisualizer";
 import KidneyHealthCalculator from "../components/KidneyHealthCalculator";
