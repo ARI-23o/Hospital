@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import MobileBottomNav from './components/MobileBottomNav';
@@ -53,9 +54,19 @@ export default function App() {
         setActiveTab={setActiveTab} 
       />
 
-      {/* Main Dynamic View Content with mobile padding-bottom for bottom bar */}
+      {/* Main Dynamic View Content with smooth page transition */}
       <main className="flex-grow pb-20 lg:pb-0">
-        {renderActivePage()}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {renderActivePage()}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       {/* Persistent Responsive Medical Footer */}
