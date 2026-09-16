@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import DesignGridModal from './components/DesignGridModal';
+import MobileBottomNav from './components/MobileBottomNav';
 import AdminPortal from './components/AdminPortal';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -14,7 +14,6 @@ import AppointmentPage from './pages/AppointmentPage';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
-  const [isGridModalOpen, setIsGridModalOpen] = useState(false);
 
   // Scroll to top whenever page tab changes
   useEffect(() => {
@@ -47,28 +46,23 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-slate-800 selection:bg-teal-500 selection:text-white">
-      {/* Persistent Navigation Header */}
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-slate-800 selection:bg-teal-500 selection:text-white relative">
+      {/* Persistent Responsive Navigation Header */}
       <Header 
         activeTab={activeTab} 
         setActiveTab={setActiveTab} 
-        onOpenMockupGrid={() => setIsGridModalOpen(true)}
       />
 
-      {/* Main Dynamic View Content */}
-      <main className="flex-grow">
+      {/* Main Dynamic View Content with mobile padding-bottom for bottom bar */}
+      <main className="flex-grow pb-20 lg:pb-0">
         {renderActivePage()}
       </main>
 
-      {/* Persistent Medical Footer */}
+      {/* Persistent Responsive Medical Footer */}
       <Footer setActiveTab={setActiveTab} />
 
-      {/* 4x2 Design Mockup Showcase Modal */}
-      <DesignGridModal
-        isOpen={isGridModalOpen}
-        onClose={() => setIsGridModalOpen(false)}
-        onSelectPage={(pageId) => setActiveTab(pageId)}
-      />
+      {/* Floating Sticky Mobile Quick Action Bar */}
+      <MobileBottomNav setActiveTab={setActiveTab} />
     </div>
   );
 }
