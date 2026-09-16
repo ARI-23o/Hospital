@@ -140,37 +140,12 @@ export default function HomePage({ setActiveTab }) {
   return (
     <div className="space-y-12 sm:space-y-16 pb-12 overflow-hidden">
       
-      {/* 1. ULTRA-MODERN HERO SECTION WITH FLOATING GLASS BADGES & 3D VISUALIZER */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#0A1D37] via-[#0F2D59] to-[#0A1A2F] text-white pt-8 pb-16 sm:pt-12 sm:pb-24">
+      {/* 1. HERO SECTION WITH 3D VISUALIZER */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#0A1D37] via-[#0F2D59] to-[#0A1A2F] text-white pt-8 pb-16 sm:pt-12 sm:pb-20">
         
-        {/* Dynamic Multi-Layered Glowing Spheres (like dynografx.com) */}
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-teal-500/10 blur-[130px] pointer-events-none animate-pulse-glow"></div>
+        {/* Subtle Ambient Background Gradients */}
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-teal-500/10 blur-[130px] pointer-events-none"></div>
         <div className="absolute bottom-10 right-10 w-[450px] h-[450px] rounded-full bg-sky-500/10 blur-[120px] pointer-events-none"></div>
-
-        {/* Floating Glassmorphism Metric Badges on Desktop */}
-        <div className="hidden xl:block absolute left-8 top-32 z-20 animate-float-slow">
-          <div className="px-4 py-3 rounded-2xl backdrop-blur-xl shadow-2xl border border-white/15 bg-white/5 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center">
-              <Zap className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Dialysis Safety</p>
-              <p className="text-sm font-bold text-teal-300">High-Flux Dialysis</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="hidden xl:block absolute right-10 top-28 z-20 animate-float-reverse">
-          <div className="px-4 py-3 rounded-2xl backdrop-blur-xl shadow-2xl border border-white/15 bg-white/5 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-300 flex items-center justify-center">
-              <Shield className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Doctor Led</p>
-              <p className="text-sm font-bold text-sky-300">DM Nephrologist</p>
-            </div>
-          </div>
-        </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -263,11 +238,8 @@ export default function HomePage({ setActiveTab }) {
         </div>
       </section>
 
-      {/* 2. INFINITE MARQUEE TICKER */}
-      <MarqueeTicker />
-
-      {/* 3. LIVE OPD QUEUE TRACKER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 2. LIVE OPD QUEUE TRACKER */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-10 relative z-20">
         <LiveOpdQueue setActiveTab={setActiveTab} />
       </section>
 
