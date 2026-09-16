@@ -13,9 +13,9 @@ export default function HomePage({ setActiveTab }) {
   ];
 
   const stats = [
-    { number: '1000+', label: 'Patients Treated', icon: Users },
+    { number: '1,500+', label: 'Patients Treated', icon: Users },
     { number: '12+ Years', label: 'Clinical Experience', icon: Award },
-    { number: 'Modern', label: 'Facilities & Dialysis', icon: Building },
+    { number: 'Modern', label: 'Dialysis & Facilities', icon: Building },
     { number: '100%', label: 'Personalized Treatment', icon: UserCheck },
   ];
 
@@ -31,7 +31,7 @@ export default function HomePage({ setActiveTab }) {
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 bg-teal-50 border border-teal-200 text-teal-800 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase shadow-sm">
                 <Sparkles className="w-3.5 h-3.5 text-teal-600" />
-                Premier Kidney Clinic in Chandrapura, Maharashtra
+                Premier Kidney Clinic in Chandrapur, Maharashtra
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F2D59] leading-[1.18] tracking-tight">
@@ -39,7 +39,7 @@ export default function HomePage({ setActiveTab }) {
               </h1>
 
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl">
-                Compassionate, comprehensive, and evidence-based nephrology medical care led by <strong className="text-[#0F2D59]">Dr. Sagar Sadar</strong>. Specialized in slowing kidney disease, dialysis management, and blood pressure control.
+                Compassionate, comprehensive, and evidence-based nephrology medical care led by <strong className="text-[#0F2D59]">Dr. Sagar Sarda</strong>. Specialized in slowing kidney disease, dialysis management, and blood pressure control.
               </p>
 
               {/* Action Buttons */}
@@ -59,60 +59,57 @@ export default function HomePage({ setActiveTab }) {
                 </button>
               </div>
 
-              {/* Trust Doctor Badge */}
-              <div className="pt-4 border-t border-slate-200/80 flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#0F2D59] to-teal-500 p-0.5 shadow-md flex items-center justify-center shrink-0">
-                  <div className="w-full h-full bg-white rounded-full flex items-center justify-center text-teal-700 font-bold text-lg">
-                    🩺
-                  </div>
+              {/* Trust Doctor Badge with Real Image */}
+              <div 
+                onClick={() => setActiveTab('doctor')} 
+                className="pt-4 border-t border-slate-200/80 flex items-center gap-4 cursor-pointer group"
+              >
+                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#0F2D59] to-teal-500 p-0.5 shadow-md shrink-0 overflow-hidden group-hover:scale-105 transition-transform">
+                  <img
+                    src="/doctor_sagar_sarda.jpg"
+                    alt="Dr. Sagar Sarda"
+                    className="w-full h-full object-cover object-top rounded-full"
+                    onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&auto=format&fit=crop&q=80'; }}
+                  />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h4 className="font-bold text-[#0F2D59] text-base">Dr. Sagar Sadar</h4>
-                    <span className="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded">Nephrologist</span>
+                    <h4 className="font-bold text-[#0F2D59] text-base group-hover:text-teal-700 transition">Dr. Sagar Sarda</h4>
+                    <span className="bg-teal-100 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded">Consultant Nephrologist</span>
                   </div>
-                  <p className="text-xs text-slate-500 font-medium">MD (General Medicine), DM (Nephrology) • Consultant Nephrologist</p>
+                  <p className="text-xs text-slate-500 font-medium">MD (General Medicine), DM (Nephrology) • Gold Standard Care</p>
                 </div>
               </div>
 
             </div>
 
-            {/* Right Column: Hero Medical Visual Card */}
+            {/* Right Column: Hero Doctor & Medical Visual Card */}
             <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-md bg-white rounded-3xl p-6 shadow-2xl border border-slate-100/80">
+              <div className="relative mx-auto max-w-md bg-white rounded-3xl p-5 shadow-2xl border border-slate-100/80">
                 {/* Decorative background glow */}
                 <div className="absolute -top-6 -right-6 w-48 h-48 bg-teal-400/15 rounded-full blur-2xl pointer-events-none"></div>
                 <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-blue-400/15 rounded-full blur-2xl pointer-events-none"></div>
 
-                {/* Kidney Care Illustration Card */}
-                <div className="relative rounded-2xl bg-gradient-to-br from-teal-600 via-[#0F2D59] to-[#0A1D37] text-white p-6 overflow-hidden shadow-inner">
-                  <div className="flex justify-between items-start mb-4">
-                    <span className="bg-teal-400/20 backdrop-blur-sm text-teal-200 text-xs px-3 py-1 rounded-full font-semibold border border-teal-400/30">
-                      Center of Renal Excellence
-                    </span>
-                    <HeartPulse className="w-7 h-7 text-teal-300 animate-pulse" />
-                  </div>
-
-                  <div className="my-6 text-center">
-                    <div className="w-24 h-24 mx-auto rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner mb-3">
-                      <span className="text-5xl">🫘</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-white tracking-wide">Renal Health & Protection</h3>
-                    <p className="text-xs text-teal-100 mt-1">Non-transplant Specialized Kidney Care</p>
-                  </div>
-
-                  <div className="space-y-2 pt-3 border-t border-white/10 text-xs">
-                    <div className="flex items-center justify-between text-slate-200">
-                      <span>✓ Advanced Dialysis Guidance</span>
-                      <span className="text-teal-300 font-bold">Available</span>
-                    </div>
-                    <div className="flex items-center justify-between text-slate-200">
-                      <span>✓ Comprehensive CKD Staging</span>
-                      <span className="text-teal-300 font-bold">Stages 1-5</span>
-                    </div>
-                    <div className="flex items-center justify-between text-slate-200">
-                      <span>✓ Diabetic Kidney Screening</span>
-                      <span className="text-teal-300 font-bold">Daily OPD</span>
+                {/* Doctor Portrait Visual Container */}
+                <div className="relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-100 group shadow-md">
+                  <img
+                    src="/doctor_sagar_sarda.jpg"
+                    alt="Dr. Sagar Sarda Nephrologist"
+                    className="w-full h-72 object-cover object-top transition duration-500 group-hover:scale-105"
+                    onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&auto=format&fit=crop&q=80'; }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A1D37] via-transparent to-transparent"></div>
+                  
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="bg-teal-500 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">Senior Consultant</span>
+                        <h3 className="text-lg font-bold text-white mt-1">Dr. Sagar Sarda</h3>
+                        <p className="text-xs text-teal-200">MD, DM (Nephrology)</p>
+                      </div>
+                      <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-xl">
+                        🩺
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -124,7 +121,7 @@ export default function HomePage({ setActiveTab }) {
                       <Calendar className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-slate-800">OPD Consultation</p>
+                      <p className="text-xs font-bold text-slate-800">Daily OPD Consultation</p>
                       <p className="text-[11px] text-slate-500">Mon - Sat: 9:00 AM - 7:00 PM</p>
                     </div>
                   </div>
@@ -147,10 +144,10 @@ export default function HomePage({ setActiveTab }) {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           {[
-            { title: 'Expert Nephrologist', sub: 'Dr. Sagar Sadar (MD, DM)', icon: UserCheck, color: 'text-blue-600 bg-blue-50' },
+            { title: 'Expert Nephrologist', sub: 'Dr. Sagar Sarda (MD, DM)', icon: UserCheck, color: 'text-blue-600 bg-blue-50' },
             { title: 'Advanced Treatment', sub: 'Evidence-based protocols', icon: Shield, color: 'text-teal-600 bg-teal-50' },
             { title: 'Personalized Care', sub: 'Tailored for each patient', icon: HeartPulse, color: 'text-rose-600 bg-rose-50' },
-            { title: 'Trusted by Patients', sub: 'Over 1000+ satisfied visits', icon: CheckCircle2, color: 'text-emerald-600 bg-emerald-50' },
+            { title: 'Trusted by Patients', sub: 'Over 1500+ satisfied visits', icon: CheckCircle2, color: 'text-emerald-600 bg-emerald-50' },
           ].map((pillar, idx) => {
             const Icon = pillar.icon;
             return (
@@ -176,7 +173,7 @@ export default function HomePage({ setActiveTab }) {
             Comprehensive Kidney Care Services
           </h2>
           <p className="text-sm text-slate-600 mt-2">
-            Dedicated nephrology care focused on preservation, symptom management, and improving your daily vitality.
+            Dedicated nephrology care focused on renal preservation, symptom management, and improving your daily quality of life.
           </p>
         </div>
 
@@ -219,13 +216,13 @@ export default function HomePage({ setActiveTab }) {
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0F2D59] via-[#163D75] to-[#0D9488] text-white p-8 sm:p-12 shadow-xl">
           <div className="relative z-10 max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-xs font-semibold text-teal-200 border border-white/10">
-              <MapPin className="w-3.5 h-3.5 text-teal-300" /> Chandrapura & Surrounding Regions
+              <MapPin className="w-3.5 h-3.5 text-teal-300" /> Chandrapur & Surrounding Regions
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
-              Serving the People of Chandrapura, Maharashtra
+              Serving the People of Chandrapur, Maharashtra
             </h2>
             <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-light">
-              Better Kidney Health. A Healthier Community. Under the expert direction of Dr. Sagar Sadar, our facility brings modern, accessible, and compassionate kidney care directly to you.
+              Better Kidney Health. A Healthier Community. Under the expert direction of Dr. Sagar Sarda, our facility brings modern, accessible, and compassionate kidney care directly to you.
             </p>
           </div>
 
@@ -252,7 +249,7 @@ export default function HomePage({ setActiveTab }) {
           <div className="space-y-1 text-center md:text-left">
             <h3 className="text-xl font-bold text-[#0F2D59]">Early Detection Saves Kidney Function</h3>
             <p className="text-xs sm:text-sm text-slate-600">
-              If you have diabetes, high blood pressure, or swelling in the feet, schedule a screening with Dr. Sagar Sadar today.
+              If you have diabetes, high blood pressure, or swelling in the feet, schedule a screening with Dr. Sagar Sarda today.
             </p>
           </div>
           <div className="flex items-center gap-3 shrink-0">

@@ -9,13 +9,13 @@ export default function AboutPage({ setActiveTab }) {
       <section className="bg-gradient-to-r from-[#0F2D59] to-[#0D9488] text-white py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
           <span className="text-teal-300 font-bold text-xs uppercase tracking-wider bg-white/10 px-3.5 py-1 rounded-full border border-white/10">
-            About Chandrapura Kidney Care
+            About Chandrapur Kidney Care
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight">
             Committed to Better Kidney Health for a Healthier Community
           </h1>
           <p className="text-sm sm:text-base text-slate-200 mt-3 font-normal leading-relaxed">
-            A doctor-led nephrology center founded with the vision of providing compassionate, evidence-based, and accessible kidney care in Maharashtra.
+            A doctor-led nephrology center founded with the vision of providing compassionate, evidence-based, and accessible kidney care in Chandrapur, Maharashtra.
           </p>
         </div>
       </section>
@@ -29,10 +29,10 @@ export default function AboutPage({ setActiveTab }) {
               Our Journey
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F2D59]">
-              Pioneering Doctor-Led Kidney Care in Chandrapura
+              Pioneering Doctor-Led Kidney Care in Chandrapur
             </h2>
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              <strong>Chandrapura Kidney Care</strong> was founded by <strong>Dr. Sagar Sadar (MD, DM Nephrology)</strong> with a deep conviction: every patient facing renal disease deserves prompt, empathetic, and scientifically backed medical guidance without the need for excessive travel.
+              <strong>Chandrapur Kidney Care</strong> was founded by <strong>Dr. Sagar Sarda (MD, DM Nephrology)</strong> with a deep conviction: every patient facing renal disease deserves prompt, empathetic, and scientifically backed medical guidance without the need for excessive travel.
             </p>
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
               We specialize in the non-invasive and medical preservation of renal function, meticulous management of chronic kidney disease (CKD), high-flux dialysis supervision, and difficult-to-control hypertension.
@@ -42,7 +42,7 @@ export default function AboutPage({ setActiveTab }) {
               <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
                 <CheckCircle className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-sm font-bold text-slate-900">Dr. Sagar Sadar Leadership</h4>
+                  <h4 className="text-sm font-bold text-slate-900">Dr. Sagar Sarda Leadership</h4>
                   <p className="text-xs text-slate-500">Every treatment protocol is directly supervised by our Senior Nephrologist.</p>
                 </div>
               </div>
@@ -60,16 +60,17 @@ export default function AboutPage({ setActiveTab }) {
 
           <div className="lg:col-span-5">
             <div className="bg-white p-4 rounded-3xl shadow-card border border-slate-100">
-              <div className="rounded-2xl bg-gradient-to-tr from-[#0F2D59] to-teal-700 text-white p-8 text-center relative overflow-hidden">
-                <div className="w-20 h-20 mx-auto rounded-full bg-white/10 flex items-center justify-center mb-4 text-4xl shadow-inner">
-                  🏥
-                </div>
-                <h3 className="text-xl font-extrabold text-white">Chandrapura Kidney Care</h3>
-                <p className="text-xs text-teal-200 mt-1">Maharashtra, India</p>
-                <div className="mt-6 pt-4 border-t border-white/15 text-xs text-slate-200 text-left space-y-2">
-                  <p>✔ ISO-Grade Dialysis Protocols</p>
-                  <p>✔ Comprehensive Staging & Delay of Dialysis</p>
-                  <p>✔ Patient & Family Counseling</p>
+              <div className="rounded-2xl overflow-hidden bg-slate-900 relative shadow-md">
+                <img
+                  src="/doctor_sagar_sarda.jpg"
+                  alt="Dr. Sagar Sarda"
+                  className="w-full h-80 object-cover object-top"
+                  onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&auto=format&fit=crop&q=80'; }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F2D59] via-transparent to-transparent"></div>
+                <div className="absolute bottom-4 left-4 right-4 text-white">
+                  <h3 className="text-lg font-bold">Dr. Sagar Sarda</h3>
+                  <p className="text-xs text-teal-200">Consultant Nephrologist • Chandrapur Kidney Care</p>
                 </div>
               </div>
             </div>
@@ -150,7 +151,7 @@ export default function AboutPage({ setActiveTab }) {
           <div>
             <h3 className="text-xl sm:text-2xl font-bold">Have Questions About Your Kidney Health?</h3>
             <p className="text-xs sm:text-sm text-slate-300 mt-1">
-              Consult with Dr. Sagar Sadar for personalized advice on your reports and treatment path.
+              Consult with Dr. Sagar Sarda for personalized advice on your reports and treatment path.
             </p>
           </div>
           <button

@@ -6,10 +6,10 @@ import {
 
 export default function DoctorProfilePage({ setActiveTab }) {
   const areasOfExpertise = [
-    'Chronic Kidney Disease (CKD)',
-    'Dialysis and Advanced Kidney Care',
-    'Hypertension Management',
-    'Kidney Stone Treatment & Medical Dissolution',
+    'Chronic Kidney Disease (CKD) Management',
+    'Dialysis & Advanced Renal Care',
+    'Hypertension & Renal Vascular Control',
+    'Kidney Stone Medical Treatment & Prevention',
     'Glomerular Diseases & Nephrotic Syndrome',
     'Preventive Nephrology & Diabetic Screening',
   ];
@@ -17,7 +17,7 @@ export default function DoctorProfilePage({ setActiveTab }) {
   const credentials = [
     'MD (General Medicine) — Top Tier Medical College',
     'DM (Nephrology) — Super-specialty Gold Standard Training',
-    'Extensive experience managing 1,200+ Complex Nephrology Patients',
+    'Extensive experience managing 1,500+ Nephrology & Dialysis Patients',
     'Specialist in Delaying Dialysis & Non-Transplant Kidney Care',
     'Member of Indian Society of Nephrology (ISN)'
   ];
@@ -32,7 +32,7 @@ export default function DoctorProfilePage({ setActiveTab }) {
             Meet Our Senior Consultant
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight">
-            Dr. Sagar Sadar
+            Dr. Sagar Sarda
           </h1>
           <p className="text-sm sm:text-base text-teal-100 mt-2 font-medium">
             MD (General Medicine) • DM (Nephrology) • Consultant Nephrologist
@@ -47,28 +47,37 @@ export default function DoctorProfilePage({ setActiveTab }) {
             
             {/* Left: Doctor Visual & Badge */}
             <div className="lg:col-span-5 text-center">
-              <div className="relative mx-auto max-w-sm rounded-3xl overflow-hidden bg-gradient-to-b from-sky-100 via-teal-50 to-slate-100 p-8 shadow-inner border border-slate-200">
-                {/* Doctor Avatar Badge */}
-                <div className="w-44 h-44 mx-auto rounded-full bg-gradient-to-tr from-[#0F2D59] to-teal-500 p-1.5 shadow-xl flex items-center justify-center">
-                  <div className="w-full h-full bg-white rounded-full flex flex-col items-center justify-center text-teal-700 shadow-inner">
-                    <span className="text-6xl">👨‍⚕️</span>
+              <div className="relative mx-auto max-w-sm rounded-3xl overflow-hidden bg-gradient-to-b from-sky-100 via-teal-50 to-slate-100 p-6 shadow-inner border border-slate-200">
+                {/* Doctor Real Photo Frame */}
+                <div className="w-56 h-72 mx-auto rounded-2xl bg-slate-900 overflow-hidden shadow-xl border-2 border-teal-500/40 relative group">
+                  <img
+                    src="/doctor_sagar_sarda.jpg"
+                    alt="Dr. Sagar Sarda Consultant Nephrologist"
+                    className="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105"
+                    onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&auto=format&fit=crop&q=80'; }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A1D37]/90 via-transparent to-transparent"></div>
+                  <div className="absolute bottom-3 left-3 right-3 text-center text-white">
+                    <span className="text-[11px] font-bold bg-teal-500 text-white px-3 py-0.5 rounded-full uppercase shadow">
+                      Consultant Nephrologist
+                    </span>
                   </div>
                 </div>
 
-                <div className="mt-6">
-                  <h3 className="text-2xl font-extrabold text-[#0F2D59]">Dr. Sagar Sadar</h3>
-                  <p className="text-teal-700 font-semibold text-sm mt-0.5">Consultant Nephrologist</p>
-                  <p className="text-xs text-slate-500 font-medium">Chandrapura Kidney Care</p>
+                <div className="mt-5">
+                  <h3 className="text-2xl font-extrabold text-[#0F2D59]">Dr. Sagar Sarda</h3>
+                  <p className="text-teal-700 font-semibold text-sm mt-0.5">MD, DM (Nephrology)</p>
+                  <p className="text-xs text-slate-500 font-medium">Chandrapur Kidney Care</p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-200 flex justify-around text-center">
+                <div className="mt-5 pt-4 border-t border-slate-200 flex justify-around text-center">
                   <div>
                     <span className="block text-xl font-bold text-[#0F2D59]">12+</span>
                     <span className="text-[11px] text-slate-500 uppercase tracking-wide">Yrs Exp</span>
                   </div>
                   <div className="border-r border-slate-200"></div>
                   <div>
-                    <span className="block text-xl font-bold text-teal-600">1200+</span>
+                    <span className="block text-xl font-bold text-teal-600">1,500+</span>
                     <span className="text-[11px] text-slate-500 uppercase tracking-wide">Patients</span>
                   </div>
                   <div className="border-r border-slate-200"></div>
@@ -90,7 +99,7 @@ export default function DoctorProfilePage({ setActiveTab }) {
                 <p className="text-slate-800 italic text-sm sm:text-base leading-relaxed">
                   "My goal is to provide evidence-based kidney care with compassion, ensuring every patient receives personalized treatment, thorough education, and compassionate clinical support."
                 </p>
-                <p className="text-right text-xs font-bold text-[#0F2D59] mt-2">— Dr. Sagar Sadar</p>
+                <p className="text-right text-xs font-bold text-[#0F2D59] mt-2">— Dr. Sagar Sarda</p>
               </div>
 
               {/* Qualifications */}
