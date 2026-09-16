@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   lint-and-format:
-    name: 🎨 Lint & Code Style
+    name: Lint and Code Style
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -33,7 +33,7 @@ jobs:
         run: npm run lint
 
   test-and-coverage:
-    name: 🧪 Unit & Integration Tests
+    name: Unit and Integration Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -47,7 +47,7 @@ jobs:
       - name: Install All Dependencies
         run: npm run install:all
 
-      - name: Run Unit & Integration Tests with Coverage Gate (70%)
+      - name: Run Unit and Integration Tests with Coverage Gate (70%)
         run: npm run test:coverage
 
       - name: Upload Test Coverage Artifact
@@ -59,7 +59,7 @@ jobs:
           retention-days: 14
 
   build-verification:
-    name: 🏗️ Production Build Verification
+    name: Production Build Verification
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -78,6 +78,6 @@ jobs:
 
       - name: Verify Build Artifacts
         run: |
-          test -d client/dist || { echo "❌ client/dist build output missing"; exit 1; }
-          test -f client/dist/index.html || { echo "❌ client/dist/index.html missing"; exit 1; }
-          echo "✅ Frontend production build successfully verified!"
+          test -d client/dist || { echo "client/dist build output missing"; exit 1; }
+          test -f client/dist/index.html || { echo "client/dist/index.html missing"; exit 1; }
+          echo "Frontend production build successfully verified."

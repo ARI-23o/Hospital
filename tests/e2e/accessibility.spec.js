@@ -8,7 +8,7 @@ test.describe("WCAG 2.1 AA Accessibility Audits", () => {
 
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
-      .disableRules(["color-contrast"]) // Optional soft pass for dynamic 3D gradient canvases
+      .disableRules(["color-contrast"])
       .analyze();
 
     const criticalOrSerious = accessibilityScanResults.violations.filter(

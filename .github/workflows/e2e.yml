@@ -1,4 +1,4 @@
-name: End-to-End & Accessibility Tests
+name: End-to-End and Accessibility Tests
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   playwright-e2e:
-    name: 🎭 Playwright E2E & WCAG Audits
+    name: Playwright E2E and WCAG Audits
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

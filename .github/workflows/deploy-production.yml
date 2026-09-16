@@ -13,7 +13,7 @@ on:
 
 jobs:
   deploy-production:
-    name: 🏥 Production Release & Health Check
+    name: Production Release and Health Check
     runs-on: ubuntu-latest
     environment:
       name: production
@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install All Dependencies & Build
+      - name: Install All Dependencies and Build
         run: |
           npm run install:all
           npm run build
@@ -36,4 +36,4 @@ jobs:
         run: |
           echo "Verifying production build bundle..."
           test -d client/dist && test -f client/dist/index.html
-          echo "✅ Production artifacts verified successfully!"
+          echo "Production artifacts verified successfully."

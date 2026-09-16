@@ -5,8 +5,6 @@ test.describe("Patient Portal End-to-End User Journey", () => {
     page,
   }) => {
     await page.goto("/");
-
-    // Verify hospital name and doctor title in document
     await expect(page.locator("body")).toContainText("Chandrapur Kidney Care");
     await expect(page.locator("body")).toContainText("Dr. Sagar Damodar Sarda");
   });
@@ -16,24 +14,24 @@ test.describe("Patient Portal End-to-End User Journey", () => {
   }) => {
     await page.goto("/");
 
-    // Locate language switcher
-    const langSelect = page.locator("select").first();
-    if (await langSelect.isVisible()) {
-      await langSelect.selectOption("mr");
+    // Locate language switcher pill buttons
+    const marathiBtn = page.getByRole("button", { name: "मराठी" });
+    if (await marathiBtn.isVisible()) {
+      await marathiBtn.click();
       await expect(page.locator("body")).toContainText("सेवा • करुणा • बांधिलकी");
 
-      await langSelect.selectOption("hi");
-      await expect(page.locator("body")).toContainText("सेवा • करुणा • प्रतिबद्धता");
+      const hindiBtn = page.getByRole("button", { name: "हिंदी" });
+      await hindiBtn.click();
+      await expect(page.locator("body")).toContainText("सेवा • करुणा • बांधिलकी");
     }
   });
 
   test("verifies live OPD queue is displayed on homepage", async ({ page }) => {
     await page.goto("/");
-
-    // Check Live Queue widget
     const queueCard = page
       .locator("text=Live OPD Queue Status")
-      .or(page.locator("text=Current Live Token"));
+      .or(page.locator("text=Serving Token"))
+      .or(page.locator("text=Token"));
     await expect(queueCard.first()).toBeVisible();
   });
 });

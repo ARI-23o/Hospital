@@ -1,4 +1,4 @@
-name: Dependency Review & License Compliance
+name: Dependency Review and License Compliance
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   dependency-review:
-    name: 🛡️ Dependency Vulnerability Review
+    name: Dependency Vulnerability Review
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code

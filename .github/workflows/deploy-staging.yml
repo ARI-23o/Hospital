@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy-staging:
-    name: 🚀 Deploy to Staging Environment
+    name: Deploy to Staging Environment
     runs-on: ubuntu-latest
     environment:
       name: staging
@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install All Dependencies & Build
+      - name: Install All Dependencies and Build
         run: |
           npm run install:all
           npm run build
@@ -29,4 +29,4 @@ jobs:
       - name: Staging Health Check Smoke Test
         run: |
           echo "Verifying staging application build and status endpoint..."
-          node -e "const http = require('http'); console.log('✅ Staging build artifacts verified.');"
+          node -e "console.log('Staging build artifacts verified.');"

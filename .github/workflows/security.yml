@@ -1,4 +1,4 @@
-name: Security & Vulnerability Scanning
+name: Security and Vulnerability Scanning
 
 on:
   push:
@@ -6,11 +6,11 @@ on:
   pull_request:
     branches: [main, master]
   schedule:
-    - cron: "0 0 * * 0" # Weekly Sunday run
+    - cron: "0 0 * * 0"
 
 jobs:
   secret-scan:
-    name: 🛡️ TruffleHog Secret Scanning
+    name: TruffleHog Secret Scanning
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -27,7 +27,7 @@ jobs:
           extra_args: --only-verified
 
   dependency-audit:
-    name: 📦 NPM Dependency Audit
+    name: NPM Dependency Audit
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -36,13 +36,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
-      - name: Audit for High/Critical CVEs
+      - name: Audit for High and Critical CVEs
         run: npm audit --audit-level=high
 
   codeql-analysis:
-    name: 🔍 CodeQL Static Analysis (SAST)
+    name: CodeQL Static Analysis (SAST)
     runs-on: ubuntu-latest
     permissions:
       actions: read

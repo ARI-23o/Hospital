@@ -194,8 +194,15 @@ export default function KidneyHealthCalculator({ setActiveTab }) {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Gender</label>
+                <label
+                  htmlFor="calculator-gender"
+                  className="block text-xs font-bold text-slate-700 mb-1"
+                >
+                  Gender
+                </label>
                 <select
+                  id="calculator-gender"
+                  aria-label="Patient Gender"
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
                   className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none font-medium bg-white"
@@ -283,10 +290,15 @@ export default function KidneyHealthCalculator({ setActiveTab }) {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label
+                  htmlFor="calculator-salt"
+                  className="block text-xs font-bold text-slate-700 mb-1"
+                >
                   Dietary Salt / Sodium Intake
                 </label>
                 <select
+                  id="calculator-salt"
+                  aria-label="Dietary Salt / Sodium Intake"
                   value={saltIntake}
                   onChange={(e) => setSaltIntake(e.target.value)}
                   className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none font-medium bg-white"
@@ -298,10 +310,15 @@ export default function KidneyHealthCalculator({ setActiveTab }) {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label
+                  htmlFor="calculator-history"
+                  className="block text-xs font-bold text-slate-700 mb-1"
+                >
                   Previous Kidney Stone Episode?
                 </label>
                 <select
+                  id="calculator-history"
+                  aria-label="Previous Kidney Stone Episode"
                   value={historyOfStones}
                   onChange={(e) => setHistoryOfStones(e.target.value)}
                   className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none font-medium bg-white"
