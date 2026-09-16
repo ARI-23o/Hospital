@@ -1,0 +1,16 @@
+{
+  "name": "chandrapura-kidney-care-server",
+  "version": "1.0.0",
+  "description": "Backend API & SQLite Database for Chandrapura Kidney Care",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "better-sqlite3": "^11.8.1"
+  }
+}
