@@ -5,7 +5,6 @@ export default function Header({ activeTab, setActiveTab }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Compact header on scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -17,11 +16,11 @@ export default function Header({ activeTab, setActiveTab }) {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
-    { id: 'services', label: 'Services' },
-    { id: 'doctor', label: 'Doctor' },
+    { id: 'services', label: 'Specialties & Services' },
+    { id: 'doctor', label: 'Doctor Profile' },
     { id: 'facilities', label: 'Facilities' },
     { id: 'patient-info', label: 'Patient Info' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'contact', label: 'Contact Us' },
   ];
 
   const handleNavClick = (id) => {
@@ -33,7 +32,7 @@ export default function Header({ activeTab, setActiveTab }) {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 transition-all duration-300 animate-fade-in">
       
-      {/* 1. Essential Top Announcement Bar (Minimal & Compact) */}
+      {/* 1. Essential Top Announcement Bar */}
       <div className="bg-[#0F2D59] text-white text-[11px] py-1.5 px-3 sm:px-6 border-b border-slate-800">
         <div className="max-w-7xl mx-auto flex justify-between items-center gap-2">
           
@@ -91,12 +90,12 @@ export default function Header({ activeTab, setActiveTab }) {
                 <span className="text-lg font-extrabold tracking-tight text-[#0D9488]">Kidney Care</span>
               </div>
               <p className="text-[10px] font-medium text-slate-500 tracking-wider uppercase mt-0.5">
-                Dr. Sagar Sarda • Nephrologist
+                Kidney & Urology Care • Dr. Sagar Sarda
               </p>
             </div>
           </div>
 
-          {/* Desktop Navigation Links (Compact 7 Labels, No Wrapping) */}
+          {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (
               <button
@@ -116,7 +115,7 @@ export default function Header({ activeTab, setActiveTab }) {
           {/* Desktop Right Button & Mobile Toggle */}
           <div className="flex items-center space-x-2">
             
-            {/* Single-line Book Appointment Button with hover lift */}
+            {/* Single-line Book Appointment Button */}
             <button
               onClick={() => handleNavClick('appointment')}
               className="hidden sm:inline-flex bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl shadow-md shadow-emerald-600/20 hover:shadow-emerald-600/30 btn-hover-effect whitespace-nowrap items-center gap-1.5"
