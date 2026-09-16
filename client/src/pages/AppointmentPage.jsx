@@ -4,8 +4,10 @@ import {
   Calendar, Clock, UserCheck, ShieldCheck, CheckCircle2, AlertCircle, 
   HeartPulse, Phone, MapPin, Check
 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function AppointmentPage({ setActiveTab }) {
+  const { lang, t } = useLanguage();
   const [formData, setFormData] = useState({
     patient_name: '',
     phone: '',
@@ -67,16 +69,21 @@ export default function AppointmentPage({ setActiveTab }) {
       });
 
       const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || 'Failed to submit appointment.');
-      }
+      if (!res.ok) throw new Error(data.error || 'Failed to book appointment');
 
       setConfirmedBooking(data);
       setLoading(false);
 
+      // Trigger celebrate confetti
       try {
-        confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
-      } catch (cErr) {}
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      } catch (err) {
+        // Ignore confetti failure
+      }
 
     } catch (err) {
       setError(err.message);
@@ -91,13 +98,13 @@ export default function AppointmentPage({ setActiveTab }) {
       <section className="bg-gradient-to-r from-[#0F2D59] via-[#163D75] to-[#0D9488] text-white py-10 sm:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
           <span className="text-teal-300 font-bold text-[11px] sm:text-xs uppercase tracking-wider bg-white/10 px-3 py-1 rounded-full border border-white/10">
-            Online OPD Booking
+            {t('nav.appointment', 'Online OPD Booking')}
           </span>
           <h1 className="text-2xl sm:text-4xl font-extrabold mt-3 tracking-tight">
-            Book an Appointment
+            {t('appointment.title', 'Book an Appointment')}
           </h1>
           <p className="text-xs sm:text-base text-teal-100 mt-2 font-normal">
-            Take the first step towards better kidney health with Dr. Sagar Sarda.
+            {t('appointment.subtitle', 'Schedule your consultation with Dr. Sagar Damodar Sarda (DM Nephrology).')}
           </p>
         </div>
       </section>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { LanguageProvider } from './context/LanguageContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import MobileBottomNav from './components/MobileBottomNav';
@@ -14,7 +15,7 @@ import ContactPage from './pages/ContactPage';
 import AppointmentPage from './pages/AppointmentPage';
 import FaqPage from './pages/FaqPage';
 
-export default function App() {
+function MainAppContent() {
   const [activeTab, setActiveTab] = useState('home');
 
   // Scroll to top whenever page tab changes
@@ -78,5 +79,13 @@ export default function App() {
       {/* Floating Sticky Mobile Quick Action Bar */}
       <MobileBottomNav setActiveTab={setActiveTab} />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <MainAppContent />
+    </LanguageProvider>
   );
 }

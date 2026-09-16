@@ -12,6 +12,7 @@ import KidneyHealthCalculator from '../components/KidneyHealthCalculator';
 import LiveOpdQueue from '../components/LiveOpdQueue';
 import MarqueeTicker from '../components/MarqueeTicker';
 import DoctorScheduleExplorer from '../components/DoctorScheduleExplorer';
+import { useLanguage } from '../context/LanguageContext';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -31,6 +32,7 @@ const itemVariants = {
 };
 
 export default function HomePage({ setActiveTab }) {
+  const { lang, t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('all'); // 'all' | 'nephrology' | 'urology'
 
   const allServices = [
@@ -160,20 +162,20 @@ export default function HomePage({ setActiveTab }) {
               
               <motion.div variants={itemVariants} className="inline-flex items-center gap-2 bg-teal-500/15 border border-teal-400/30 text-teal-300 px-3.5 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-sm">
                 <Sparkles className="w-3.5 h-3.5 text-teal-300 animate-spin" style={{ animationDuration: '6s' }} />
-                <span>Chandrapur's Premier Kidney & Urology Center</span>
+                <span>{t('hero.badge')}</span>
               </motion.div>
 
               {/* Headline with animated gradient */}
               <motion.h1 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white leading-[1.18] tracking-tight">
-                Complete Kidney & Urology Care. <br />
+                {t('hero.mainTitle1')} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-cyan-300 to-emerald-400 animate-gradient-text">
-                  Better Health. Brighter Tomorrows.
+                  {t('hero.mainTitle2')}
                 </span>
               </motion.h1>
 
               {/* Supporting Text */}
               <motion.p variants={itemVariants} className="text-xs sm:text-base text-slate-300 leading-relaxed font-normal max-w-xl">
-                Comprehensive care for kidney health, urinary conditions, and urological concerns, with a focus on personalized treatment, high-flux dialysis, and patient well-being under Dr. Sagar Sarda.
+                {t('hero.subtitle')}
               </motion.p>
 
               {/* Action Buttons */}
@@ -185,7 +187,7 @@ export default function HomePage({ setActiveTab }) {
                   className="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-sm sm:text-base px-6 sm:px-8 py-3.5 rounded-xl shadow-lg shadow-teal-500/25 flex items-center justify-center gap-2 transition-all"
                 >
                   <Calendar className="w-4 h-4" />
-                  <span>Book an Appointment</span>
+                  <span>{t('common.bookAppointment')}</span>
                 </motion.button>
 
                 <motion.button
@@ -194,7 +196,7 @@ export default function HomePage({ setActiveTab }) {
                   onClick={() => setActiveTab('services')}
                   className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-bold text-sm sm:text-base px-6 py-3.5 rounded-xl border border-white/20 shadow-xs text-center transition-all backdrop-blur-md"
                 >
-                  Explore Our Services
+                  {t('common.exploreServices')}
                 </motion.button>
               </motion.div>
 

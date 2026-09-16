@@ -1,7 +1,9 @@
 import React from 'react';
 import { Phone, Calendar, MapPin, MessageCircle } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function MobileBottomNav({ setActiveTab }) {
+  const { lang, t } = useLanguage();
   const MAP_URL = "https://maps.app.goo.gl/f1P5sEp6G8aWFc39A";
   const PHONE_NUMBER = "tel:+919876543210";
   const WHATSAPP_URL = "https://wa.me/919876543210?text=Hello%20Chandrapur%20Kidney%20Care,%20I%20would%20like%20to%20inquire%20about%20a%20nephrology%20consultation.";
@@ -18,7 +20,9 @@ export default function MobileBottomNav({ setActiveTab }) {
           <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center mb-1">
             <Phone className="w-4 h-4" />
           </div>
-          <span className="text-[10px] font-bold">Call OPD</span>
+          <span className="text-[10px] font-bold">
+            {lang === 'mr' ? 'कॉल करा' : lang === 'hi' ? 'कॉल करें' : 'Call OPD'}
+          </span>
         </a>
 
         {/* 2. WhatsApp */}
@@ -44,7 +48,9 @@ export default function MobileBottomNav({ setActiveTab }) {
           <div className="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mb-1">
             <MapPin className="w-4 h-4" />
           </div>
-          <span className="text-[10px] font-bold">Directions</span>
+          <span className="text-[10px] font-bold">
+            {lang === 'mr' ? 'नकाशा' : lang === 'hi' ? 'दिशाएं' : 'Directions'}
+          </span>
         </a>
 
         {/* 4. Book Appointment */}
@@ -58,7 +64,9 @@ export default function MobileBottomNav({ setActiveTab }) {
           <div className="w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center mb-1 shadow-sm">
             <Calendar className="w-4 h-4" />
           </div>
-          <span className="text-[10px] font-bold">Book OPD</span>
+          <span className="text-[10px] font-bold">
+            {lang === 'mr' ? 'नोंदणी' : lang === 'hi' ? 'बुकिंग' : 'Book OPD'}
+          </span>
         </button>
 
       </div>
