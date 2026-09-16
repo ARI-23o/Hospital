@@ -1,8 +1,9 @@
 import React from 'react';
 import { 
   Award, GraduationCap, Clock, CheckCircle2, HeartHandshake, ShieldCheck, 
-  Calendar, Phone, MapPin, Quote, Star
+  Calendar, Phone, MapPin, Quote, Star, Sparkles
 } from 'lucide-react';
+import DoctorScheduleExplorer from '../components/DoctorScheduleExplorer';
 
 export default function DoctorProfilePage({ setActiveTab }) {
   const areasOfExpertise = [
@@ -17,7 +18,7 @@ export default function DoctorProfilePage({ setActiveTab }) {
   const credentials = [
     'MD (General Medicine) — Top Tier Medical College',
     'DM (Nephrology) — Super-specialty Gold Standard Training',
-    'Extensive experience managing 1,500+ Nephrology & Dialysis Patients',
+    'Extensive experience managing 15,000+ Dialysis & Nephrology Sessions',
     'Specialist in Delaying Dialysis & Non-Transplant Kidney Care',
     'Member of Indian Society of Nephrology (ISN)'
   ];
@@ -76,8 +77,8 @@ export default function DoctorProfilePage({ setActiveTab }) {
                   </div>
                   <div className="border-r border-slate-200"></div>
                   <div>
-                    <span className="block text-lg sm:text-xl font-bold text-teal-600">1,500+</span>
-                    <span className="text-[10px] text-slate-500 uppercase tracking-wide">Patients</span>
+                    <span className="block text-lg sm:text-xl font-bold text-teal-600">15,000+</span>
+                    <span className="text-[10px] text-slate-500 uppercase tracking-wide">Sessions</span>
                   </div>
                   <div className="border-r border-slate-200"></div>
                   <div>
@@ -151,6 +152,11 @@ export default function DoctorProfilePage({ setActiveTab }) {
 
           </div>
         </div>
+      </section>
+
+      {/* 3. Embedded Doctor Schedule Explorer */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <DoctorScheduleExplorer setActiveTab={setActiveTab} />
       </section>
 
     </div>

@@ -4,12 +4,14 @@ import {
   HeartPulse, Shield, UserCheck, Stethoscope, ArrowRight, CheckCircle2, 
   Activity, Award, Building, Calendar, Phone, Sparkles, MapPin, Users, Star, 
   ChevronRight, Microscope, Scale, Gauge, Droplet, ShieldAlert, Clock, Sparkle,
-  BedDouble, FileText, Check, Layers
+  BedDouble, FileText, Check, Layers, Zap
 } from 'lucide-react';
 import ThreeKidneyVisualizer from '../components/ThreeKidneyVisualizer';
 import Interactive3DCard from '../components/Interactive3DCard';
 import KidneyHealthCalculator from '../components/KidneyHealthCalculator';
 import LiveOpdQueue from '../components/LiveOpdQueue';
+import MarqueeTicker from '../components/MarqueeTicker';
+import DoctorScheduleExplorer from '../components/DoctorScheduleExplorer';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -138,12 +140,37 @@ export default function HomePage({ setActiveTab }) {
   return (
     <div className="space-y-12 sm:space-y-16 pb-12 overflow-hidden">
       
-      {/* 1. ULTRA-MODERN HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#0A1D37] via-[#0F2D59] to-[#0A1A2F] text-white pt-8 pb-14 sm:pt-12 sm:pb-20">
+      {/* 1. ULTRA-MODERN HERO SECTION WITH FLOATING GLASS BADGES & 3D VISUALIZER */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#0A1D37] via-[#0F2D59] to-[#0A1A2F] text-white pt-8 pb-16 sm:pt-12 sm:pb-24">
         
-        {/* Glowing Background Mesh & Shapes */}
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute bottom-0 left-10 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        {/* Dynamic Multi-Layered Glowing Spheres (like dynografx.com) */}
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-teal-500/10 blur-[130px] pointer-events-none animate-pulse-glow"></div>
+        <div className="absolute bottom-10 right-10 w-[450px] h-[450px] rounded-full bg-sky-500/10 blur-[120px] pointer-events-none"></div>
+
+        {/* Floating Glassmorphism Metric Badges on Desktop */}
+        <div className="hidden xl:block absolute left-8 top-32 z-20 animate-float-slow">
+          <div className="px-4 py-3 rounded-2xl backdrop-blur-xl shadow-2xl border border-white/15 bg-white/5 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center">
+              <Zap className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Dialysis Safety</p>
+              <p className="text-sm font-bold text-teal-300">High-Flux Dialysis</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="hidden xl:block absolute right-10 top-28 z-20 animate-float-reverse">
+          <div className="px-4 py-3 rounded-2xl backdrop-blur-xl shadow-2xl border border-white/15 bg-white/5 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-300 flex items-center justify-center">
+              <Shield className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Doctor Led</p>
+              <p className="text-sm font-bold text-sky-300">DM Nephrologist</p>
+            </div>
+          </div>
+        </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -157,14 +184,14 @@ export default function HomePage({ setActiveTab }) {
             >
               
               <motion.div variants={itemVariants} className="inline-flex items-center gap-2 bg-teal-500/15 border border-teal-400/30 text-teal-300 px-3.5 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-sm">
-                <Sparkles className="w-3.5 h-3.5 text-teal-300" />
+                <Sparkles className="w-3.5 h-3.5 text-teal-300 animate-spin" style={{ animationDuration: '6s' }} />
                 <span>Chandrapur's Premier Kidney & Urology Center</span>
               </motion.div>
 
-              {/* Exact Requested Headline */}
-              <motion.h1 variants={itemVariants} className="text-2xl sm:text-4xl lg:text-[44px] font-extrabold text-white leading-[1.18] tracking-tight">
+              {/* Headline with animated gradient */}
+              <motion.h1 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white leading-[1.18] tracking-tight">
                 Complete Kidney & Urology Care. <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-300">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-cyan-300 to-emerald-400 animate-gradient-text">
                   Better Health. Brighter Tomorrows.
                 </span>
               </motion.h1>
@@ -196,7 +223,7 @@ export default function HomePage({ setActiveTab }) {
                 </motion.button>
               </motion.div>
 
-              {/* Doctor Card Badge */}
+              {/* Doctor Quick Badge */}
               <motion.div 
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
@@ -236,12 +263,20 @@ export default function HomePage({ setActiveTab }) {
         </div>
       </section>
 
-      {/* 2. LIVE OPD QUEUE TRACKER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-10 relative z-20">
+      {/* 2. INFINITE MARQUEE TICKER */}
+      <MarqueeTicker />
+
+      {/* 3. LIVE OPD QUEUE TRACKER */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <LiveOpdQueue setActiveTab={setActiveTab} />
       </section>
 
-      {/* 3. TWO SPECIALTY 3D PERSPECTIVE CARDS */}
+      {/* 4. DOCTOR SCHEDULE & OPD TIMINGS EXPLORER */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <DoctorScheduleExplorer setActiveTab={setActiveTab} />
+      </section>
+
+      {/* 5. TWO SPECIALTY 3D PERSPECTIVE CARDS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-xl mx-auto mb-6">
           <span className="text-[11px] font-bold text-teal-700 bg-teal-50 px-3 py-1 rounded-full uppercase tracking-wider">
@@ -339,12 +374,12 @@ export default function HomePage({ setActiveTab }) {
         </div>
       </section>
 
-      {/* 4. CLINICAL eGFR & KIDNEY STONE CALCULATOR */}
+      {/* 6. CLINICAL eGFR & KIDNEY STONE CALCULATOR */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <KidneyHealthCalculator setActiveTab={setActiveTab} />
       </section>
 
-      {/* 5. CLINICAL STATS SHOWCASE */}
+      {/* 7. CLINICAL STATS SHOWCASE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-soft border border-slate-100 grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((s, idx) => {
@@ -364,7 +399,7 @@ export default function HomePage({ setActiveTab }) {
         </div>
       </section>
 
-      {/* 6. COMPREHENSIVE SERVICES DIRECTORY */}
+      {/* 8. COMPREHENSIVE SERVICES DIRECTORY */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
           <div className="inline-block text-[11px] font-bold text-teal-700 bg-teal-50 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
@@ -437,7 +472,7 @@ export default function HomePage({ setActiveTab }) {
         </motion.div>
       </section>
 
-      {/* 7. PATIENT TESTIMONIALS */}
+      {/* 9. PATIENT TESTIMONIALS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-br from-slate-50 to-teal-50/50 rounded-3xl p-6 sm:p-10 border border-slate-200/80">
           <div className="text-center max-w-xl mx-auto mb-6">
@@ -478,7 +513,7 @@ export default function HomePage({ setActiveTab }) {
         </div>
       </section>
 
-      {/* 8. REGIONAL IMPACT & LOCATION */}
+      {/* 10. REGIONAL IMPACT & LOCATION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0F2D59] via-[#163D75] to-[#0D9488] text-white p-6 sm:p-10 shadow-xl space-y-6">
           <div className="relative z-10 space-y-2 max-w-2xl">

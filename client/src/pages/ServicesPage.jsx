@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Activity, HeartPulse, Gauge, ShieldAlert, Microscope, Scale, Stethoscope, 
-  ShieldCheck, ArrowRight, ChevronDown, CheckCircle2, Droplet, Calendar
+  ShieldCheck, ArrowRight, ChevronDown, CheckCircle2, Droplet, Calendar, Sparkles
 } from 'lucide-react';
+import MarqueeTicker from '../components/MarqueeTicker';
+import Interactive3DCard from '../components/Interactive3DCard';
 
 export default function ServicesPage({ setActiveTab }) {
   const [activeTabFilter, setActiveTabFilter] = useState('all');
@@ -165,7 +167,10 @@ export default function ServicesPage({ setActiveTab }) {
         </div>
       </section>
 
-      {/* 2. Services Grid */}
+      {/* Marquee Ticker */}
+      <MarqueeTicker />
+
+      {/* 2. Services Grid with 3D Perspective Cards */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           layout
@@ -177,13 +182,8 @@ export default function ServicesPage({ setActiveTab }) {
               const isExpanded = selectedService === srv.id;
 
               return (
-                <motion.div
+                <Interactive3DCard
                   key={srv.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.3 }}
                   className={`bg-white rounded-3xl p-6 shadow-soft border transition-all flex flex-col justify-between ${
                     isExpanded ? 'border-teal-500 shadow-card ring-2 ring-teal-500/20' : 'border-slate-100 hover:border-teal-200 hover:shadow-card'
                   }`}
@@ -246,7 +246,7 @@ export default function ServicesPage({ setActiveTab }) {
                       <Calendar className="w-3.5 h-3.5" /> Book Consultation
                     </button>
                   </div>
-                </motion.div>
+                </Interactive3DCard>
               );
             })}
           </AnimatePresence>

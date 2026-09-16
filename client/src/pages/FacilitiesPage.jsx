@@ -1,5 +1,7 @@
 import React from 'react';
-import { Sparkles, Shield, HeartPulse, Microscope, Users, CheckCircle, Clock } from 'lucide-react';
+import { Sparkles, Shield, HeartPulse, Microscope, Users, CheckCircle, Clock, CheckCircle2 } from 'lucide-react';
+import Interactive3DCard from '../components/Interactive3DCard';
+import MarqueeTicker from '../components/MarqueeTicker';
 
 export default function FacilitiesPage({ setActiveTab }) {
   const facilities = [
@@ -54,30 +56,33 @@ export default function FacilitiesPage({ setActiveTab }) {
   ];
 
   return (
-    <div className="space-y-16 pb-16">
+    <div className="space-y-12 sm:space-y-16 pb-16">
       
       {/* 1. Header Banner */}
-      <section className="bg-gradient-to-r from-[#0F2D59] via-[#163D75] to-[#0D9488] text-white py-14">
+      <section className="bg-gradient-to-r from-[#0F2D59] via-[#163D75] to-[#0D9488] text-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
           <span className="text-teal-300 font-bold text-xs uppercase tracking-wider bg-white/10 px-3.5 py-1 rounded-full border border-white/10">
             Infrastructure & Amenities
           </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight">
+          <h1 className="text-2xl sm:text-4xl font-extrabold mt-3 tracking-tight">
             Our Facilities — Modern Infrastructure for Better Care
           </h1>
-          <p className="text-sm sm:text-base text-teal-100 mt-2 font-normal leading-relaxed">
-            Designed for patient safety, comfort, and clinical precision in Chandrapura, Maharashtra.
+          <p className="text-xs sm:text-base text-teal-100 mt-2 font-normal leading-relaxed">
+            Designed for patient safety, comfort, and clinical precision in Chandrapur, Maharashtra.
           </p>
         </div>
       </section>
 
-      {/* 2. Facility Gallery Cards (6 Grid) */}
+      {/* Marquee Ticker */}
+      <MarqueeTicker />
+
+      {/* 2. Facility Gallery Cards (6 Grid with 3D perspective tilt) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {facilities.map((fac, idx) => {
             const Icon = fac.icon;
             return (
-              <div
+              <Interactive3DCard
                 key={idx}
                 className="bg-white rounded-3xl overflow-hidden shadow-soft border border-slate-100 hover:shadow-card transition flex flex-col justify-between group"
               >
@@ -110,7 +115,7 @@ export default function FacilitiesPage({ setActiveTab }) {
                     <div className="grid grid-cols-1 gap-1.5 text-xs text-slate-700">
                       {fac.features.map((feat, i) => (
                         <div key={i} className="flex items-center gap-2">
-                          <CheckCircle className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 shrink-0" />
                           <span>{feat}</span>
                         </div>
                       ))}
@@ -120,10 +125,10 @@ export default function FacilitiesPage({ setActiveTab }) {
 
                 {/* Bottom Card Footer */}
                 <div className="px-6 py-3.5 bg-slate-50 border-t border-slate-100 text-xs text-slate-500 flex items-center justify-between">
-                  <span>Chandrapura Kidney Care</span>
+                  <span>Chandrapur Kidney Care</span>
                   <span className="text-teal-600 font-bold">Standard of Care</span>
                 </div>
-              </div>
+              </Interactive3DCard>
             );
           })}
         </div>
