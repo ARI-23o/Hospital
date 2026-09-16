@@ -1,17 +1,17 @@
-import React from 'react';
-import { Phone, Calendar, MapPin, MessageCircle } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import React from "react";
+import { Phone, Calendar, MapPin, MessageCircle } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function MobileBottomNav({ setActiveTab }) {
   const { lang, t } = useLanguage();
   const MAP_URL = "https://maps.app.goo.gl/f1P5sEp6G8aWFc39A";
   const PHONE_NUMBER = "tel:+919876543210";
-  const WHATSAPP_URL = "https://wa.me/919876543210?text=Hello%20Chandrapur%20Kidney%20Care,%20I%20would%20like%20to%20inquire%20about%20a%20nephrology%20consultation.";
+  const WHATSAPP_URL =
+    "https://wa.me/919876543210?text=Hello%20Chandrapur%20Kidney%20Care,%20I%20would%20like%20to%20inquire%20about%20a%20nephrology%20consultation.";
 
   return (
     <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-slate-200 shadow-2xl px-3 py-2">
       <div className="grid grid-cols-4 gap-1.5 max-w-md mx-auto">
-        
         {/* 1. Call Now */}
         <a
           href={PHONE_NUMBER}
@@ -21,7 +21,7 @@ export default function MobileBottomNav({ setActiveTab }) {
             <Phone className="w-4 h-4" />
           </div>
           <span className="text-[10px] font-bold">
-            {lang === 'mr' ? 'कॉल करा' : lang === 'hi' ? 'कॉल करें' : 'Call OPD'}
+            {lang === "mr" ? "कॉल करा" : lang === "hi" ? "कॉल करें" : "Call OPD"}
           </span>
         </a>
 
@@ -49,15 +49,15 @@ export default function MobileBottomNav({ setActiveTab }) {
             <MapPin className="w-4 h-4" />
           </div>
           <span className="text-[10px] font-bold">
-            {lang === 'mr' ? 'नकाशा' : lang === 'hi' ? 'दिशाएं' : 'Directions'}
+            {lang === "mr" ? "नकाशा" : lang === "hi" ? "दिशाएं" : "Directions"}
           </span>
         </a>
 
         {/* 4. Book Appointment */}
         <button
           onClick={() => {
-            setActiveTab('appointment');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setActiveTab("appointment");
+            window.scrollTo({ top: 0, behavior: "smooth" });
           }}
           className="flex flex-col items-center justify-center py-1.5 px-1 rounded-xl bg-[#0F2D59] text-white active:scale-95 transition shadow-md"
         >
@@ -65,10 +65,9 @@ export default function MobileBottomNav({ setActiveTab }) {
             <Calendar className="w-4 h-4" />
           </div>
           <span className="text-[10px] font-bold">
-            {lang === 'mr' ? 'नोंदणी' : lang === 'hi' ? 'बुकिंग' : 'Book OPD'}
+            {lang === "mr" ? "नोंदणी" : lang === "hi" ? "बुकिंग" : "Book OPD"}
           </span>
         </button>
-
       </div>
     </div>
   );

@@ -1,0 +1,14 @@
+node_modules
+client/node_modules
+dist
+client/dist
+server/data/*.db
+server/data/*.sqlite
+coverage
+playwright-report
+test-results
+.git
+.github
+.env
+.env.*
+*.log

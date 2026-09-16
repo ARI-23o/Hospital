@@ -47,7 +47,8 @@ export const translations = {
       badge: "Chandrapur's Premier Kidney & Urology Center",
       mainTitle1: "Advanced Kidney &",
       mainTitle2: "Urological Excellence",
-      subtitle: "Comprehensive, evidence-based nephrology, high-flux hemodialysis, and laser urology led by DM Nephrologist Dr. Sagar Damodar Sarda.",
+      subtitle:
+        "Comprehensive, evidence-based nephrology, high-flux hemodialysis, and laser urology led by DM Nephrologist Dr. Sagar Damodar Sarda.",
       stat1Number: "15+",
       stat1Label: "Years Clinical Experience",
       stat2Number: "10,000+",
@@ -57,25 +58,31 @@ export const translations = {
       stat4Number: "100%",
       stat4Label: "Dedicated Patient Care",
       anatomyViewTitle: "Interactive 3D Anatomy Explorer",
-      anatomyViewSubtitle: "Select an organ system to inspect anatomical structures and common conditions:",
+      anatomyViewSubtitle:
+        "Select an organ system to inspect anatomical structures and common conditions:",
       tabNephrology: "🫘 Nephrology & Kidneys",
       tabUrology: "🔬 Urology & Bladder",
     },
     services: {
       title: "Comprehensive Medical & Surgical Specialties",
-      subtitle: "World-class nephrology, dialysis management, and advanced urological interventions delivered with precision.",
+      subtitle:
+        "World-class nephrology, dialysis management, and advanced urological interventions delivered with precision.",
       nephrologyTitle: "Nephrology & Kidney Medicine",
       nephrologyDesc: "Diagnosis, medical management, and long-term care for all kidney disorders.",
       urologyTitle: "Urology & Endourology",
-      urologyDesc: "Minimally invasive laser surgery for kidney stones, prostate, and urinary conditions.",
+      urologyDesc:
+        "Minimally invasive laser surgery for kidney stones, prostate, and urinary conditions.",
       dialysisTitle: "High-Flux Hemodialysis",
-      dialysisDesc: "State-of-the-art dialysis stations with ultrapure RO water and zero infection protocols.",
+      dialysisDesc:
+        "State-of-the-art dialysis stations with ultrapure RO water and zero infection protocols.",
       transplantTitle: "Kidney Transplant Care",
-      transplantDesc: "Pre-transplant donor/recipient workup, post-transplant immunosuppression, and follow-up.",
+      transplantDesc:
+        "Pre-transplant donor/recipient workup, post-transplant immunosuppression, and follow-up.",
       stoneTitle: "Laser Stone Surgery (RIRS / PCNL)",
       stoneDesc: "Scarless, painless laser disintegration for kidney and ureteric stones.",
       prostateTitle: "Prostate & Men's Health (BPH)",
-      prostateDesc: "Modern laser prostatectomy, uroflowmetry, and comprehensive male urinary care.",
+      prostateDesc:
+        "Modern laser prostatectomy, uroflowmetry, and comprehensive male urinary care.",
     },
     doctor: {
       experienceBadge: "15+ Years Clinical Experience",
@@ -92,7 +99,8 @@ export const translations = {
     },
     patientGuide: {
       title: "Patient Guide & Hospital Information",
-      subtitle: "Everything you need to know before, during, and after your visit to Chandrapur Kidney Care.",
+      subtitle:
+        "Everything you need to know before, during, and after your visit to Chandrapur Kidney Care.",
       beforeVisit: "Before Your Visit",
       duringVisit: "During Your Visit & OPD",
       afterVisit: "After Visit & Home Care",
@@ -103,14 +111,16 @@ export const translations = {
     faqsPage: {
       badge: "Patient Knowledge Hub",
       title: "Frequently Asked Questions",
-      subtitle: "Verified medical answers by DM Nephrologist Dr. Sagar Sarda regarding Kidney Disease, Dialysis, Transplantation, and Urology.",
+      subtitle:
+        "Verified medical answers by DM Nephrologist Dr. Sagar Sarda regarding Kidney Disease, Dialysis, Transplantation, and Urology.",
       pillAll: "All Questions",
       pillNephrology: "Nephrology & Kidney Care",
       pillUrology: "Urology & Stones",
       searchPlaceholder: "Search symptoms, kidney disease, dialysis, stone laser...",
       noResults: "No matching questions found for your search query.",
       stillHaveQuestions: "Have a specific medical query not answered here?",
-      consultDoctor: "Consult Dr. Sagar Sarda directly at our Chandrapur clinic or book an appointment.",
+      consultDoctor:
+        "Consult Dr. Sagar Sarda directly at our Chandrapur clinic or book an appointment.",
     },
     appointment: {
       title: "Book an Appointment",
@@ -124,11 +134,13 @@ export const translations = {
       reason: "Reason for Visit / Symptoms",
       bookNowBtn: "Confirm & Book Appointment",
       successTitle: "Appointment Request Received!",
-      successDesc: "Our hospital reception team will call you shortly to confirm your consultation time.",
+      successDesc:
+        "Our hospital reception team will call you shortly to confirm your consultation time.",
     },
     contact: {
       title: "Contact & Clinic Location",
-      subtitle: "Visit our super-speciality kidney center in Chandrapur or reach out for inquiries.",
+      subtitle:
+        "Visit our super-speciality kidney center in Chandrapur or reach out for inquiries.",
       sendInquiry: "Send an Inquiry",
       locationMap: "Location Map • Chandrapur",
       navigateGoogleMaps: "Navigate in Google Maps App",
@@ -137,13 +149,15 @@ export const translations = {
       opdTimingsTitle: "OPD Timings",
     },
     footer: {
-      aboutHospital: "Super-speciality kidney center led by Dr. Sagar Damodar Sarda (MBBS, MD Medicine, DM Nephrology - Consultant Nephrologist & Kidney Transplant Physician).",
+      aboutHospital:
+        "Super-speciality kidney center led by Dr. Sagar Damodar Sarda (MBBS, MD Medicine, DM Nephrology - Consultant Nephrologist & Kidney Transplant Physician).",
       quickLinks: "Navigation",
       patientCare: "Patient Care & Help",
       contactInfo: "Clinic & Location",
-      copyright: "Chandrapur Kidney Care • Dr. Sagar Sarda (MD, DM Nephrology). All Rights Reserved.",
+      copyright:
+        "Chandrapur Kidney Care • Dr. Sagar Sarda (MD, DM Nephrology). All Rights Reserved.",
       allRights: "Complete Kidney & Urology Care in Chandrapur, Maharashtra.",
-    }
+    },
   },
 
   mr: {
@@ -194,7 +208,8 @@ export const translations = {
       badge: "चंद्रपूरमधील अग्रगण्य किडनी व युरॉलॉजी उपचार केंद्र",
       mainTitle1: "अद्ययावत किडनी आणि",
       mainTitle2: "युरॉलॉजिकल उपचार",
-      subtitle: "डी.एम. नेफ्रोलॉजिस्ट डॉ. सागर दामोदर सारडा यांच्या मार्गदर्शनाखाली अचूक निदान, हाय-फ्लक्स हिमोडायलिसिस आणि आधुनिक लेझर युरॉलॉजी उपचार.",
+      subtitle:
+        "डी.एम. नेफ्रोलॉजिस्ट डॉ. सागर दामोदर सारडा यांच्या मार्गदर्शनाखाली अचूक निदान, हाय-फ्लक्स हिमोडायलिसिस आणि आधुनिक लेझर युरॉलॉजी उपचार.",
       stat1Number: "१५+",
       stat1Label: "वर्षांचा वैद्यकीय अनुभव",
       stat2Number: "१०,०००+",
@@ -212,13 +227,16 @@ export const translations = {
       title: "सर्वसमावेशक वैद्यकीय व शस्त्रक्रिया विभाग",
       subtitle: "अत्याधुनिक नेफ्रोलॉजी, डायलिसिस व्यवस्थापन आणि अचूक लेझर युरॉलॉजिकल उपचार पद्धती.",
       nephrologyTitle: "नेफ्रोलॉजी आणि किडनी आजार",
-      nephrologyDesc: "सर्व प्रकारच्या किडनी विकारांचे अचूक निदान, औषधोपचार आणि दीर्घकालीन व्यवस्थापन.",
+      nephrologyDesc:
+        "सर्व प्रकारच्या किडनी विकारांचे अचूक निदान, औषधोपचार आणि दीर्घकालीन व्यवस्थापन.",
       urologyTitle: "युरॉलॉजी आणि एंडोयुरॉलॉजी",
       urologyDesc: "किडनी स्टोन, प्रोस्टेट आणि मूत्रविकारांसाठी कमीत कमी चिरेची लेझर शस्त्रक्रिया.",
       dialysisTitle: "हाय-फ्लक्स हिमोडायलिसिस",
-      dialysisDesc: "अल्ट्राप्युअर आरओ पाण्याचे फिल्टरेशन आणि शून्य संसर्ग प्रोटोकॉलसह अत्याधुनिक डायलिसिस युनिट.",
+      dialysisDesc:
+        "अल्ट्राप्युअर आरओ पाण्याचे फिल्टरेशन आणि शून्य संसर्ग प्रोटोकॉलसह अत्याधुनिक डायलिसिस युनिट.",
       transplantTitle: "किडनी ट्रान्सप्लांट (प्रत्यारोपण)",
-      transplantDesc: "प्रत्यारोपणापूर्वीची तयारी, कायदेशीर मार्गदर्शन, शस्त्रक्रियेनंतरची इम्युनोसप्रेशन काळजी व पाठपुरावा.",
+      transplantDesc:
+        "प्रत्यारोपणापूर्वीची तयारी, कायदेशीर मार्गदर्शन, शस्त्रक्रियेनंतरची इम्युनोसप्रेशन काळजी व पाठपुरावा.",
       stoneTitle: "लेझर स्टोन सर्जरी (RIRS / PCNL)",
       stoneDesc: "टाकेविरहित, वेदनारहित लेझर किरणांद्वारे किडनी आणि मूत्रनलिकेतील खडे फोडणे.",
       prostateTitle: "प्रोस्टेट आणि पुरुष आरोग्य (BPH)",
@@ -250,14 +268,16 @@ export const translations = {
     faqsPage: {
       badge: "रुग्ण ज्ञान केंद्र",
       title: "वारंवार विचारले जाणारे प्रश्न (FAQs)",
-      subtitle: "किडनी आजार, डायलिसिस, ट्रान्सप्लांट आणि युरॉलॉजीबद्दल डी.एम. नेफ्रोलॉजिस्ट डॉ. सागर सारडा यांनी दिलेली खात्रीशीर वैद्यकीय उत्तरे.",
+      subtitle:
+        "किडनी आजार, डायलिसिस, ट्रान्सप्लांट आणि युरॉलॉजीबद्दल डी.एम. नेफ्रोलॉजिस्ट डॉ. सागर सारडा यांनी दिलेली खात्रीशीर वैद्यकीय उत्तरे.",
       pillAll: "सर्व प्रश्न",
       pillNephrology: "नेफ्रोलॉजी व किडनी काळजी",
       pillUrology: "युरॉलॉजी व मुतखडा उपचार",
       searchPlaceholder: "लक्षणे, किडनीचे आजार, डायलिसिस, लेझर उपचार शोधा...",
       noResults: "आपल्या शोध शब्दासाठी कोणतेही प्रश्न सापडले नाहीत.",
       stillHaveQuestions: "आपल्या मनात काही वेगळा वैद्यकीय प्रश्न आहे का?",
-      consultDoctor: "डॉ. सागर सारडा यांचा थेट सल्ला घेण्यासाठी आमच्या चंद्रपूर क्लिनिकला भेट द्या किंवा अपॉइंटमेंट बुक करा.",
+      consultDoctor:
+        "डॉ. सागर सारडा यांचा थेट सल्ला घेण्यासाठी आमच्या चंद्रपूर क्लिनिकला भेट द्या किंवा अपॉइंटमेंट बुक करा.",
     },
     appointment: {
       title: "ऑनलाइन अपॉइंटमेंट बुक करा",
@@ -275,7 +295,8 @@ export const translations = {
     },
     contact: {
       title: "संपर्क व क्लिनिक पत्ता",
-      subtitle: "चंद्रपूरमधील आमच्या सुपर-स्पेशालिटी किडनी सेंटरला भेट द्या किंवा अधिक माहितीसाठी संपर्क करा.",
+      subtitle:
+        "चंद्रपूरमधील आमच्या सुपर-स्पेशालिटी किडनी सेंटरला भेट द्या किंवा अधिक माहितीसाठी संपर्क करा.",
       sendInquiry: "चौकशी संदेश पाठवा",
       locationMap: "क्लिनिक नकाशा • चंद्रपूर",
       navigateGoogleMaps: "गुगल मॅप्स ॲपमध्ये दिशा मिळवा",
@@ -284,13 +305,15 @@ export const translations = {
       opdTimingsTitle: "ओपीडी तपासणी वेळा",
     },
     footer: {
-      aboutHospital: "डॉ. सागर दामोदर सारडा (एम.बी.बी.एस., एम.डी. मेडिसिन, डी.एम. नेफ्रोलॉजी - कन्सल्टंट नेफ्रोलॉजिस्ट व किडनी ट्रान्सप्लांट फिजिशियन) यांच्या नेतृत्वाखालील सुपर-स्पेशालिटी किडनी केंद्र.",
+      aboutHospital:
+        "डॉ. सागर दामोदर सारडा (एम.बी.बी.एस., एम.डी. मेडिसिन, डी.एम. नेफ्रोलॉजी - कन्सल्टंट नेफ्रोलॉजिस्ट व किडनी ट्रान्सप्लांट फिजिशियन) यांच्या नेतृत्वाखालील सुपर-स्पेशालिटी किडनी केंद्र.",
       quickLinks: "महत्त्वाचे दुवे",
       patientCare: "रुग्ण साहाय्य व मदत",
       contactInfo: "क्लिनिक व संपर्क",
-      copyright: "चंद्रपूर किडनी केअर • डॉ. सागर सारडा (एम.डी., डी.एम. नेफ्रोलॉजी). सर्व हक्क राखीव.",
+      copyright:
+        "चंद्रपूर किडनी केअर • डॉ. सागर सारडा (एम.डी., डी.एम. नेफ्रोलॉजी). सर्व हक्क राखीव.",
       allRights: "चंद्रपूर, महाराष्ट्र येथील संपूर्ण किडनी व युरॉलॉजी उपचार केंद्र.",
-    }
+    },
   },
 
   hi: {
@@ -341,7 +364,8 @@ export const translations = {
       badge: "चंद्रपुर का प्रमुख किडनी एवं यूरोलॉजी केंद्र",
       mainTitle1: "उन्नत किडनी एवं",
       mainTitle2: "यूरोलॉजिकल उपचार",
-      subtitle: "डी.एम. नेफ्रोलॉजिस्ट डॉ. सागर दामोदर सारडा के नेतृत्व में सटीक निदान, हाई-फ्लक्स हेमोडायलिसिस और आधुनिक लेजर यूरोलॉजी उपचार।",
+      subtitle:
+        "डी.एम. नेफ्रोलॉजिस्ट डॉ. सागर दामोदर सारडा के नेतृत्व में सटीक निदान, हाई-फ्लक्स हेमोडायलिसिस और आधुनिक लेजर यूरोलॉजी उपचार।",
       stat1Number: "15+",
       stat1Label: "वर्षों का चिकित्सीय अनुभव",
       stat2Number: "10,000+",
@@ -357,19 +381,23 @@ export const translations = {
     },
     services: {
       title: "व्यापक चिकित्सा एवं सर्जिकल विभाग",
-      subtitle: "विश्वस्तरीय नेफ्रोलॉजी, डायलिसिस प्रबंधन और सटीक लेजर यूरोलॉजिकल उपचार प्रक्रियाएं।",
+      subtitle:
+        "विश्वस्तरीय नेफ्रोलॉजी, डायलिसिस प्रबंधन और सटीक लेजर यूरोलॉजिकल उपचार प्रक्रियाएं।",
       nephrologyTitle: "नेफ्रोलॉजी एवं किडनी रोग",
       nephrologyDesc: "सभी प्रकार के किडनी विकारों का सटीक निदान, दवाएं और दीर्घकालिक देखभाल।",
       urologyTitle: "यूरोलॉजी एवं एंडोयूरोलॉजी",
       urologyDesc: "किडनी स्टोन, प्रोस्टेट और मूत्र विकारों के लिए मिनिमली इनवेसिव लेजर सर्जरी।",
       dialysisTitle: "हाई-फ्लक्स हेमोडायलिसिस",
-      dialysisDesc: "अल्ट्राप्योर आरओ वाटर फिल्ट्रेशन और शून्य संक्रमण प्रोटोकॉल से युक्त आधुनिक डायलिसिस यूनिट।",
+      dialysisDesc:
+        "अल्ट्राप्योर आरओ वाटर फिल्ट्रेशन और शून्य संक्रमण प्रोटोकॉल से युक्त आधुनिक डायलिसिस यूनिट।",
       transplantTitle: "किडनी ट्रांसप्लांट (प्रत्यारोपण)",
-      transplantDesc: "ट्रांसप्लांट से पूर्व जांच, कानूनी प्रक्रिया मार्गदर्शन और सर्जरी पश्चात इम्यूनोसप्रेशन देखभाल।",
+      transplantDesc:
+        "ट्रांसप्लांट से पूर्व जांच, कानूनी प्रक्रिया मार्गदर्शन और सर्जरी पश्चात इम्यूनोसप्रेशन देखभाल।",
       stoneTitle: "लेजर स्टोन सर्जरी (RIRS / PCNL)",
       stoneDesc: "बिना चीरे, दर्द रहित लेजर किरणों द्वारा गुर्दे और मूत्रनली की पथरी का निवारण।",
       prostateTitle: "प्रोस्टेट एवं पुरुष स्वास्थ्य (BPH)",
-      prostateDesc: "आधुनिक लेजर प्रोस्टेटेक्टॉमी, यूरोफ्लोमेट्री और संपूर्ण पुरुष मूत्र विकार उपचार।",
+      prostateDesc:
+        "आधुनिक लेजर प्रोस्टेटेक्टॉमी, यूरोफ्लोमेट्री और संपूर्ण पुरुष मूत्र विकार उपचार।",
     },
     doctor: {
       experienceBadge: "15+ वर्षों का नैदानिक अनुभव",
@@ -386,7 +414,8 @@ export const translations = {
     },
     patientGuide: {
       title: "मरीज गाइड एवं अस्पताल जानकारी",
-      subtitle: "चंद्रपुर किडनी केयर में आने से पहले, परामर्श के दौरान और बाद की संपूर्ण आवश्यक जानकारी।",
+      subtitle:
+        "चंद्रपुर किडनी केयर में आने से पहले, परामर्श के दौरान और बाद की संपूर्ण आवश्यक जानकारी।",
       beforeVisit: "क्लिनिक आने से पहले",
       duringVisit: "ओपीडी परामर्श के दौरान",
       afterVisit: "घर लौटने के बाद देखभाल",
@@ -397,14 +426,16 @@ export const translations = {
     faqsPage: {
       badge: "मरीज ज्ञान केंद्र",
       title: "अक्सर पूछे जाने वाले प्रश्न (FAQs)",
-      subtitle: "किडनी रोग, डायलिसिस, ट्रांसप्लांट और यूरोलॉजी पर डी.एम. नेफ्रोलॉजिस्ट डॉ. सागर सारडा द्वारा प्रामाणिक चिकित्सीय उत्तर।",
+      subtitle:
+        "किडनी रोग, डायलिसिस, ट्रांसप्लांट और यूरोलॉजी पर डी.एम. नेफ्रोलॉजिस्ट डॉ. सागर सारडा द्वारा प्रामाणिक चिकित्सीय उत्तर।",
       pillAll: "सभी प्रश्न",
       pillNephrology: "नेफ्रोलॉजी एवं किडनी देखभाल",
       pillUrology: "यूरोलॉजी एवं पथरी उपचार",
       searchPlaceholder: "लक्षण, किडनी रोग, डायलिसिस, लेजर उपचार खोजें...",
       noResults: "आपकी खोज के लिए कोई प्रश्न नहीं मिला।",
       stillHaveQuestions: "क्या आपके मन में कोई विशिष्ट चिकित्सीय प्रश्न है?",
-      consultDoctor: "डॉ. सागर सारडा से सीधे परामर्श के लिए हमारे चंद्रपुर क्लिनिक आएं या ऑनलाइन अपॉइंटमेंट बुक करें।",
+      consultDoctor:
+        "डॉ. सागर सारडा से सीधे परामर्श के लिए हमारे चंद्रपुर क्लिनिक आएं या ऑनलाइन अपॉइंटमेंट बुक करें।",
     },
     appointment: {
       title: "ऑनलाइन अपॉइंटमेंट बुक करें",
@@ -431,12 +462,14 @@ export const translations = {
       opdTimingsTitle: "ओपीडी परामर्श समय",
     },
     footer: {
-      aboutHospital: "डॉ. सागर दामोदर सारडा (एम.बी.बी.एस., एम.डी. मेडिसिन, डी.एम. नेफ्रोलॉजी - कंसल्टेंट नेफ्रोलॉजिस्ट व किडनी ट्रांसप्लांट फिजिशियन) के नेतृत्व में सुपर-स्पेशलिटी किडनी केंद्र।",
+      aboutHospital:
+        "डॉ. सागर दामोदर सारडा (एम.बी.बी.एस., एम.डी. मेडिसिन, डी.एम. नेफ्रोलॉजी - कंसल्टेंट नेफ्रोलॉजिस्ट व किडनी ट्रांसप्लांट फिजिशियन) के नेतृत्व में सुपर-स्पेशलिटी किडनी केंद्र।",
       quickLinks: "मुख्य नेविगेशन",
       patientCare: "मरीज सहायता एवं सेवा",
       contactInfo: "क्लिनिक एवं स्थान",
-      copyright: "चंद्रपुर किडनी केयर • डॉ. सागर सारडा (एम.डी., डी.एम. नेफ्रोलॉजी). सर्वाधिकार सुरक्षित।",
+      copyright:
+        "चंद्रपुर किडनी केयर • डॉ. सागर सारडा (एम.डी., डी.एम. नेफ्रोलॉजी). सर्वाधिकार सुरक्षित।",
       allRights: "चंद्रपुर, महाराष्ट्र में संपूर्ण किडनी एवं यूरोलॉजी देखभाल केंद्र।",
-    }
-  }
+    },
+  },
 };

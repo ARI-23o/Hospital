@@ -36,21 +36,23 @@ app.post("/api/auth/login", (req, res) => {
 
   if (userAttempts.lockedUntil > now) {
     const remainingSecs = Math.ceil((userAttempts.lockedUntil - now) / 1000);
-    return res.status(429).json({ 
-      error: `Too many failed login attempts. Portal locked for security. Please try again in ${remainingSecs} seconds.` 
+    return res.status(429).json({
+      error: `Too many failed login attempts. Portal locked for security. Please try again in ${remainingSecs} seconds.`,
     });
   }
 
   if (!passcode || !VALID_PASSCODES.includes(passcode.trim())) {
     userAttempts.count += 1;
     if (userAttempts.count >= 5) {
-      userAttempts.lockedUntil = now + (10 * 60 * 1000); // 10 minute lockout
+      userAttempts.lockedUntil = now + 10 * 60 * 1000; // 10 minute lockout
       failedAttempts.set(ip, userAttempts);
-      return res.status(429).json({ error: "Maximum attempts exceeded. Account locked for 10 minutes." });
+      return res
+        .status(429)
+        .json({ error: "Maximum attempts exceeded. Account locked for 10 minutes." });
     }
     failedAttempts.set(ip, userAttempts);
-    return res.status(401).json({ 
-      error: `Invalid Access Passcode. ${5 - userAttempts.count} attempt(s) remaining.` 
+    return res.status(401).json({
+      error: `Invalid Access Passcode. ${5 - userAttempts.count} attempt(s) remaining.`,
     });
   }
 
@@ -64,7 +66,7 @@ app.post("/api/auth/login", (req, res) => {
     user: "Dr. Sagar Damodar Sarda",
     role: "Consultant Nephrologist & Admin",
     created: now,
-    expiresAt: now + (12 * 60 * 60 * 1000) // 12 hours session
+    expiresAt: now + 12 * 60 * 60 * 1000, // 12 hours session
   };
 
   activeSessions.set(token, sessionData);
@@ -72,7 +74,7 @@ app.post("/api/auth/login", (req, res) => {
   res.json({
     success: true,
     message: "Doctor Portal unlocked successfully.",
-    session: sessionData
+    session: sessionData,
   });
 });
 
@@ -106,38 +108,39 @@ app.get("/api/doctor", (req, res) => {
       degrees: "MD (General Medicine), DM (Nephrology)",
       title: "Consultant Nephrologist",
       experience: "12+ Years Clinical & Nephrology Experience",
-      quote: "My goal is to provide evidence-based, empathetic kidney care with compassion, ensuring every patient receives personalized treatment and dedicated support.",
+      quote:
+        "My goal is to provide evidence-based, empathetic kidney care with compassion, ensuring every patient receives personalized treatment and dedicated support.",
       areasOfExpertise: [
         "Chronic Kidney Disease (CKD)",
         "Dialysis and Advanced Kidney Care",
         "Hypertension Management",
         "Kidney Stone Treatment & Prevention",
         "Glomerular Diseases & Nephrotic Syndrome",
-        "Preventive Nephrology & Screening"
+        "Preventive Nephrology & Screening",
       ],
       credentials: [
         "MD (General Medicine) - Gold Medalist",
         "DM (Nephrology) - Top Tier Medical Institute",
         "Extensive experience in 300+ Complex Nephrology Cases & Dialysis Management",
-        "Comprehensive Kidney Care (Excluding Kidney Transplant Services)"
+        "Comprehensive Kidney Care (Excluding Kidney Transplant Services)",
       ],
       opdTimings: {
         mondayToSaturday: "09:00 AM - 01:00 PM & 04:00 PM - 07:30 PM",
-        sunday: "By Prior Appointment Only"
+        sunday: "By Prior Appointment Only",
       },
       contact: {
         phone: "+91 98765 43210",
         alternatePhone: "+91 98233 33537",
         email: "info@chandrapurakidneycare.in",
-        emergency: "+91 98765 43210"
+        emergency: "+91 98765 43210",
       },
       stats: {
         patientsTreated: "1,200+",
         yearsOfExperience: "12+",
         dialysisSupervised: "8,500+",
-        patientSatisfaction: "99%"
-      }
-    }
+        patientSatisfaction: "99%",
+      },
+    },
   });
 });
 
@@ -182,7 +185,9 @@ app.post("/api/appointments", (req, res) => {
     const { patient_name, phone, email, appointment_date, time_slot, reason, notes } = req.body;
 
     if (!patient_name || !phone || !appointment_date || !time_slot || !reason) {
-      return res.status(400).json({ error: "Please provide all required fields (Name, Phone, Date, Time, Reason)." });
+      return res
+        .status(400)
+        .json({ error: "Please provide all required fields (Name, Phone, Date, Time, Reason)." });
     }
 
     const stmt = db.prepare(`
@@ -200,12 +205,14 @@ app.post("/api/appointments", (req, res) => {
       notes ? notes.trim() : null
     );
 
-    const newAppointment = db.prepare("SELECT * FROM appointments WHERE id = ?").get(info.lastInsertRowid);
+    const newAppointment = db
+      .prepare("SELECT * FROM appointments WHERE id = ?")
+      .get(info.lastInsertRowid);
 
     res.status(201).json({
       message: "Appointment successfully booked and confirmed!",
       appointment: newAppointment,
-      bookingReference: `CKC-${new Date().getFullYear()}-${String(info.lastInsertRowid).padStart(4, "0")}`
+      bookingReference: `CKC-${new Date().getFullYear()}-${String(info.lastInsertRowid).padStart(4, "0")}`,
     });
   } catch (err) {
     res.status(500).json({ error: "Failed to create appointment", details: err.message });
@@ -242,12 +249,16 @@ app.get("/api/appointments/booked-slots", (req, res) => {
     if (!date) {
       return res.json([]);
     }
-    const rows = db.prepare(`
+    const rows = db
+      .prepare(
+        `
       SELECT time_slot FROM appointments
       WHERE appointment_date = ? AND status != 'Cancelled'
-    `).all(date);
+    `
+      )
+      .all(date);
 
-    const bookedSlots = rows.map(r => r.time_slot);
+    const bookedSlots = rows.map((r) => r.time_slot);
     res.json(bookedSlots);
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch booked slots", details: err.message });
@@ -259,10 +270,12 @@ app.get("/api/opd/queue", (req, res) => {
   try {
     let queue = db.prepare("SELECT * FROM opd_queue WHERE id = 1").get();
     if (!queue) {
-      db.prepare(`
+      db.prepare(
+        `
         INSERT INTO opd_queue (id, current_token, next_token, estimated_wait_mins, status, doctor_name)
         VALUES (1, 14, 18, 20, 'active', 'Dr. Sagar Damodar Sarda')
-      `).run();
+      `
+      ).run();
       queue = db.prepare("SELECT * FROM opd_queue WHERE id = 1").get();
     }
     res.json(queue);
@@ -277,22 +290,31 @@ app.post("/api/opd/queue", (req, res) => {
 
     const current = db.prepare("SELECT * FROM opd_queue WHERE id = 1").get();
     if (!current) {
-      db.prepare(`
+      db.prepare(
+        `
         INSERT INTO opd_queue (id, current_token, next_token, estimated_wait_mins, status)
         VALUES (1, 1, 2, 15, 'active')
-      `).run();
+      `
+      ).run();
     }
 
-    const updatedCurrentToken = current_token !== undefined ? parseInt(current_token, 10) : current.current_token;
-    const updatedNextToken = next_token !== undefined ? parseInt(next_token, 10) : current.next_token;
-    const updatedWaitMins = estimated_wait_mins !== undefined ? parseInt(estimated_wait_mins, 10) : current.estimated_wait_mins;
+    const updatedCurrentToken =
+      current_token !== undefined ? parseInt(current_token, 10) : current.current_token;
+    const updatedNextToken =
+      next_token !== undefined ? parseInt(next_token, 10) : current.next_token;
+    const updatedWaitMins =
+      estimated_wait_mins !== undefined
+        ? parseInt(estimated_wait_mins, 10)
+        : current.estimated_wait_mins;
     const updatedStatus = status || current.status;
 
-    db.prepare(`
+    db.prepare(
+      `
       UPDATE opd_queue
       SET current_token = ?, next_token = ?, estimated_wait_mins = ?, status = ?, updated_at = CURRENT_TIMESTAMP
       WHERE id = 1
-    `).run(updatedCurrentToken, updatedNextToken, updatedWaitMins, updatedStatus);
+    `
+    ).run(updatedCurrentToken, updatedNextToken, updatedWaitMins, updatedStatus);
 
     const updatedQueue = db.prepare("SELECT * FROM opd_queue WHERE id = 1").get();
     res.json({ message: "OPD Queue successfully updated!", queue: updatedQueue });
@@ -315,8 +337,17 @@ app.post("/api/inquiries", (req, res) => {
       VALUES (?, ?, ?, ?, ?, 'New')
     `);
 
-    const info = stmt.run(name.trim(), email.trim(), phone ? phone.trim() : "", subject ? subject.trim() : "General Inquiry", message.trim());
-    res.status(201).json({ message: "Inquiry received. Our clinic team will reach out promptly.", id: info.lastInsertRowid });
+    const info = stmt.run(
+      name.trim(),
+      email.trim(),
+      phone ? phone.trim() : "",
+      subject ? subject.trim() : "General Inquiry",
+      message.trim()
+    );
+    res.status(201).json({
+      message: "Inquiry received. Our clinic team will reach out promptly.",
+      id: info.lastInsertRowid,
+    });
   } catch (err) {
     res.status(500).json({ error: "Failed to send inquiry", details: err.message });
   }
@@ -355,6 +386,10 @@ if (distPath) {
   });
 }
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🏥 Chandrapura Kidney Care Server running on port ${PORT}`);
-});
+export default app;
+
+if (process.env.NODE_ENV !== "test") {
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`🏥 Chandrapura Kidney Care Server running on port ${PORT}`);
+  });
+}

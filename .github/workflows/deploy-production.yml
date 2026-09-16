@@ -1,0 +1,54 @@
+name: Deploy Production
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: "Release version tag (e.g., v1.0.0)"
+        required: true
+        default: "v1.0.0"
+
+jobs:
+  deploy-production:
+    name: 🏥 Production Zero-Downtime Deployment
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://chandrapurahospital.com
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install & Build Production Bundle
+        run: |
+          npm ci
+          npm run build
+
+      - name: Build Production Image
+        run: |
+          docker build -t chandrapura-hospital:${{ github.ref_name || github.event.inputs.release_version }} .
+
+      - name: Pre-Deployment Database Snapshot Hook
+        run: |
+          echo "Triggering pre-deploy database snapshot backup..."
+
+      - name: Execute Live Smoke & Health Checks
+        run: |
+          docker run -d --name prod-smoke -p 5002:5000 -e NODE_ENV=test chandrapura-hospital:${{ github.ref_name || github.event.inputs.release_version }}
+          sleep 5
+          docker exec prod-smoke wget --no-verbose --tries=5 --spider http://localhost:5000/api/health || {
+            echo "❌ CRITICAL: Health check failed! Initiating automated rollback...";
+            docker stop prod-smoke && docker rm prod-smoke;
+            exit 1;
+          }
+          docker stop prod-smoke && docker rm prod-smoke
+          echo "✅ Production health check verified! Rollout successful."

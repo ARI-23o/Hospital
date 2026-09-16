@@ -1,31 +1,41 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { 
-  Target, Eye, ShieldCheck, HeartPulse, Stethoscope, CheckCircle2, 
-  ArrowRight, Phone, Calendar, Sparkles, Building, Activity, Users
-} from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  Target,
+  Eye,
+  ShieldCheck,
+  HeartPulse,
+  Stethoscope,
+  CheckCircle2,
+  ArrowRight,
+  Phone,
+  Calendar,
+  Sparkles,
+  Building,
+  Activity,
+  Users,
+} from "lucide-react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
-  }
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+  },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
-  }
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 export default function AboutPage({ setActiveTab }) {
   return (
     <div className="space-y-12 sm:space-y-16 pb-16 overflow-hidden">
-      
       {/* 1. TOP HERO SECTION (Refined Dual-Specialty Focus & Smooth Motion) */}
       <section className="relative overflow-hidden bg-gradient-to-b from-sky-50/70 via-white to-slate-50/80 py-10 sm:py-14 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
@@ -35,25 +45,26 @@ export default function AboutPage({ setActiveTab }) {
             animate="visible"
             className="space-y-3"
           >
-            <motion.span 
+            <motion.span
               variants={itemVariants}
               className="inline-block text-teal-700 bg-teal-50 border border-teal-200/80 font-bold text-[11px] sm:text-xs uppercase tracking-wider px-3.5 py-1 rounded-full shadow-xs"
             >
               About Chandrapur Kidney Care
             </motion.span>
-            
-            <motion.h1 
+
+            <motion.h1
               variants={itemVariants}
               className="text-2xl sm:text-4xl font-extrabold text-[#0F2D59] tracking-tight leading-[1.2]"
             >
               Comprehensive Kidney & Urology Care for Our Community
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               variants={itemVariants}
               className="text-xs sm:text-base text-slate-600 mt-2 font-normal leading-relaxed max-w-2xl mx-auto"
             >
-              Providing compassionate, evidence-based care for kidney and urinary health in Chandrapur, Maharashtra.
+              Providing compassionate, evidence-based care for kidney and urinary health in
+              Chandrapur, Maharashtra.
             </motion.p>
           </motion.div>
         </div>
@@ -62,9 +73,8 @@ export default function AboutPage({ setActiveTab }) {
       {/* 2. OUR JOURNEY & CLINIC OVERVIEW SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
           {/* Left: Journey Narrative & Dual Specialty Feature Cards */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
@@ -81,19 +91,27 @@ export default function AboutPage({ setActiveTab }) {
 
             <div className="space-y-3 text-slate-600 text-xs sm:text-sm leading-relaxed">
               <p>
-                <strong>Chandrapur Kidney Care</strong> is dedicated to providing accessible, compassionate, and patient-centered care for kidney and urinary health in Chandrapur, Maharashtra.
+                <strong>Chandrapur Kidney Care</strong> is dedicated to providing accessible,
+                compassionate, and patient-centered care for kidney and urinary health in
+                Chandrapur, Maharashtra.
               </p>
               <p>
-                Founded under the guidance of <strong className="text-[#0F2D59]">Dr. Sagar Damodar Sarda</strong> (MBBS, MD Medicine, DM Nephrology - Consultant Nephrologist & Kidney Transplant Physician), our goal is to help patients understand their conditions, receive world-class specialist care, and make informed decisions about their health.
+                Founded under the guidance of{" "}
+                <strong className="text-[#0F2D59]">Dr. Sagar Damodar Sarda</strong> (MBBS, MD
+                Medicine, DM Nephrology - Consultant Nephrologist & Kidney Transplant Physician),
+                our goal is to help patients understand their conditions, receive world-class
+                specialist care, and make informed decisions about their health.
               </p>
               <p>
-                Our services cover Nephrology and Urology, with care tailored to the needs of each patient. From kidney disease management and dialysis guidance to urological consultations, we aim to make quality healthcare easier to access.
+                Our services cover Nephrology and Urology, with care tailored to the needs of each
+                patient. From kidney disease management and dialysis guidance to urological
+                consultations, we aim to make quality healthcare easier to access.
               </p>
             </div>
 
             {/* 3. TWO FEATURE CARDS (Nephrology Care & Urology Care) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -106,11 +124,13 @@ export default function AboutPage({ setActiveTab }) {
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-slate-900">Nephrology Care</h4>
-                  <p className="text-xs text-slate-500 mt-0.5">Kidney disease evaluation, medical management, and dialysis guidance.</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Kidney disease evaluation, medical management, and dialysis guidance.
+                  </p>
                 </div>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -123,15 +143,16 @@ export default function AboutPage({ setActiveTab }) {
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-slate-900">Urology Care</h4>
-                  <p className="text-xs text-slate-500 mt-0.5">Specialist evaluation and treatment for urinary system conditions.</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Specialist evaluation and treatment for urinary system conditions.
+                  </p>
                 </div>
               </motion.div>
             </div>
-
           </motion.div>
 
           {/* Right: Verified Doctor Portrait Card */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-40px" }}
@@ -146,28 +167,28 @@ export default function AboutPage({ setActiveTab }) {
                   className="w-full h-80 sm:h-96 object-cover object-top transition duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0F2D59] via-[#0F2D59]/20 to-transparent"></div>
-                
+
                 <div className="absolute bottom-4 left-4 right-4 text-white">
                   <span className="text-[10px] font-bold bg-teal-500 text-white px-2.5 py-0.5 rounded-full uppercase">
                     Lead Consultant
                   </span>
                   <h3 className="text-xl font-bold mt-1">Dr. Sagar Damodar Sarda</h3>
                   <p className="text-xs text-teal-200">MBBS, MD Medicine, DM Nephrology</p>
-                  <p className="text-[11px] text-slate-300 mt-0.5">Consultant Nephrologist & Kidney Transplant Physician</p>
+                  <p className="text-[11px] text-slate-300 mt-0.5">
+                    Consultant Nephrologist & Kidney Transplant Physician
+                  </p>
                 </div>
               </div>
             </div>
           </motion.div>
-
         </div>
       </section>
 
       {/* 4. MISSION, VISION & CORE VALUES (Consistent Heights & Staggered Motion) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
-          
           {/* 01 Mission */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -184,7 +205,8 @@ export default function AboutPage({ setActiveTab }) {
               </div>
               <h3 className="text-base sm:text-lg font-bold text-[#0F2D59] mb-2">Our Mission</h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                To provide compassionate, evidence-based kidney and urology care that supports patient well-being, informed decisions, and accessible specialist consultations.
+                To provide compassionate, evidence-based kidney and urology care that supports
+                patient well-being, informed decisions, and accessible specialist consultations.
               </p>
             </div>
             <div className="mt-5 pt-3 border-t border-slate-100 text-xs font-semibold text-blue-700 flex items-center gap-1">
@@ -193,7 +215,7 @@ export default function AboutPage({ setActiveTab }) {
           </motion.div>
 
           {/* 02 Vision */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -210,7 +232,8 @@ export default function AboutPage({ setActiveTab }) {
               </div>
               <h3 className="text-base sm:text-lg font-bold text-[#0F2D59] mb-2">Our Vision</h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                To build a trusted center for kidney and urinary health in Chandrapur, offering coordinated specialist care and a patient-friendly healthcare experience.
+                To build a trusted center for kidney and urinary health in Chandrapur, offering
+                coordinated specialist care and a patient-friendly healthcare experience.
               </p>
             </div>
             <div className="mt-5 pt-3 border-t border-slate-100 text-xs font-semibold text-teal-700 flex items-center gap-1">
@@ -219,7 +242,7 @@ export default function AboutPage({ setActiveTab }) {
           </motion.div>
 
           {/* 03 Core Values */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -234,7 +257,9 @@ export default function AboutPage({ setActiveTab }) {
                 </div>
                 <span className="text-sm font-extrabold text-slate-300">03</span>
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-[#0F2D59] mb-2">Our Core Values</h3>
+              <h3 className="text-base sm:text-lg font-bold text-[#0F2D59] mb-2">
+                Our Core Values
+              </h3>
               <ul className="text-xs sm:text-sm text-slate-600 space-y-1.5">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
@@ -258,14 +283,12 @@ export default function AboutPage({ setActiveTab }) {
               <span>Integrity & Clinical Excellence</span>
             </div>
           </motion.div>
-
         </div>
       </section>
 
       {/* 5. NEW SECTION: OUR SPECIALTIES (Two Specialties. One Commitment.) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-slate-900 rounded-3xl p-6 sm:p-10 text-white shadow-xl space-y-8">
-          
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="text-teal-300 text-xs font-bold uppercase tracking-wider bg-white/10 px-3 py-1 rounded-full border border-white/10">
               Our Specialties
@@ -279,16 +302,18 @@ export default function AboutPage({ setActiveTab }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            
             {/* Nephrology Box */}
             <div className="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 space-y-3">
               <div className="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center">
                 <HeartPulse className="w-5 h-5" />
               </div>
               <h3 className="text-lg font-bold text-white">Nephrology</h3>
-              <p className="text-xs text-teal-200 font-semibold">Kidney health and medical kidney care</p>
+              <p className="text-xs text-teal-200 font-semibold">
+                Kidney health and medical kidney care
+              </p>
               <p className="text-xs text-slate-300 leading-relaxed">
-                CKD management, dialysis care, hypertension-related kidney care, glomerular diseases, and medical renal evaluation.
+                CKD management, dialysis care, hypertension-related kidney care, glomerular
+                diseases, and medical renal evaluation.
               </p>
             </div>
 
@@ -298,26 +323,27 @@ export default function AboutPage({ setActiveTab }) {
                 <Stethoscope className="w-5 h-5" />
               </div>
               <h3 className="text-lg font-bold text-white">Urology</h3>
-              <p className="text-xs text-sky-200 font-semibold">Urinary system and urological care</p>
+              <p className="text-xs text-sky-200 font-semibold">
+                Urinary system and urological care
+              </p>
               <p className="text-xs text-slate-300 leading-relaxed">
-                Urological consultations and treatment for conditions of the urinary tract, stone medical evaluation, and voiding health.
+                Urological consultations and treatment for conditions of the urinary tract, stone
+                medical evaluation, and voiding health.
               </p>
             </div>
-
           </div>
 
           <div className="text-center pt-2">
             <motion.button
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => setActiveTab('services')}
+              onClick={() => setActiveTab("services")}
               className="bg-teal-500 hover:bg-teal-600 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl transition shadow-md inline-flex items-center gap-2"
             >
               <span>Explore All Specialties & Services</span>
               <ArrowRight className="w-4 h-4" />
             </motion.button>
           </div>
-
         </div>
       </section>
 
@@ -332,19 +358,20 @@ export default function AboutPage({ setActiveTab }) {
               Questions About Your Kidney or Urinary Health?
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 max-w-xl">
-              Connect with the appropriate specialist at Chandrapur Kidney Care and understand your next steps.
+              Connect with the appropriate specialist at Chandrapur Kidney Care and understand your
+              next steps.
             </p>
           </div>
-          
+
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
             <button
-              onClick={() => setActiveTab('appointment')}
+              onClick={() => setActiveTab("appointment")}
               className="bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl transition shadow-md flex items-center justify-center gap-2"
             >
               <Calendar className="w-4 h-4" /> Book an Appointment
             </button>
             <button
-              onClick={() => setActiveTab('contact')}
+              onClick={() => setActiveTab("contact")}
               className="bg-white hover:bg-slate-100 text-[#0F2D59] font-bold text-xs sm:text-sm px-5 py-3 rounded-xl border border-slate-200 transition text-center"
             >
               Contact Us
@@ -352,7 +379,6 @@ export default function AboutPage({ setActiveTab }) {
           </div>
         </div>
       </section>
-
     </div>
   );
 }

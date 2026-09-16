@@ -32,6 +32,7 @@ A modern, compassionate, and high-performance multi-page healthcare website and 
 ## 🚀 How to Run Locally
 
 ### 1. Install Dependencies
+
 ```bash
 # In the project root:
 npm install
@@ -46,6 +47,7 @@ npm install
 ```
 
 ### 2. Start Backend API Server
+
 ```bash
 cd server
 npm run dev
@@ -53,6 +55,7 @@ npm run dev
 ```
 
 ### 3. Start Frontend Client
+
 ```bash
 cd client
 npm run dev
@@ -62,6 +65,7 @@ npm run dev
 ---
 
 ## 🩺 Doctor & Clinic Profile
+
 - **Clinic Name**: Chandrapura Kidney Care
 - **Lead Consultant**: Dr. Sagar Sadar, MD (General Medicine), DM (Nephrology)
 - **Specialization**: Consultant Nephrologist (Comprehensive Non-Transplant Kidney Care)

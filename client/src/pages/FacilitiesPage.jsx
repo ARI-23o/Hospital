@@ -1,63 +1,101 @@
-import React from 'react';
-import { Sparkles, Shield, HeartPulse, Microscope, Users, CheckCircle, Clock, CheckCircle2 } from 'lucide-react';
-import Interactive3DCard from '../components/Interactive3DCard';
-import MarqueeTicker from '../components/MarqueeTicker';
+import React from "react";
+import {
+  Sparkles,
+  Shield,
+  HeartPulse,
+  Microscope,
+  Users,
+  CheckCircle,
+  Clock,
+  CheckCircle2,
+} from "lucide-react";
+import Interactive3DCard from "../components/Interactive3DCard";
+import MarqueeTicker from "../components/MarqueeTicker";
 
 export default function FacilitiesPage({ setActiveTab }) {
   const facilities = [
     {
-      title: 'Modern Dialysis Unit',
-      desc: 'Equipped with advanced hemodialysis machines, high-flux dialyzers, ultra-pure water treatment plant (RO), and strict infection control barrier protocols.',
+      title: "Modern Dialysis Unit",
+      desc: "Equipped with advanced hemodialysis machines, high-flux dialyzers, ultra-pure water treatment plant (RO), and strict infection control barrier protocols.",
       icon: HeartPulse,
-      tag: 'Specialized Care',
-      visual: '🏥 Dialysis Station',
-      features: ['High-Flux Dialyzers', 'Dedicated RO Water System', 'Individual Patient Monitoring', 'Emergency Crash Cart Backup']
+      tag: "Specialized Care",
+      visual: "🏥 Dialysis Station",
+      features: [
+        "High-Flux Dialyzers",
+        "Dedicated RO Water System",
+        "Individual Patient Monitoring",
+        "Emergency Crash Cart Backup",
+      ],
     },
     {
-      title: 'Consultation Rooms',
-      desc: 'Private, comfortable, and well-lit doctor chambers designed for thorough clinical evaluation, confidential discussions, and patient-family counseling.',
+      title: "Consultation Rooms",
+      desc: "Private, comfortable, and well-lit doctor chambers designed for thorough clinical evaluation, confidential discussions, and patient-family counseling.",
       icon: Users,
-      tag: 'OPD Excellence',
-      visual: '👨‍⚕️ Doctor Chamber',
-      features: ['Ergonomic Examination Bed', 'Digital Health Record Station', 'Private Counseling Space', 'Air Conditioned Comfort']
+      tag: "OPD Excellence",
+      visual: "👨‍⚕️ Doctor Chamber",
+      features: [
+        "Ergonomic Examination Bed",
+        "Digital Health Record Station",
+        "Private Counseling Space",
+        "Air Conditioned Comfort",
+      ],
     },
     {
-      title: 'Patient Waiting Area',
-      desc: 'Spacious, clean, and tranquil reception lounge designed to minimize stress and waiting time for patients and accompanying relatives.',
+      title: "Patient Waiting Area",
+      desc: "Spacious, clean, and tranquil reception lounge designed to minimize stress and waiting time for patients and accompanying relatives.",
       icon: Clock,
-      tag: 'Patient Comfort',
-      visual: '🛋️ Waiting Lounge',
-      features: ['Air Filtered Environment', 'Comfortable Seating Layout', 'Drinking Water Station', 'Wheelchair Accessibility']
+      tag: "Patient Comfort",
+      visual: "🛋️ Waiting Lounge",
+      features: [
+        "Air Filtered Environment",
+        "Comfortable Seating Layout",
+        "Drinking Water Station",
+        "Wheelchair Accessibility",
+      ],
     },
     {
-      title: 'Pathology & Diagnostic Support',
-      desc: 'Rapid turn-around diagnostic support for Kidney Function Tests (KFT), Serum Creatinine, Electrolytes, Urine Microalbumin, and Complete Blood Counts.',
+      title: "Pathology & Diagnostic Support",
+      desc: "Rapid turn-around diagnostic support for Kidney Function Tests (KFT), Serum Creatinine, Electrolytes, Urine Microalbumin, and Complete Blood Counts.",
       icon: Microscope,
-      tag: 'Fast Results',
-      visual: '🔬 Laboratory Desk',
-      features: ['Automated Biochemistry Analyzers', 'Same-Day KFT Reports', 'Urine Microscopy Correlation', 'NABL Accredited Quality']
+      tag: "Fast Results",
+      visual: "🔬 Laboratory Desk",
+      features: [
+        "Automated Biochemistry Analyzers",
+        "Same-Day KFT Reports",
+        "Urine Microscopy Correlation",
+        "NABL Accredited Quality",
+      ],
     },
     {
-      title: 'Clean & Hygienic Environment',
-      desc: 'Daily sterilization, biomedical waste segregation, and stringent hospital hygiene standards ensuring safety for immunocompromised kidney patients.',
+      title: "Clean & Hygienic Environment",
+      desc: "Daily sterilization, biomedical waste segregation, and stringent hospital hygiene standards ensuring safety for immunocompromised kidney patients.",
       icon: Shield,
-      tag: 'Infection Control',
-      visual: '✨ Sanitized Facility',
-      features: ['Continuous Air Circulation', 'Daily Multi-surface Sanitization', 'Touchless Sanitizer Dispensers', 'Hospital Grade Disinfection']
+      tag: "Infection Control",
+      visual: "✨ Sanitized Facility",
+      features: [
+        "Continuous Air Circulation",
+        "Daily Multi-surface Sanitization",
+        "Touchless Sanitizer Dispensers",
+        "Hospital Grade Disinfection",
+      ],
     },
     {
-      title: 'Patient Support Staff',
-      desc: 'Empathetic nursing team and front desk coordinators trained in nephrology care, ready to assist elderly patients with scheduling, wheelchair support, and billing.',
+      title: "Patient Support Staff",
+      desc: "Empathetic nursing team and front desk coordinators trained in nephrology care, ready to assist elderly patients with scheduling, wheelchair support, and billing.",
       icon: Sparkles,
-      tag: 'Dedicated Team',
-      visual: '🤝 Support Desk',
-      features: ['Trained Dialysis Technicians', 'Dedicated Patient Helpdesk', 'Appointment Assistance', 'Multilingual Support']
+      tag: "Dedicated Team",
+      visual: "🤝 Support Desk",
+      features: [
+        "Trained Dialysis Technicians",
+        "Dedicated Patient Helpdesk",
+        "Appointment Assistance",
+        "Multilingual Support",
+      ],
     },
   ];
 
   return (
     <div className="space-y-12 sm:space-y-16 pb-16">
-      
       {/* 1. Header Banner */}
       <section className="bg-gradient-to-r from-[#0F2D59] via-[#163D75] to-[#0D9488] text-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
@@ -94,16 +132,14 @@ export default function FacilitiesPage({ setActiveTab }) {
                     </div>
                   </div>
                   <div className="mt-4 text-center py-3">
-                    <span className="text-4xl">{fac.visual.split(' ')[0]}</span>
+                    <span className="text-4xl">{fac.visual.split(" ")[0]}</span>
                     <h3 className="text-lg font-bold text-white mt-2">{fac.title}</h3>
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className="p-6 space-y-4">
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    {fac.desc}
-                  </p>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{fac.desc}</p>
 
                   <div className="space-y-2 pt-2 border-t border-slate-100">
                     <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
@@ -146,14 +182,13 @@ export default function FacilitiesPage({ setActiveTab }) {
             </div>
           </div>
           <button
-            onClick={() => setActiveTab('appointment')}
+            onClick={() => setActiveTab("appointment")}
             className="bg-[#0F2D59] hover:bg-teal-800 text-white font-bold text-sm px-6 py-3 rounded-xl transition shadow-md shrink-0"
           >
             Visit Our Clinic
           </button>
         </div>
       </section>
-
     </div>
   );
 }

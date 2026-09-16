@@ -7,8 +7,20 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "client": "cd client && npm run dev",
     "server": "node server/src/index.js",
-    "build": "cd client && npm install && npm run build",
-    "start": "node server/src/index.js"
+    "build": "cd client && npm run build",
+    "start": "node server/src/index.js",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "audit:check": "npm audit --audit-level=high",
+    "install:all": "npm install && cd client && npm install"
   },
   "dependencies": {
     "better-sqlite3": "^11.8.1",
@@ -16,6 +28,25 @@
     "express": "^4.21.2"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "@axe-core/playwright": "^4.13.0",
+    "@eslint/js": "^9.39.5",
+    "@playwright/test": "^1.63.0",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "@vitest/coverage-v8": "^5.0.1",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.12.0",
+    "jsdom": "^29.1.1",
+    "prettier": "^3.9.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "supertest": "^7.2.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
   }
 }

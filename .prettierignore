@@ -1,0 +1,10 @@
+node_modules
+dist
+client/dist
+server/data
+coverage
+playwright-report
+test-results
+.system_generated
+*.sqlite
+*.db

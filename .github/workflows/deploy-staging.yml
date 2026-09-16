@@ -1,0 +1,41 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  deploy-staging:
+    name: 🚀 Deploy to Staging Environment
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://staging.chandrapurahospital.com
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install Dependencies & Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Verify Docker Container Build
+        run: |
+          docker build -t chandrapura-hospital:staging .
+
+      - name: Staging Health Check Smoke Test
+        run: |
+          echo "Simulating container launch & health verification..."
+          docker run -d --name staging-smoke -p 5001:5000 -e NODE_ENV=test chandrapura-hospital:staging
+          sleep 5
+          docker exec staging-smoke wget --no-verbose --tries=3 --spider http://localhost:5000/api/health || exit 1
+          docker stop staging-smoke && docker rm staging-smoke
+          echo "✅ Staging smoke test passed successfully!"

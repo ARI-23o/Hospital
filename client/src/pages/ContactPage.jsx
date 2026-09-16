@@ -1,44 +1,60 @@
-import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, AlertCircle, MessageSquare, ExternalLink, Navigation } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Send,
+  CheckCircle2,
+  AlertCircle,
+  MessageSquare,
+  ExternalLink,
+  Navigation,
+} from "lucide-react";
 
 export default function ContactPage({ setActiveTab }) {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
   });
-  const [status, setStatus] = useState({ loading: false, success: false, error: '' });
+  const [status, setStatus] = useState({ loading: false, success: false, error: "" });
 
   const MAP_URL = "https://maps.app.goo.gl/f1P5sEp6G8aWFc39A";
-  const MAP_EMBED_URL = "https://maps.google.com/maps?q=19.9495898,79.2959868&t=&z=16&ie=UTF8&iwloc=&output=embed";
+  const MAP_EMBED_URL =
+    "https://maps.google.com/maps?q=19.9495898,79.2959868&t=&z=16&ie=UTF8&iwloc=&output=embed";
 
   const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
-      setStatus({ loading: false, success: false, error: 'Please fill in Name, Email and Message.' });
+      setStatus({
+        loading: false,
+        success: false,
+        error: "Please fill in Name, Email and Message.",
+      });
       return;
     }
 
-    setStatus({ loading: true, success: false, error: '' });
+    setStatus({ loading: true, success: false, error: "" });
 
     try {
-      const res = await fetch('/api/inquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+      const res = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to submit inquiry');
+      if (!res.ok) throw new Error(data.error || "Failed to submit inquiry");
 
-      setStatus({ loading: false, success: true, error: '' });
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setStatus({ loading: false, success: true, error: "" });
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
     } catch (err) {
       setStatus({ loading: false, success: false, error: err.message });
     }
@@ -46,18 +62,16 @@ export default function ContactPage({ setActiveTab }) {
 
   return (
     <div className="space-y-10 sm:space-y-16 pb-12">
-      
       {/* 1. Header Banner */}
       <section className="bg-gradient-to-r from-[#0F2D59] via-[#163D75] to-[#0D9488] text-white py-10 sm:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
           <span className="text-teal-300 font-bold text-[11px] sm:text-xs uppercase tracking-wider bg-white/10 px-3 py-1 rounded-full border border-white/10">
             Get in Touch
           </span>
-          <h1 className="text-2xl sm:text-4xl font-extrabold mt-3 tracking-tight">
-            Contact Us
-          </h1>
+          <h1 className="text-2xl sm:text-4xl font-extrabold mt-3 tracking-tight">Contact Us</h1>
           <p className="text-xs sm:text-base text-teal-100 mt-2 font-normal">
-            We are here to assist you with appointment scheduling, directions to our clinic, and kidney health guidance.
+            We are here to assist you with appointment scheduling, directions to our clinic, and
+            kidney health guidance.
           </p>
         </div>
       </section>
@@ -65,10 +79,8 @@ export default function ContactPage({ setActiveTab }) {
       {/* 2. Contact Details & Form */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
           {/* Left Column: Clinic Contact Info & Real Interactive Map */}
           <div className="lg:col-span-5 space-y-5">
-            
             <div className="bg-white rounded-3xl p-5 sm:p-7 shadow-card border border-slate-100 space-y-4">
               <h3 className="text-lg font-bold text-[#0F2D59] border-b border-slate-100 pb-2.5">
                 Clinic Information
@@ -81,7 +93,9 @@ export default function ContactPage({ setActiveTab }) {
                   </div>
                   <div>
                     <h4 className="font-bold text-slate-800">Hospital Location</h4>
-                    <p className="text-slate-500 mt-0.5">Behind LIC Office, Main Road, Chandrapur, Maharashtra, India</p>
+                    <p className="text-slate-500 mt-0.5">
+                      Behind LIC Office, Main Road, Chandrapur, Maharashtra, India
+                    </p>
                     <a
                       href={MAP_URL}
                       target="_blank"
@@ -99,8 +113,18 @@ export default function ContactPage({ setActiveTab }) {
                   </div>
                   <div>
                     <h4 className="font-bold text-slate-800">Phone Numbers</h4>
-                    <a href="tel:+919876543210" className="text-slate-600 font-medium block hover:text-teal-700">+91 98765 43210</a>
-                    <a href="tel:+919823333537" className="text-slate-600 font-medium block hover:text-teal-700">+91 98233 33537</a>
+                    <a
+                      href="tel:+919876543210"
+                      className="text-slate-600 font-medium block hover:text-teal-700"
+                    >
+                      +91 98765 43210
+                    </a>
+                    <a
+                      href="tel:+919823333537"
+                      className="text-slate-600 font-medium block hover:text-teal-700"
+                    >
+                      +91 98233 33537
+                    </a>
                   </div>
                 </div>
 
@@ -110,7 +134,12 @@ export default function ContactPage({ setActiveTab }) {
                   </div>
                   <div>
                     <h4 className="font-bold text-slate-800">Email Address</h4>
-                    <a href="mailto:info@chandrapurakidneycare.in" className="text-slate-500 hover:text-teal-700">info@chandrapurakidneycare.in</a>
+                    <a
+                      href="mailto:info@chandrapurakidneycare.in"
+                      className="text-slate-500 hover:text-teal-700"
+                    >
+                      info@chandrapurakidneycare.in
+                    </a>
                   </div>
                 </div>
 
@@ -167,7 +196,6 @@ export default function ContactPage({ setActiveTab }) {
                 Navigate in Google Maps App
               </a>
             </div>
-
           </div>
 
           {/* Right Column: Contact Form */}
@@ -180,7 +208,8 @@ export default function ContactPage({ setActiveTab }) {
                 Have a Question for Our Team?
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 mb-5">
-                Fill out the form below and Dr. Sagar Sarda's clinic coordinator will respond promptly.
+                Fill out the form below and Dr. Sagar Sarda's clinic coordinator will respond
+                promptly.
               </p>
 
               {status.success && (
@@ -280,16 +309,13 @@ export default function ContactPage({ setActiveTab }) {
                   className="w-full bg-[#0F2D59] hover:bg-teal-700 active:scale-98 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm"
                 >
                   <Send className="w-4 h-4" />
-                  {status.loading ? 'Sending...' : 'Send Message to Clinic'}
+                  {status.loading ? "Sending..." : "Send Message to Clinic"}
                 </button>
               </form>
-
             </div>
           </div>
-
         </div>
       </section>
-
     </div>
   );
 }

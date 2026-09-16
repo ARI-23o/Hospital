@@ -68,10 +68,12 @@ export function initDB() {
   // Seed default OPD queue row if empty
   const queueRow = db.prepare("SELECT * FROM opd_queue WHERE id = 1").get();
   if (!queueRow) {
-    db.prepare(`
+    db.prepare(
+      `
       INSERT INTO opd_queue (id, current_token, next_token, estimated_wait_mins, status, doctor_name)
       VALUES (1, 14, 18, 20, 'active', 'Dr. Sagar Damodar Sarda')
-    `).run();
+    `
+    ).run();
   }
 
   // Seed sample services if empty
@@ -87,74 +89,99 @@ export function initDB() {
         title: "Chronic Kidney Disease (CKD) Management",
         slug: "ckd-management",
         tagline: "Early detection, monitoring and long-term care to slow disease progression.",
-        description: "Comprehensive staging (Stages 1 to 5), personalized nephro-protective therapies, dietary renal planning, blood pressure and protein leak management to preserve native kidney function.",
-        symptoms: "Swelling in feet/ankles, fatigue, changes in urination frequency, metallic taste, nausea.",
-        treatments: "Renoprotective medications (ACEi/ARBs/SGLT2i), metabolic acidosis control, anemia therapy, regular GFR & creatinine monitoring.",
-        icon_name: "Activity"
+        description:
+          "Comprehensive staging (Stages 1 to 5), personalized nephro-protective therapies, dietary renal planning, blood pressure and protein leak management to preserve native kidney function.",
+        symptoms:
+          "Swelling in feet/ankles, fatigue, changes in urination frequency, metallic taste, nausea.",
+        treatments:
+          "Renoprotective medications (ACEi/ARBs/SGLT2i), metabolic acidosis control, anemia therapy, regular GFR & creatinine monitoring.",
+        icon_name: "Activity",
       },
       {
         title: "Dialysis Care & Guidance",
         slug: "dialysis-care",
         tagline: "Hemodialysis support and guidance for higher quality of life.",
-        description: "Specialized vascular access (AV fistula/graft/catheter) planning, hemodialysis prescription optimization, adequacy monitoring, and continuous guidance for patients and families.",
+        description:
+          "Specialized vascular access (AV fistula/graft/catheter) planning, hemodialysis prescription optimization, adequacy monitoring, and continuous guidance for patients and families.",
         symptoms: "Uremic symptoms, fluid overload, shortness of breath, refractory hypertension.",
-        treatments: "High-flux hemodialysis supervision, dry weight management, dialysis catheter care, cardiovascular optimization.",
-        icon_name: "HeartPulse"
+        treatments:
+          "High-flux hemodialysis supervision, dry weight management, dialysis catheter care, cardiovascular optimization.",
+        icon_name: "HeartPulse",
       },
       {
         title: "Hypertension / High BP Care",
         slug: "hypertension-care",
         tagline: "Specialized treatment for blood pressure management to protect kidney health.",
-        description: "Targeted investigation of secondary hypertension, renal artery Doppler, 24-hour ABPM management, and tailored multi-drug regimens for resistant hypertension.",
-        symptoms: "Morning headaches, blurred vision, dizziness, elevated home blood pressure readings.",
-        treatments: "Resistant hypertension protocols, sodium-sensitive management, aldosterone antagonism, lifestyle & renal dietary intervention.",
-        icon_name: "Gauge"
+        description:
+          "Targeted investigation of secondary hypertension, renal artery Doppler, 24-hour ABPM management, and tailored multi-drug regimens for resistant hypertension.",
+        symptoms:
+          "Morning headaches, blurred vision, dizziness, elevated home blood pressure readings.",
+        treatments:
+          "Resistant hypertension protocols, sodium-sensitive management, aldosterone antagonism, lifestyle & renal dietary intervention.",
+        icon_name: "Gauge",
       },
       {
         title: "Kidney Stone Management",
         slug: "kidney-stone-management",
-        tagline: "Evaluation and medical treatment for kidney stones with a modern clinical approach.",
-        description: "Metabolic stone workup (24-hour urine chemistry), medical expulsive therapy, recurrence prevention diets, and nephrology consultation for stone-induced renal impairment.",
-        symptoms: "Severe flank or back pain, blood in urine (hematuria), painful urination, fever/chills.",
-        treatments: "Hydration protocols, citrate supplementation, uric acid lowering, oxalate reduction, medical expulsive therapies.",
-        icon_name: "ShieldAlert"
+        tagline:
+          "Evaluation and medical treatment for kidney stones with a modern clinical approach.",
+        description:
+          "Metabolic stone workup (24-hour urine chemistry), medical expulsive therapy, recurrence prevention diets, and nephrology consultation for stone-induced renal impairment.",
+        symptoms:
+          "Severe flank or back pain, blood in urine (hematuria), painful urination, fever/chills.",
+        treatments:
+          "Hydration protocols, citrate supplementation, uric acid lowering, oxalate reduction, medical expulsive therapies.",
+        icon_name: "ShieldAlert",
       },
       {
         title: "Glomerular Diseases",
         slug: "glomerular-diseases",
         tagline: "Diagnosis and management of complex kidney disorders and protein leak.",
-        description: "In-depth workup for Nephrotic and Nephritic syndromes, IgA nephropathy, Membranous nephropathy, Lupus nephritis, with kidney biopsy interpretation and targeted immunosuppression.",
-        symptoms: "Foamy urine, facial puffiness, leg edema, dark/tea-colored urine, high blood pressure.",
-        treatments: "Targeted immunotherapy, steroid-sparing protocols, strict antiproteinuric regimens, close lipid & albumin monitoring.",
-        icon_name: "Microscope"
+        description:
+          "In-depth workup for Nephrotic and Nephritic syndromes, IgA nephropathy, Membranous nephropathy, Lupus nephritis, with kidney biopsy interpretation and targeted immunosuppression.",
+        symptoms:
+          "Foamy urine, facial puffiness, leg edema, dark/tea-colored urine, high blood pressure.",
+        treatments:
+          "Targeted immunotherapy, steroid-sparing protocols, strict antiproteinuric regimens, close lipid & albumin monitoring.",
+        icon_name: "Microscope",
       },
       {
         title: "Electrolyte & Mineral Balance",
         slug: "electrolyte-mineral-balance",
-        tagline: "Treatment for critical imbalances such as potassium, calcium, sodium, and acid-base.",
-        description: "Expert diagnostic evaluation and rapid correction of hyperkalemia, hypokalemia, hyponatremia, hypercalcemia, metabolic acidosis, and renal bone mineral disease (CKD-MBD).",
+        tagline:
+          "Treatment for critical imbalances such as potassium, calcium, sodium, and acid-base.",
+        description:
+          "Expert diagnostic evaluation and rapid correction of hyperkalemia, hypokalemia, hyponatremia, hypercalcemia, metabolic acidosis, and renal bone mineral disease (CKD-MBD).",
         symptoms: "Muscle cramps, irregular heartbeat, confusion, weakness, bone pain.",
-        treatments: "Potassium binders, phosphate binders, active Vitamin D analogs, calcimimetics, controlled sodium/fluid correction.",
-        icon_name: "Scale"
+        treatments:
+          "Potassium binders, phosphate binders, active Vitamin D analogs, calcimimetics, controlled sodium/fluid correction.",
+        icon_name: "Scale",
       },
       {
         title: "Urinary Tract Infections (UTI)",
         slug: "urinary-tract-infections",
         tagline: "Accurate diagnosis, culture-guided therapy and effective long-term prevention.",
-        description: "Systematic investigation of complicated and recurrent UTIs, pyelonephritis, structural urinary tract evaluation, and customized non-antibiotic and targeted prophylactic strategies.",
-        symptoms: "Burning urination, increased urgency, lower abdominal discomfort, foul-smelling urine, fever.",
-        treatments: "Culture-guided targeted antibiotics, prophylactic regimens, urinary tract ultrasound correlation, preventive behavioral protocols.",
-        icon_name: "Stethoscope"
+        description:
+          "Systematic investigation of complicated and recurrent UTIs, pyelonephritis, structural urinary tract evaluation, and customized non-antibiotic and targeted prophylactic strategies.",
+        symptoms:
+          "Burning urination, increased urgency, lower abdominal discomfort, foul-smelling urine, fever.",
+        treatments:
+          "Culture-guided targeted antibiotics, prophylactic regimens, urinary tract ultrasound correlation, preventive behavioral protocols.",
+        icon_name: "Stethoscope",
       },
       {
         title: "Preventive Kidney Care",
         slug: "preventive-kidney-care",
-        tagline: "Guidance on lifestyle, diabetic screening, and regular monitoring to keep your kidneys healthy.",
-        description: "Proactive screening packages for diabetic individuals, elderly, and family members of kidney patients. Lifestyle education, hydration guidelines, and avoidance of nephrotoxic drugs.",
-        symptoms: "Often asymptomatic in early stages – screening recommended for diabetics & hypertensive individuals.",
-        treatments: "Annual microalbuminuria & serum creatinine screening, nephrotoxic medication safety audit, renal diet plans.",
-        icon_name: "ShieldCheck"
-      }
+        tagline:
+          "Guidance on lifestyle, diabetic screening, and regular monitoring to keep your kidneys healthy.",
+        description:
+          "Proactive screening packages for diabetic individuals, elderly, and family members of kidney patients. Lifestyle education, hydration guidelines, and avoidance of nephrotoxic drugs.",
+        symptoms:
+          "Often asymptomatic in early stages – screening recommended for diabetics & hypertensive individuals.",
+        treatments:
+          "Annual microalbuminuria & serum creatinine screening, nephrotoxic medication safety audit, renal diet plans.",
+        icon_name: "ShieldCheck",
+      },
     ];
 
     for (const s of servicesList) {
@@ -170,9 +197,36 @@ export function initDB() {
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
-    insertApt.run("Ramesh Deshmukh", "+91 98221 44550", "ramesh.d@example.com", "2026-09-18", "10:30 AM - 11:00 AM", "CKD Follow-up & Creatinine Review", "Patient has existing diabetes for 8 years", "Confirmed");
-    insertApt.run("Sunita Patil", "+91 94230 11223", "sunita.p@example.com", "2026-09-18", "11:30 AM - 12:00 PM", "Hypertension & Proteinuria Evaluation", "Referred by general physician", "Confirmed");
-    insertApt.run("Anil Kulkarni", "+91 98900 88776", "anil.kulkarni@example.com", "2026-09-19", "04:30 PM - 05:00 PM", "Kidney Stone Medical Assessment", "Reported severe right flank pain last week", "Confirmed");
+    insertApt.run(
+      "Ramesh Deshmukh",
+      "+91 98221 44550",
+      "ramesh.d@example.com",
+      "2026-09-18",
+      "10:30 AM - 11:00 AM",
+      "CKD Follow-up & Creatinine Review",
+      "Patient has existing diabetes for 8 years",
+      "Confirmed"
+    );
+    insertApt.run(
+      "Sunita Patil",
+      "+91 94230 11223",
+      "sunita.p@example.com",
+      "2026-09-18",
+      "11:30 AM - 12:00 PM",
+      "Hypertension & Proteinuria Evaluation",
+      "Referred by general physician",
+      "Confirmed"
+    );
+    insertApt.run(
+      "Anil Kulkarni",
+      "+91 98900 88776",
+      "anil.kulkarni@example.com",
+      "2026-09-19",
+      "04:30 PM - 05:00 PM",
+      "Kidney Stone Medical Assessment",
+      "Reported severe right flank pain last week",
+      "Confirmed"
+    );
   }
 }
 

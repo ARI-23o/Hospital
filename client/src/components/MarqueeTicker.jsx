@@ -1,16 +1,24 @@
-import React from 'react';
-import { HeartPulse, Stethoscope, Shield, Sparkles, Activity, Award, CheckCircle2 } from 'lucide-react';
+import React from "react";
+import {
+  HeartPulse,
+  Stethoscope,
+  Shield,
+  Sparkles,
+  Activity,
+  Award,
+  CheckCircle2,
+} from "lucide-react";
 
 export default function MarqueeTicker() {
   const items = [
-    { label: 'Dr. Sagar Sarda (MD, DM Nephrology)', icon: Award, color: '#0D9488' },
-    { label: 'High-Flux Hemodialysis Unit', icon: HeartPulse, color: '#0284C7' },
-    { label: 'Chronic Kidney Disease (CKD) Stages 1-5', icon: Activity, color: '#10B981' },
-    { label: 'Kidney Stone Metabolic Workup', icon: Shield, color: '#F59E0B' },
-    { label: 'Urology & Urinary Tract Care', icon: Stethoscope, color: '#6366F1' },
-    { label: 'Hypertension & Renoprotection', icon: CheckCircle2, color: '#EC4899' },
-    { label: 'Glomerular Disease & Proteinuria', icon: Sparkles, color: '#14B8A6' },
-    { label: '24/7 Emergency Renal Support', icon: HeartPulse, color: '#EF4444' },
+    { label: "Dr. Sagar Sarda (MD, DM Nephrology)", icon: Award, color: "#0D9488" },
+    { label: "High-Flux Hemodialysis Unit", icon: HeartPulse, color: "#0284C7" },
+    { label: "Chronic Kidney Disease (CKD) Stages 1-5", icon: Activity, color: "#10B981" },
+    { label: "Kidney Stone Metabolic Workup", icon: Shield, color: "#F59E0B" },
+    { label: "Urology & Urinary Tract Care", icon: Stethoscope, color: "#6366F1" },
+    { label: "Hypertension & Renoprotection", icon: CheckCircle2, color: "#EC4899" },
+    { label: "Glomerular Disease & Proteinuria", icon: Sparkles, color: "#14B8A6" },
+    { label: "24/7 Emergency Renal Support", icon: HeartPulse, color: "#EF4444" },
   ];
 
   return (

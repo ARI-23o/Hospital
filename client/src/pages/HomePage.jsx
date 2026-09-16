@@ -1,210 +1,249 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  HeartPulse, Shield, UserCheck, Stethoscope, ArrowRight, CheckCircle2, 
-  Activity, Award, Building, Calendar, Phone, Sparkles, MapPin, Users, Star, 
-  ChevronRight, Microscope, Scale, Gauge, Droplet, ShieldAlert, Clock, Sparkle,
-  BedDouble, FileText, Check, Layers, Zap
-} from 'lucide-react';
-import ThreeKidneyVisualizer from '../components/ThreeKidneyVisualizer';
-import Interactive3DCard from '../components/Interactive3DCard';
-import KidneyHealthCalculator from '../components/KidneyHealthCalculator';
-import LiveOpdQueue from '../components/LiveOpdQueue';
-import MarqueeTicker from '../components/MarqueeTicker';
-import DoctorScheduleExplorer from '../components/DoctorScheduleExplorer';
-import { useLanguage } from '../context/LanguageContext';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  HeartPulse,
+  Shield,
+  UserCheck,
+  Stethoscope,
+  ArrowRight,
+  CheckCircle2,
+  Activity,
+  Award,
+  Building,
+  Calendar,
+  Phone,
+  Sparkles,
+  MapPin,
+  Users,
+  Star,
+  ChevronRight,
+  Microscope,
+  Scale,
+  Gauge,
+  Droplet,
+  ShieldAlert,
+  Clock,
+  Sparkle,
+  BedDouble,
+  FileText,
+  Check,
+  Layers,
+  Zap,
+} from "lucide-react";
+import ThreeKidneyVisualizer from "../components/ThreeKidneyVisualizer";
+import Interactive3DCard from "../components/Interactive3DCard";
+import KidneyHealthCalculator from "../components/KidneyHealthCalculator";
+import LiveOpdQueue from "../components/LiveOpdQueue";
+import MarqueeTicker from "../components/MarqueeTicker";
+import DoctorScheduleExplorer from "../components/DoctorScheduleExplorer";
+import { useLanguage } from "../context/LanguageContext";
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.08 }
-  }
+    transition: { staggerChildren: 0.08, delayChildren: 0.08 },
+  },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 16 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] }
-  }
+    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 export default function HomePage({ setActiveTab }) {
   const { lang, t } = useLanguage();
-  const [activeCategory, setActiveCategory] = useState('all'); // 'all' | 'nephrology' | 'urology'
+  const [activeCategory, setActiveCategory] = useState("all"); // 'all' | 'nephrology' | 'urology'
 
   const allServices = [
     // Nephrology
-    { 
-      id: 'ckd',
-      category: 'nephrology',
-      title: 'Chronic Kidney Disease (CKD)', 
-      desc: 'Comprehensive staging (Stages 1-5), monitoring, and renoprotective medical therapies to slow disease progression.', 
+    {
+      id: "ckd",
+      category: "nephrology",
+      title: "Chronic Kidney Disease (CKD)",
+      desc: "Comprehensive staging (Stages 1-5), monitoring, and renoprotective medical therapies to slow disease progression.",
       icon: Activity,
-      tag: 'Nephrology'
+      tag: "Nephrology",
     },
-    { 
-      id: 'dialysis',
-      category: 'nephrology',
-      title: 'Dialysis Care & Guidance', 
-      desc: 'High-flux hemodialysis supervision, vascular access (AV fistula) monitoring, and adequacy optimization.', 
+    {
+      id: "dialysis",
+      category: "nephrology",
+      title: "Dialysis Care & Guidance",
+      desc: "High-flux hemodialysis supervision, vascular access (AV fistula) monitoring, and adequacy optimization.",
       icon: HeartPulse,
-      tag: 'Nephrology'
+      tag: "Nephrology",
     },
-    { 
-      id: 'hypertension',
-      category: 'nephrology',
-      title: 'Hypertension & Kidney Health', 
-      desc: 'Targeted management of secondary and resistant high blood pressure to safeguard native renal function.', 
+    {
+      id: "hypertension",
+      category: "nephrology",
+      title: "Hypertension & Kidney Health",
+      desc: "Targeted management of secondary and resistant high blood pressure to safeguard native renal function.",
       icon: Gauge,
-      tag: 'Nephrology'
+      tag: "Nephrology",
     },
-    { 
-      id: 'stones',
-      category: 'both',
-      title: 'Kidney Stone Medical Care', 
-      desc: 'Metabolic urine evaluation (24-hour chemistry), medical dissolution protocols, and recurrence prevention.', 
+    {
+      id: "stones",
+      category: "both",
+      title: "Kidney Stone Medical Care",
+      desc: "Metabolic urine evaluation (24-hour chemistry), medical dissolution protocols, and recurrence prevention.",
       icon: ShieldAlert,
-      tag: 'Nephrology & Urology'
+      tag: "Nephrology & Urology",
     },
     // Urology & Urinary Care
-    { 
-      id: 'uti',
-      category: 'urology',
-      title: 'Urinary Tract Infections (UTI)', 
-      desc: 'Accurate culture-guided antibiotic therapy, recurrence prevention regimens, and structural evaluation.', 
+    {
+      id: "uti",
+      category: "urology",
+      title: "Urinary Tract Infections (UTI)",
+      desc: "Accurate culture-guided antibiotic therapy, recurrence prevention regimens, and structural evaluation.",
       icon: Stethoscope,
-      tag: 'Urology'
+      tag: "Urology",
     },
-    { 
-      id: 'glomerular',
-      category: 'nephrology',
-      title: 'Glomerular Diseases & Proteinuria', 
-      desc: 'Nephrotic & Nephritic syndrome evaluation, kidney biopsy review, and targeted immunotherapy.', 
+    {
+      id: "glomerular",
+      category: "nephrology",
+      title: "Glomerular Diseases & Proteinuria",
+      desc: "Nephrotic & Nephritic syndrome evaluation, kidney biopsy review, and targeted immunotherapy.",
       icon: Microscope,
-      tag: 'Nephrology'
+      tag: "Nephrology",
     },
-    { 
-      id: 'electrolytes',
-      category: 'nephrology',
-      title: 'Electrolyte & Mineral Balance', 
-      desc: 'Prompt correction of potassium, sodium, calcium, and bone-mineral disorders (CKD-MBD).', 
+    {
+      id: "electrolytes",
+      category: "nephrology",
+      title: "Electrolyte & Mineral Balance",
+      desc: "Prompt correction of potassium, sodium, calcium, and bone-mineral disorders (CKD-MBD).",
       icon: Scale,
-      tag: 'Nephrology'
+      tag: "Nephrology",
     },
-    { 
-      id: 'bladder',
-      category: 'urology',
-      title: 'Bladder & Voiding Health', 
-      desc: 'Clinical evaluation of urinary frequency, urgency, painful voiding, and non-surgical lower urinary symptoms.', 
+    {
+      id: "bladder",
+      category: "urology",
+      title: "Bladder & Voiding Health",
+      desc: "Clinical evaluation of urinary frequency, urgency, painful voiding, and non-surgical lower urinary symptoms.",
       icon: Droplet,
-      tag: 'Urology'
-    }
+      tag: "Urology",
+    },
   ];
 
-  const filteredServices = activeCategory === 'all' 
-    ? allServices 
-    : allServices.filter(s => s.category === activeCategory || s.category === 'both');
+  const filteredServices =
+    activeCategory === "all"
+      ? allServices
+      : allServices.filter((s) => s.category === activeCategory || s.category === "both");
 
   const stats = [
-    { value: '15,000+', label: 'Dialysis Sessions Supervised', icon: HeartPulse },
-    { value: '100%', label: 'Doctor-Led Consultations', icon: UserCheck },
-    { value: '12+ Yrs', label: 'Nephrology Expertise', icon: Award },
-    { value: '24/7', label: 'Emergency Dialysis Support', icon: Clock },
+    { value: "15,000+", label: "Dialysis Sessions Supervised", icon: HeartPulse },
+    { value: "100%", label: "Doctor-Led Consultations", icon: UserCheck },
+    { value: "12+ Yrs", label: "Nephrology Expertise", icon: Award },
+    { value: "24/7", label: "Emergency Dialysis Support", icon: Clock },
   ];
 
   const patientReviews = [
     {
-      name: 'Rameshwar Patil',
-      location: 'Chandrapur',
+      name: "Rameshwar Patil",
+      location: "Chandrapur",
       rating: 5,
-      comment: 'Dr. Sagar Sarda diagnosed my father’s CKD early and tailored his medicine and diet. His creatinine has stabilized without needing immediate dialysis. Truly grateful.',
-      tag: 'Nephrology Care'
+      comment:
+        "Dr. Sagar Sarda diagnosed my father’s CKD early and tailored his medicine and diet. His creatinine has stabilized without needing immediate dialysis. Truly grateful.",
+      tag: "Nephrology Care",
     },
     {
-      name: 'Sunita Deshmukh',
-      location: 'Ballarpur',
+      name: "Sunita Deshmukh",
+      location: "Ballarpur",
       rating: 5,
-      comment: 'The hemodialysis center is exceptionally clean and comfortable. Staff and Dr. Sarda monitor every session with utmost care and attention.',
-      tag: 'Dialysis Unit'
+      comment:
+        "The hemodialysis center is exceptionally clean and comfortable. Staff and Dr. Sarda monitor every session with utmost care and attention.",
+      tag: "Dialysis Unit",
     },
     {
-      name: 'Anil Roy',
-      location: 'Chandrapur',
+      name: "Anil Roy",
+      location: "Chandrapur",
       rating: 5,
-      comment: 'Suffered from severe recurring kidney stones. Dr. Sarda ran a 24-hr metabolic profile and gave preventive therapy. Zero recurrence for over a year now!',
-      tag: 'Kidney Stone Care'
-    }
+      comment:
+        "Suffered from severe recurring kidney stones. Dr. Sarda ran a 24-hr metabolic profile and gave preventive therapy. Zero recurrence for over a year now!",
+      tag: "Kidney Stone Care",
+    },
   ];
 
   return (
     <div className="space-y-12 sm:space-y-16 pb-12 overflow-hidden">
-      
       {/* 1. HERO SECTION WITH 3D VISUALIZER */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#0A1D37] via-[#0F2D59] to-[#0A1A2F] text-white pt-8 pb-16 sm:pt-12 sm:pb-20">
-        
         {/* Subtle Ambient Background Gradients */}
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-teal-500/10 blur-[130px] pointer-events-none"></div>
         <div className="absolute bottom-10 right-10 w-[450px] h-[450px] rounded-full bg-sky-500/10 blur-[120px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
             {/* Left Column: Hero Content */}
-            <motion.div 
+            <motion.div
               className="lg:col-span-6 space-y-5"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
-              
-              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 bg-teal-500/15 border border-teal-400/30 text-teal-300 px-3.5 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-sm">
-                <Sparkles className="w-3.5 h-3.5 text-teal-300 animate-spin" style={{ animationDuration: '6s' }} />
-                <span>{t('hero.badge')}</span>
+              <motion.div
+                variants={itemVariants}
+                className="inline-flex items-center gap-2 bg-teal-500/15 border border-teal-400/30 text-teal-300 px-3.5 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-sm"
+              >
+                <Sparkles
+                  className="w-3.5 h-3.5 text-teal-300 animate-spin"
+                  style={{ animationDuration: "6s" }}
+                />
+                <span>{t("hero.badge")}</span>
               </motion.div>
 
               {/* Headline with animated gradient */}
-              <motion.h1 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white leading-[1.18] tracking-tight">
-                {t('hero.mainTitle1')} <br />
+              <motion.h1
+                variants={itemVariants}
+                className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white leading-[1.18] tracking-tight"
+              >
+                {t("hero.mainTitle1")} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-cyan-300 to-emerald-400 animate-gradient-text">
-                  {t('hero.mainTitle2')}
+                  {t("hero.mainTitle2")}
                 </span>
               </motion.h1>
 
               {/* Supporting Text */}
-              <motion.p variants={itemVariants} className="text-xs sm:text-base text-slate-300 leading-relaxed font-normal max-w-xl">
-                {t('hero.subtitle')}
+              <motion.p
+                variants={itemVariants}
+                className="text-xs sm:text-base text-slate-300 leading-relaxed font-normal max-w-xl"
+              >
+                {t("hero.subtitle")}
               </motion.p>
 
               {/* Action Buttons */}
-              <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+              <motion.div
+                variants={itemVariants}
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2"
+              >
                 <motion.button
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  onClick={() => setActiveTab('appointment')}
+                  onClick={() => setActiveTab("appointment")}
                   className="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-sm sm:text-base px-6 sm:px-8 py-3.5 rounded-xl shadow-lg shadow-teal-500/25 flex items-center justify-center gap-2 transition-all"
                 >
                   <Calendar className="w-4 h-4" />
-                  <span>{t('common.bookAppointment')}</span>
+                  <span>{t("common.bookAppointment")}</span>
                 </motion.button>
 
                 <motion.button
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  onClick={() => setActiveTab('services')}
+                  onClick={() => setActiveTab("services")}
                   className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-bold text-sm sm:text-base px-6 py-3.5 rounded-xl border border-white/20 shadow-xs text-center transition-all backdrop-blur-md"
                 >
-                  {t('common.exploreServices')}
+                  {t("common.exploreServices")}
                 </motion.button>
               </motion.div>
 
               {/* Doctor Quick Badge */}
-              <motion.div 
+              <motion.div
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
-                onClick={() => setActiveTab('doctor')} 
+                onClick={() => setActiveTab("doctor")}
                 className="pt-3 border-t border-white/15 flex items-center gap-3.5 cursor-pointer group bg-white/5 backdrop-blur-md p-3 rounded-2xl border border-white/10 hover:border-teal-400/40 transition shadow-xs"
               >
                 <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-teal-400 to-blue-500 p-0.5 shadow-sm shrink-0 overflow-hidden group-hover:scale-105 transition-transform">
@@ -216,18 +255,23 @@ export default function HomePage({ setActiveTab }) {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h4 className="font-bold text-white text-sm group-hover:text-teal-300 transition">Dr. Sagar Damodar Sarda</h4>
-                    <span className="bg-teal-500/20 text-teal-300 border border-teal-500/30 text-[10px] font-bold px-2 py-0.5 rounded">Lead Consultant</span>
+                    <h4 className="font-bold text-white text-sm group-hover:text-teal-300 transition">
+                      Dr. Sagar Damodar Sarda
+                    </h4>
+                    <span className="bg-teal-500/20 text-teal-300 border border-teal-500/30 text-[10px] font-bold px-2 py-0.5 rounded">
+                      Lead Consultant
+                    </span>
                   </div>
-                  <p className="text-xs text-slate-300 truncate">MBBS, MD Medicine, DM Nephrology • Transplant Physician</p>
+                  <p className="text-xs text-slate-300 truncate">
+                    MBBS, MD Medicine, DM Nephrology • Transplant Physician
+                  </p>
                 </div>
                 <ChevronRight className="w-4 h-4 text-teal-400 group-hover:translate-x-1 transition-transform" />
               </motion.div>
-
             </motion.div>
 
             {/* Right Column: 3D Interactive Organ Visualizer */}
-            <motion.div 
+            <motion.div
               className="lg:col-span-6"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -235,7 +279,6 @@ export default function HomePage({ setActiveTab }) {
             >
               <ThreeKidneyVisualizer />
             </motion.div>
-
           </div>
         </div>
       </section>
@@ -262,12 +305,11 @@ export default function HomePage({ setActiveTab }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
           {/* Specialty 01: Nephrology 3D Card */}
           <Interactive3DCard
             onClick={() => {
-              setActiveCategory('nephrology');
-              setActiveTab('services');
+              setActiveCategory("nephrology");
+              setActiveTab("services");
             }}
             className="bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 cursor-pointer group flex flex-col justify-between"
           >
@@ -280,7 +322,7 @@ export default function HomePage({ setActiveTab }) {
                 <p className="text-xs text-teal-200">Kidney Health & Dialysis Care</p>
               </div>
 
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.15, rotate: 5 }}
                 className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-5xl border border-white/20 shadow-inner relative z-10"
               >
@@ -294,7 +336,9 @@ export default function HomePage({ setActiveTab }) {
 
             <div className="p-6 bg-slate-900 space-y-4">
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Kidney disease management (CKD 1-5), high-flux hemodialysis supervision, hypertension control, diabetic kidney care, and nephrology consultation under Dr. Sagar Sarda.
+                Kidney disease management (CKD 1-5), high-flux hemodialysis supervision,
+                hypertension control, diabetic kidney care, and nephrology consultation under Dr.
+                Sagar Sarda.
               </p>
 
               <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-bold text-teal-400 group-hover:text-teal-300 transition">
@@ -307,8 +351,8 @@ export default function HomePage({ setActiveTab }) {
           {/* Specialty 02: Urology 3D Card */}
           <Interactive3DCard
             onClick={() => {
-              setActiveCategory('urology');
-              setActiveTab('services');
+              setActiveCategory("urology");
+              setActiveTab("services");
             }}
             className="bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 cursor-pointer group flex flex-col justify-between"
           >
@@ -321,7 +365,7 @@ export default function HomePage({ setActiveTab }) {
                 <p className="text-xs text-sky-200">Urinary System & Voiding Health</p>
               </div>
 
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.15, rotate: -5 }}
                 className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-5xl border border-white/20 shadow-inner relative z-10"
               >
@@ -335,7 +379,8 @@ export default function HomePage({ setActiveTab }) {
 
             <div className="p-6 bg-slate-900 space-y-4">
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Specialist evaluation for urinary tract infections (UTI), kidney stone medical dissolution, bladder health, voiding concerns, and coordinated urological guidance.
+                Specialist evaluation for urinary tract infections (UTI), kidney stone medical
+                dissolution, bladder health, voiding concerns, and coordinated urological guidance.
               </p>
 
               <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-bold text-sky-400 group-hover:text-sky-300 transition">
@@ -344,7 +389,6 @@ export default function HomePage({ setActiveTab }) {
               </div>
             </div>
           </Interactive3DCard>
-
         </div>
       </section>
 
@@ -383,23 +427,24 @@ export default function HomePage({ setActiveTab }) {
             Nephrology & Urology Treatments
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
-            Evidence-based medical care for renal preservation, dialysis supervision, and urinary tract conditions.
+            Evidence-based medical care for renal preservation, dialysis supervision, and urinary
+            tract conditions.
           </p>
 
           {/* Category Toggle Tabs */}
           <div className="flex items-center justify-center gap-2 mt-4">
             {[
-              { id: 'all', label: 'All Services' },
-              { id: 'nephrology', label: 'Nephrology' },
-              { id: 'urology', label: 'Urology' },
+              { id: "all", label: "All Services" },
+              { id: "nephrology", label: "Nephrology" },
+              { id: "urology", label: "Urology" },
             ].map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveCategory(tab.id)}
                 className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
                   activeCategory === tab.id
-                    ? 'bg-[#0F2D59] text-white shadow-sm'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    ? "bg-[#0F2D59] text-white shadow-sm"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                 }`}
               >
                 {tab.label}
@@ -409,14 +454,17 @@ export default function HomePage({ setActiveTab }) {
         </div>
 
         {/* Services Grid */}
-        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <motion.div
+          layout
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
+        >
           <AnimatePresence>
             {filteredServices.map((srv) => {
               const Icon = srv.icon;
               return (
                 <Interactive3DCard
                   key={srv.id}
-                  onClick={() => setActiveTab('services')}
+                  onClick={() => setActiveTab("services")}
                   className="bg-white rounded-2xl p-5 shadow-soft border border-slate-100 hover:border-teal-300 transition-all cursor-pointer flex flex-col justify-between group hover:shadow-card"
                 >
                   <div>
@@ -460,7 +508,10 @@ export default function HomePage({ setActiveTab }) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {patientReviews.map((rev, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-5 shadow-soft border border-slate-100 flex flex-col justify-between">
+              <div
+                key={idx}
+                className="bg-white rounded-2xl p-5 shadow-soft border border-slate-100 flex flex-col justify-between"
+              >
                 <div className="space-y-2.5">
                   <div className="flex items-center justify-between">
                     <div className="flex text-amber-400">
@@ -472,9 +523,7 @@ export default function HomePage({ setActiveTab }) {
                       {rev.tag}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-600 leading-relaxed italic">
-                    "{rev.comment}"
-                  </p>
+                  <p className="text-xs text-slate-600 leading-relaxed italic">"{rev.comment}"</p>
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
@@ -492,19 +541,21 @@ export default function HomePage({ setActiveTab }) {
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0F2D59] via-[#163D75] to-[#0D9488] text-white p-6 sm:p-10 shadow-xl space-y-6">
           <div className="relative z-10 space-y-2 max-w-2xl">
             <div className="inline-flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-full text-[11px] font-semibold text-teal-200 border border-white/10">
-              <MapPin className="w-3.5 h-3.5 text-teal-300" /> Behind LIC Office, Main Road, Chandrapur
+              <MapPin className="w-3.5 h-3.5 text-teal-300" /> Behind LIC Office, Main Road,
+              Chandrapur
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Serving Chandrapur & Surrounding Districts
             </h2>
             <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-light">
-              Dedicated nephrology and urology outpatient clinics, daily hemodialysis supervision, and 24/7 emergency renal support.
+              Dedicated nephrology and urology outpatient clinics, daily hemodialysis supervision,
+              and 24/7 emergency renal support.
             </p>
           </div>
 
           <div className="relative z-10 flex flex-wrap gap-3 pt-2">
             <button
-              onClick={() => setActiveTab('appointment')}
+              onClick={() => setActiveTab("appointment")}
               className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-md transition flex items-center gap-2"
             >
               <Calendar className="w-4 h-4" /> Book Consultation Slot
@@ -520,7 +571,6 @@ export default function HomePage({ setActiveTab }) {
           </div>
         </div>
       </section>
-
     </div>
   );
 }

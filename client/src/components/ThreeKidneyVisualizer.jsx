@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Activity, Layers, Info, Play, Pause } from 'lucide-react';
+import React, { useEffect, useRef, useState } from "react";
+import * as THREE from "three";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, Activity, Layers, Info, Play, Pause } from "lucide-react";
 
 export default function ThreeKidneyVisualizer() {
   const mountRef = useRef(null);
   const [activeHotspot, setActiveHotspot] = useState(null);
-  const [mode, setMode] = useState('nephrology'); // 'nephrology' | 'urology'
+  const [mode, setMode] = useState("nephrology"); // 'nephrology' | 'urology'
   const [isRotating, setIsRotating] = useState(true);
 
   const modeRef = useRef(mode);
@@ -17,17 +17,49 @@ export default function ThreeKidneyVisualizer() {
 
   const hotspots = {
     nephrology: [
-      { id: 'cortex', title: 'Renal Cortex', desc: 'Outer kidney region containing ~1 million nephrons & glomeruli filtering metabolic toxins (Urea, Creatinine).' },
-      { id: 'medulla', title: 'Renal Medulla', desc: 'Inner renal pyramids regulating electrolyte balance (Sodium, Potassium) and water retention.' },
-      { id: 'artery', title: 'Renal Artery', desc: 'High-pressure vascular branch delivering 1.2 Liters/min of blood for precise kidney filtration.' },
-      { id: 'vein', title: 'Renal Vein', desc: 'Transports purified, electrolyte-balanced venous blood back into systemic circulation.' }
+      {
+        id: "cortex",
+        title: "Renal Cortex",
+        desc: "Outer kidney region containing ~1 million nephrons & glomeruli filtering metabolic toxins (Urea, Creatinine).",
+      },
+      {
+        id: "medulla",
+        title: "Renal Medulla",
+        desc: "Inner renal pyramids regulating electrolyte balance (Sodium, Potassium) and water retention.",
+      },
+      {
+        id: "artery",
+        title: "Renal Artery",
+        desc: "High-pressure vascular branch delivering 1.2 Liters/min of blood for precise kidney filtration.",
+      },
+      {
+        id: "vein",
+        title: "Renal Vein",
+        desc: "Transports purified, electrolyte-balanced venous blood back into systemic circulation.",
+      },
     ],
     urology: [
-      { id: 'kidneys', title: 'Bilateral Kidneys', desc: 'Dual left and right kidneys filtering metabolic waste and continuously generating urine.' },
-      { id: 'ureters', title: 'Dual Ureters', desc: 'Muscular tubular conduits transporting urine from each kidney to the bladder via peristaltic waves.' },
-      { id: 'bladder', title: 'Urinary Bladder', desc: 'Expandable hollow muscular dome (capacity 300–500 mL) that securely stores urine until voiding.' },
-      { id: 'prostate', title: 'Prostate & Urethra', desc: 'Inferior outflow channel and gland regulating smooth urinary flow, voiding control, and continence.' }
-    ]
+      {
+        id: "kidneys",
+        title: "Bilateral Kidneys",
+        desc: "Dual left and right kidneys filtering metabolic waste and continuously generating urine.",
+      },
+      {
+        id: "ureters",
+        title: "Dual Ureters",
+        desc: "Muscular tubular conduits transporting urine from each kidney to the bladder via peristaltic waves.",
+      },
+      {
+        id: "bladder",
+        title: "Urinary Bladder",
+        desc: "Expandable hollow muscular dome (capacity 300–500 mL) that securely stores urine until voiding.",
+      },
+      {
+        id: "prostate",
+        title: "Prostate & Urethra",
+        desc: "Inferior outflow channel and gland regulating smooth urinary flow, voiding control, and continence.",
+      },
+    ],
   };
 
   useEffect(() => {
@@ -82,7 +114,7 @@ export default function ThreeKidneyVisualizer() {
       bevelEnabled: true,
       bevelThickness: 0.45,
       bevelSize: 0.38,
-      bevelSegments: 16
+      bevelSegments: 16,
     };
     const kidneyGeo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
     kidneyGeo.center();
@@ -102,7 +134,7 @@ export default function ThreeKidneyVisualizer() {
       clearcoat: 0.8,
       clearcoatRoughness: 0.2,
       transmission: 0.15,
-      thickness: 1.2
+      thickness: 1.2,
     });
     const nephKidneyMesh = new THREE.Mesh(kidneyGeo, nephKidneyMat);
     nephKidneyMesh.position.set(-0.2, 0, 0);
@@ -110,7 +142,11 @@ export default function ThreeKidneyVisualizer() {
 
     // Pelvis
     const pelvisGeo = new THREE.ConeGeometry(0.45, 1.1, 16);
-    const pelvisMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.35, metalness: 0.2 });
+    const pelvisMat = new THREE.MeshStandardMaterial({
+      color: 0xf59e0b,
+      roughness: 0.35,
+      metalness: 0.2,
+    });
     const pelvisMesh = new THREE.Mesh(pelvisGeo, pelvisMat);
     pelvisMesh.position.set(0.35, -0.2, 0.1);
     pelvisMesh.rotation.z = -Math.PI / 4;
@@ -121,10 +157,15 @@ export default function ThreeKidneyVisualizer() {
       new THREE.Vector3(0.45, -0.4, 0.1),
       new THREE.Vector3(0.65, -1.1, 0.2),
       new THREE.Vector3(0.55, -1.8, 0.3),
-      new THREE.Vector3(0.4, -2.4, 0.2)
+      new THREE.Vector3(0.4, -2.4, 0.2),
     ]);
     const singleUreterGeo = new THREE.TubeGeometry(singleUreterCurve, 32, 0.12, 12, false);
-    const singleUreterMat = new THREE.MeshStandardMaterial({ color: 0xfbbf24, roughness: 0.3, emissive: 0x78350f, emissiveIntensity: 0.2 });
+    const singleUreterMat = new THREE.MeshStandardMaterial({
+      color: 0xfbbf24,
+      roughness: 0.3,
+      emissive: 0x78350f,
+      emissiveIntensity: 0.2,
+    });
     const singleUreterMesh = new THREE.Mesh(singleUreterGeo, singleUreterMat);
     nephrologyGroup.add(singleUreterMesh);
 
@@ -132,20 +173,30 @@ export default function ThreeKidneyVisualizer() {
     const arteryCurve = new THREE.CatmullRomCurve3([
       new THREE.Vector3(0.3, 0.4, 0.2),
       new THREE.Vector3(0.9, 0.6, 0.3),
-      new THREE.Vector3(1.6, 0.8, 0.1)
+      new THREE.Vector3(1.6, 0.8, 0.1),
     ]);
     const arteryGeo = new THREE.TubeGeometry(arteryCurve, 20, 0.14, 12, false);
-    const arteryMat = new THREE.MeshStandardMaterial({ color: 0xef4444, roughness: 0.25, emissive: 0xb91c1c, emissiveIntensity: 0.5 });
+    const arteryMat = new THREE.MeshStandardMaterial({
+      color: 0xef4444,
+      roughness: 0.25,
+      emissive: 0xb91c1c,
+      emissiveIntensity: 0.5,
+    });
     const arteryMesh = new THREE.Mesh(arteryGeo, arteryMat);
     nephrologyGroup.add(arteryMesh);
 
     const veinCurve = new THREE.CatmullRomCurve3([
       new THREE.Vector3(0.3, 0.0, 0.3),
       new THREE.Vector3(0.9, -0.1, 0.4),
-      new THREE.Vector3(1.6, -0.3, 0.2)
+      new THREE.Vector3(1.6, -0.3, 0.2),
     ]);
     const veinGeo = new THREE.TubeGeometry(veinCurve, 20, 0.16, 12, false);
-    const veinMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.25, emissive: 0x0369a1, emissiveIntensity: 0.5 });
+    const veinMat = new THREE.MeshStandardMaterial({
+      color: 0x0284c7,
+      roughness: 0.25,
+      emissive: 0x0369a1,
+      emissiveIntensity: 0.5,
+    });
     const veinMesh = new THREE.Mesh(veinGeo, veinMat);
     nephrologyGroup.add(veinMesh);
 
@@ -172,14 +223,14 @@ export default function ThreeKidneyVisualizer() {
         nephColors[i * 3 + 2] = 0.1;
       }
     }
-    nephParticleGeo.setAttribute('position', new THREE.BufferAttribute(nephPositions, 3));
-    nephParticleGeo.setAttribute('color', new THREE.BufferAttribute(nephColors, 3));
+    nephParticleGeo.setAttribute("position", new THREE.BufferAttribute(nephPositions, 3));
+    nephParticleGeo.setAttribute("color", new THREE.BufferAttribute(nephColors, 3));
     const nephParticleMat = new THREE.PointsMaterial({
       size: 0.07,
       vertexColors: true,
       transparent: true,
       opacity: 0.85,
-      blending: THREE.AdditiveBlending
+      blending: THREE.AdditiveBlending,
     });
     const nephParticleSystem = new THREE.Points(nephParticleGeo, nephParticleMat);
     nephrologyGroup.add(nephParticleSystem);
@@ -197,7 +248,7 @@ export default function ThreeKidneyVisualizer() {
       roughness: 0.35,
       metalness: 0.1,
       clearcoat: 0.7,
-      clearcoatRoughness: 0.2
+      clearcoatRoughness: 0.2,
     });
 
     // Left Kidney (Anatomically Left / Viewer's Left)
@@ -216,13 +267,16 @@ export default function ThreeKidneyVisualizer() {
 
     // Left & Right Renal Pelvises
     const urologyPelvisMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.35 });
-    
+
     const leftPelvisMesh = new THREE.Mesh(new THREE.ConeGeometry(0.25, 0.55, 16), urologyPelvisMat);
     leftPelvisMesh.position.set(-0.9, 0.85, 0.05);
     leftPelvisMesh.rotation.z = -Math.PI / 3;
     urologyGroup.add(leftPelvisMesh);
 
-    const rightPelvisMesh = new THREE.Mesh(new THREE.ConeGeometry(0.25, 0.55, 16), urologyPelvisMat);
+    const rightPelvisMesh = new THREE.Mesh(
+      new THREE.ConeGeometry(0.25, 0.55, 16),
+      urologyPelvisMat
+    );
     rightPelvisMesh.position.set(0.9, 0.7, 0.05);
     rightPelvisMesh.rotation.z = Math.PI / 3;
     urologyGroup.add(rightPelvisMesh);
@@ -232,7 +286,7 @@ export default function ThreeKidneyVisualizer() {
       new THREE.Vector3(-0.85, 0.75, 0.05),
       new THREE.Vector3(-0.65, 0.15, 0.1),
       new THREE.Vector3(-0.45, -0.45, 0.12),
-      new THREE.Vector3(-0.25, -0.9, 0.1)
+      new THREE.Vector3(-0.25, -0.9, 0.1),
     ]);
     const ureterMat = new THREE.MeshPhysicalMaterial({
       color: 0xfbbf24,
@@ -240,7 +294,7 @@ export default function ThreeKidneyVisualizer() {
       emissiveIntensity: 0.3,
       roughness: 0.25,
       metalness: 0.1,
-      clearcoat: 0.5
+      clearcoat: 0.5,
     });
     const leftUreterGeo = new THREE.TubeGeometry(leftUreterCurve, 32, 0.06, 12, false);
     const leftUreterMesh = new THREE.Mesh(leftUreterGeo, ureterMat);
@@ -251,7 +305,7 @@ export default function ThreeKidneyVisualizer() {
       new THREE.Vector3(0.85, 0.6, 0.05),
       new THREE.Vector3(0.65, 0.05, 0.1),
       new THREE.Vector3(0.45, -0.45, 0.12),
-      new THREE.Vector3(0.25, -0.9, 0.1)
+      new THREE.Vector3(0.25, -0.9, 0.1),
     ]);
     const rightUreterGeo = new THREE.TubeGeometry(rightUreterCurve, 32, 0.06, 12, false);
     const rightUreterMesh = new THREE.Mesh(rightUreterGeo, ureterMat);
@@ -269,7 +323,7 @@ export default function ThreeKidneyVisualizer() {
       clearcoat: 0.9,
       clearcoatRoughness: 0.1,
       transmission: 0.3,
-      thickness: 0.8
+      thickness: 0.8,
     });
     const bladderMesh = new THREE.Mesh(bladderGeo, bladderMat);
     bladderMesh.position.set(0, -1.05, 0.05);
@@ -277,7 +331,11 @@ export default function ThreeKidneyVisualizer() {
 
     // Bladder Ring
     const bladderRingGeo = new THREE.TorusGeometry(0.55, 0.02, 16, 64);
-    const bladderRingMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.4 });
+    const bladderRingMat = new THREE.MeshBasicMaterial({
+      color: 0x38bdf8,
+      transparent: true,
+      opacity: 0.4,
+    });
     const bladderRing = new THREE.Mesh(bladderRingGeo, bladderRingMat);
     bladderRing.position.set(0, -1.05, 0.05);
     bladderRing.rotation.x = Math.PI / 2;
@@ -291,7 +349,7 @@ export default function ThreeKidneyVisualizer() {
       emissive: 0x581c87,
       emissiveIntensity: 0.3,
       roughness: 0.35,
-      metalness: 0.15
+      metalness: 0.15,
     });
     const prostateMesh = new THREE.Mesh(prostateGeo, prostateMat);
     prostateMesh.position.set(0, -1.6, 0.05);
@@ -303,7 +361,7 @@ export default function ThreeKidneyVisualizer() {
       color: 0x38bdf8,
       emissive: 0x0284c7,
       emissiveIntensity: 0.4,
-      roughness: 0.3
+      roughness: 0.3,
     });
     const urethraMesh = new THREE.Mesh(urethraGeo, urethraMat);
     urethraMesh.position.set(0, -1.9, 0.05);
@@ -327,7 +385,7 @@ export default function ThreeKidneyVisualizer() {
     }
 
     // Default Initial Visibility
-    if (mode === 'nephrology') {
+    if (mode === "nephrology") {
       nephrologyGroup.scale.set(1, 1, 1);
       urologyGroup.scale.set(0.0001, 0.0001, 0.0001);
       urologyGroup.visible = false;
@@ -357,7 +415,9 @@ export default function ThreeKidneyVisualizer() {
       prevMousePos = { x: e.clientX, y: e.clientY };
     };
 
-    const onMouseUp = () => { isDragging = false; };
+    const onMouseUp = () => {
+      isDragging = false;
+    };
 
     const onTouchStart = (e) => {
       if (e.touches.length === 1) {
@@ -376,12 +436,12 @@ export default function ThreeKidneyVisualizer() {
     };
 
     const dom = renderer.domElement;
-    dom.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup', onMouseUp);
-    dom.addEventListener('touchstart', onTouchStart, { passive: true });
-    window.addEventListener('touchmove', onTouchMove, { passive: true });
-    window.addEventListener('touchend', onMouseUp);
+    dom.addEventListener("mousedown", onMouseDown);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    dom.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onMouseUp);
 
     let reqId;
     const clock = new THREE.Clock();
@@ -398,7 +458,7 @@ export default function ThreeKidneyVisualizer() {
 
       // Smooth Morphing Between Modes
       const currentMode = modeRef.current;
-      if (currentMode === 'nephrology') {
+      if (currentMode === "nephrology") {
         nephrologyGroup.visible = true;
         nephrologyGroup.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
 
@@ -415,7 +475,6 @@ export default function ThreeKidneyVisualizer() {
           positions[i * 3 + 1] += Math.sin(elapsedTime * 2 + i) * 0.002;
         }
         nephParticleGeo.attributes.position.needsUpdate = true;
-
       } else {
         urologyGroup.visible = true;
         urologyGroup.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
@@ -457,17 +516,17 @@ export default function ThreeKidneyVisualizer() {
       renderer.setSize(newWidth, newHeight);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       cancelAnimationFrame(reqId);
-      window.removeEventListener('resize', handleResize);
-      dom.removeEventListener('mousedown', onMouseDown);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup', onMouseUp);
-      dom.removeEventListener('touchstart', onTouchStart);
-      window.removeEventListener('touchmove', onTouchMove);
-      window.removeEventListener('touchend', onMouseUp);
+      window.removeEventListener("resize", handleResize);
+      dom.removeEventListener("mousedown", onMouseDown);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      dom.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onMouseUp);
       if (currentMount.contains(renderer.domElement)) {
         currentMount.removeChild(renderer.domElement);
       }
@@ -489,23 +548,29 @@ export default function ThreeKidneyVisualizer() {
             <Sparkles className="w-3 h-3 text-teal-300" /> Interactive 3D Anatomy
           </div>
           <h3 className="text-sm sm:text-base font-bold text-white mt-1">
-            {mode === 'nephrology' ? 'Renal Nephron & Filtration 3D' : 'Complete Urinary Tract & Urology 3D'}
+            {mode === "nephrology"
+              ? "Renal Nephron & Filtration 3D"
+              : "Complete Urinary Tract & Urology 3D"}
           </h3>
         </div>
 
         <div className="flex items-center gap-1.5 bg-white/10 p-1 rounded-xl border border-white/10">
           <button
-            onClick={() => setMode('nephrology')}
+            onClick={() => setMode("nephrology")}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 ${
-              mode === 'nephrology' ? 'bg-teal-500 text-white shadow-md' : 'text-slate-300 hover:text-white hover:bg-white/5'
+              mode === "nephrology"
+                ? "bg-teal-500 text-white shadow-md"
+                : "text-slate-300 hover:text-white hover:bg-white/5"
             }`}
           >
             <Activity className="w-3.5 h-3.5" /> Nephrology
           </button>
           <button
-            onClick={() => setMode('urology')}
+            onClick={() => setMode("urology")}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 ${
-              mode === 'urology' ? 'bg-sky-500 text-white shadow-md' : 'text-slate-300 hover:text-white'
+              mode === "urology"
+                ? "bg-sky-500 text-white shadow-md"
+                : "text-slate-300 hover:text-white"
             }`}
           >
             <Layers className="w-3.5 h-3.5" /> Urology
@@ -520,10 +585,14 @@ export default function ThreeKidneyVisualizer() {
         <div className="absolute top-2 right-2 flex flex-col gap-1 z-20">
           <button
             onClick={() => setIsRotating(!isRotating)}
-            title={isRotating ? 'Pause Rotation' : 'Resume Rotation'}
+            title={isRotating ? "Pause Rotation" : "Resume Rotation"}
             className="w-7 h-7 rounded-lg bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-slate-200 hover:text-white hover:bg-black/70 transition shadow-sm"
           >
-            {isRotating ? <Pause className="w-3.5 h-3.5 text-teal-400" /> : <Play className="w-3.5 h-3.5 text-teal-400" />}
+            {isRotating ? (
+              <Pause className="w-3.5 h-3.5 text-teal-400" />
+            ) : (
+              <Play className="w-3.5 h-3.5 text-teal-400" />
+            )}
           </button>
         </div>
 
@@ -536,8 +605,8 @@ export default function ThreeKidneyVisualizer() {
                 onClick={() => setActiveHotspot(h)}
                 className={`px-2.5 py-1 rounded-lg text-[10px] sm:text-xs font-bold border transition-all ${
                   activeHotspot?.id === h.id
-                    ? 'bg-teal-500 text-white border-teal-300 shadow-md scale-105'
-                    : 'bg-slate-900/80 backdrop-blur-sm text-slate-300 border-white/10 hover:bg-slate-800 hover:text-white'
+                    ? "bg-teal-500 text-white border-teal-300 shadow-md scale-105"
+                    : "bg-slate-900/80 backdrop-blur-sm text-slate-300 border-white/10 hover:bg-slate-800 hover:text-white"
                 }`}
               >
                 {h.title}
@@ -562,10 +631,18 @@ export default function ThreeKidneyVisualizer() {
           </div>
           <div className="flex-1">
             <h4 className="font-bold text-white text-xs">
-              {activeHotspot ? activeHotspot.title : (mode === 'nephrology' ? 'Renal Filtration Anatomy' : 'Urinary Tract & Bladder Anatomy')}
+              {activeHotspot
+                ? activeHotspot.title
+                : mode === "nephrology"
+                  ? "Renal Filtration Anatomy"
+                  : "Urinary Tract & Bladder Anatomy"}
             </h4>
             <p className="text-slate-300 text-[11px] mt-0.5 leading-relaxed">
-              {activeHotspot ? activeHotspot.desc : (mode === 'nephrology' ? 'Filters ~180 liters of blood daily, regulating blood pressure, electrolytes, and clearing metabolic waste under Dr. Sagar Damodar Sarda.' : 'Complete urinary tract system featuring bilateral kidneys, muscular peristaltic ureters, hollow urinary bladder dome, and prostatic/urethral outflow channel.')}
+              {activeHotspot
+                ? activeHotspot.desc
+                : mode === "nephrology"
+                  ? "Filters ~180 liters of blood daily, regulating blood pressure, electrolytes, and clearing metabolic waste under Dr. Sagar Damodar Sarda."
+                  : "Complete urinary tract system featuring bilateral kidneys, muscular peristaltic ureters, hollow urinary bladder dome, and prostatic/urethral outflow channel."}
             </p>
           </div>
         </motion.div>

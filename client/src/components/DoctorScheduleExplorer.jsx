@@ -1,103 +1,111 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, MapPin, Phone, ShieldCheck, CheckCircle2, ChevronRight, UserCheck } from 'lucide-react';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Calendar,
+  Clock,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  CheckCircle2,
+  ChevronRight,
+  UserCheck,
+} from "lucide-react";
 
 export default function DoctorScheduleExplorer({ setActiveTab }) {
-  const [selectedDay, setSelectedDay] = useState('today');
+  const [selectedDay, setSelectedDay] = useState("today");
 
   const days = [
-    { id: 'today', label: 'Today (Live)' },
-    { id: 'mon-wed', label: 'Mon - Wed' },
-    { id: 'thu-sat', label: 'Thu - Sat' },
-    { id: 'sunday', label: 'Sunday (Special)' },
+    { id: "today", label: "Today (Live)" },
+    { id: "mon-wed", label: "Mon - Wed" },
+    { id: "thu-sat", label: "Thu - Sat" },
+    { id: "sunday", label: "Sunday (Special)" },
   ];
 
   const scheduleData = {
     today: [
       {
-        session: 'Morning OPD Session',
-        time: '09:00 AM - 01:30 PM',
-        location: 'Chandrapur Kidney Care Main OPD Suite',
-        type: 'New Patients & Follow-Up Consultations',
-        status: 'Active (Tokens Available)',
-        statusColor: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
+        session: "Morning OPD Session",
+        time: "09:00 AM - 01:30 PM",
+        location: "Chandrapur Kidney Care Main OPD Suite",
+        type: "New Patients & Follow-Up Consultations",
+        status: "Active (Tokens Available)",
+        statusColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
       },
       {
-        session: 'Dialysis Unit Ward Rounds',
-        time: '02:00 PM - 04:00 PM',
-        location: 'High-Flux Hemodialysis Wing',
-        type: 'In-Patient Dialysis Supervision & Access Checks',
-        status: 'Ongoing Daily',
-        statusColor: 'text-teal-300 bg-teal-500/10 border-teal-500/20'
+        session: "Dialysis Unit Ward Rounds",
+        time: "02:00 PM - 04:00 PM",
+        location: "High-Flux Hemodialysis Wing",
+        type: "In-Patient Dialysis Supervision & Access Checks",
+        status: "Ongoing Daily",
+        statusColor: "text-teal-300 bg-teal-500/10 border-teal-500/20",
       },
       {
-        session: 'Evening OPD Session',
-        time: '04:30 PM - 07:30 PM',
-        location: 'Chandrapur Kidney Care Main OPD Suite',
-        type: 'Nephrology & Urology Review / Report Analysis',
-        status: 'Active (Booking Open)',
-        statusColor: 'text-sky-300 bg-sky-500/10 border-sky-500/20'
-      }
+        session: "Evening OPD Session",
+        time: "04:30 PM - 07:30 PM",
+        location: "Chandrapur Kidney Care Main OPD Suite",
+        type: "Nephrology & Urology Review / Report Analysis",
+        status: "Active (Booking Open)",
+        statusColor: "text-sky-300 bg-sky-500/10 border-sky-500/20",
+      },
     ],
-    'mon-wed': [
+    "mon-wed": [
       {
-        session: 'Morning OPD Session',
-        time: '09:00 AM - 01:30 PM',
-        location: 'Chandrapur Kidney Care (Main Road, Behind LIC)',
-        type: 'Comprehensive Nephrology & Diabetic Kidney Screening',
-        status: 'Regular OPD',
-        statusColor: 'text-teal-300 bg-teal-500/10 border-teal-500/20'
+        session: "Morning OPD Session",
+        time: "09:00 AM - 01:30 PM",
+        location: "Chandrapur Kidney Care (Main Road, Behind LIC)",
+        type: "Comprehensive Nephrology & Diabetic Kidney Screening",
+        status: "Regular OPD",
+        statusColor: "text-teal-300 bg-teal-500/10 border-teal-500/20",
       },
       {
-        session: 'Evening Consultation',
-        time: '04:30 PM - 07:30 PM',
-        location: 'Chandrapur Kidney Care OPD Suite',
-        type: 'CKD Staging & Blood Pressure Adjustments',
-        status: 'Regular OPD',
-        statusColor: 'text-teal-300 bg-teal-500/10 border-teal-500/20'
-      }
+        session: "Evening Consultation",
+        time: "04:30 PM - 07:30 PM",
+        location: "Chandrapur Kidney Care OPD Suite",
+        type: "CKD Staging & Blood Pressure Adjustments",
+        status: "Regular OPD",
+        statusColor: "text-teal-300 bg-teal-500/10 border-teal-500/20",
+      },
     ],
-    'thu-sat': [
+    "thu-sat": [
       {
-        session: 'Morning OPD Session',
-        time: '09:00 AM - 01:30 PM',
-        location: 'Chandrapur Kidney Care (Main Road, Behind LIC)',
-        type: 'Kidney Stone Metabolic Workup & Urology Consults',
-        status: 'Regular OPD',
-        statusColor: 'text-teal-300 bg-teal-500/10 border-teal-500/20'
+        session: "Morning OPD Session",
+        time: "09:00 AM - 01:30 PM",
+        location: "Chandrapur Kidney Care (Main Road, Behind LIC)",
+        type: "Kidney Stone Metabolic Workup & Urology Consults",
+        status: "Regular OPD",
+        statusColor: "text-teal-300 bg-teal-500/10 border-teal-500/20",
       },
       {
-        session: 'Evening Consultation',
-        time: '04:30 PM - 07:30 PM',
-        location: 'Chandrapur Kidney Care OPD Suite',
-        type: 'Nephrology Consultations & Dialysis Planning',
-        status: 'Regular OPD',
-        statusColor: 'text-teal-300 bg-teal-500/10 border-teal-500/20'
-      }
+        session: "Evening Consultation",
+        time: "04:30 PM - 07:30 PM",
+        location: "Chandrapur Kidney Care OPD Suite",
+        type: "Nephrology Consultations & Dialysis Planning",
+        status: "Regular OPD",
+        statusColor: "text-teal-300 bg-teal-500/10 border-teal-500/20",
+      },
     ],
     sunday: [
       {
-        session: 'Emergency Dialysis Support',
-        time: '24 Hours On-Call Support',
-        location: 'Dialysis Intensive Unit',
-        type: 'Emergency Hemodialysis & Critical Renal Care',
-        status: 'Emergency Only',
-        statusColor: 'text-rose-300 bg-rose-500/10 border-rose-500/20'
+        session: "Emergency Dialysis Support",
+        time: "24 Hours On-Call Support",
+        location: "Dialysis Intensive Unit",
+        type: "Emergency Hemodialysis & Critical Renal Care",
+        status: "Emergency Only",
+        statusColor: "text-rose-300 bg-rose-500/10 border-rose-500/20",
       },
       {
-        session: 'Prior Appointment OPD',
-        time: '10:00 AM - 01:00 PM (By Appointment)',
-        location: 'Main OPD Suite',
-        type: 'Special Senior Citizen & Urgent Reviews',
-        status: 'Prior Booking',
-        statusColor: 'text-amber-300 bg-amber-500/10 border-amber-500/20'
-      }
-    ]
+        session: "Prior Appointment OPD",
+        time: "10:00 AM - 01:00 PM (By Appointment)",
+        location: "Main OPD Suite",
+        type: "Special Senior Citizen & Urgent Reviews",
+        status: "Prior Booking",
+        statusColor: "text-amber-300 bg-amber-500/10 border-amber-500/20",
+      },
+    ],
   };
 
   return (
     <div className="bg-gradient-to-br from-[#0B1E3B] via-[#08172D] to-[#040E1D] rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-teal-500/20 relative overflow-hidden">
-      
       {/* Background Glow */}
       <div className="absolute top-0 right-1/3 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -122,8 +130,8 @@ export default function DoctorScheduleExplorer({ setActiveTab }) {
               onClick={() => setSelectedDay(d.id)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition ${
                 selectedDay === d.id
-                  ? 'bg-teal-500 text-white shadow-md font-extrabold'
-                  : 'text-slate-300 hover:text-white hover:bg-white/5'
+                  ? "bg-teal-500 text-white shadow-md font-extrabold"
+                  : "text-slate-300 hover:text-white hover:bg-white/5"
               }`}
             >
               {d.label}
@@ -146,7 +154,9 @@ export default function DoctorScheduleExplorer({ setActiveTab }) {
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${item.statusColor}`}>
+                  <span
+                    className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${item.statusColor}`}
+                  >
                     {item.status}
                   </span>
                   <div className="flex items-center gap-1 text-teal-300 text-xs font-semibold">
@@ -166,7 +176,7 @@ export default function DoctorScheduleExplorer({ setActiveTab }) {
 
               <div className="pt-4 mt-3">
                 <button
-                  onClick={() => setActiveTab('appointment')}
+                  onClick={() => setActiveTab("appointment")}
                   className="w-full bg-teal-500/20 hover:bg-teal-500 text-teal-300 hover:text-white border border-teal-500/40 font-bold py-2 px-3 rounded-xl transition text-xs flex items-center justify-center gap-1.5"
                 >
                   <Calendar className="w-3.5 h-3.5" />
@@ -191,7 +201,6 @@ export default function DoctorScheduleExplorer({ setActiveTab }) {
           <Phone className="w-3.5 h-3.5" /> Emergency: +91 98765 43210
         </a>
       </div>
-
     </div>
   );
 }

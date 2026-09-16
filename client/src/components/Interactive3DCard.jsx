@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function Interactive3DCard({ children, className = "", onClick }) {
   const cardRef = useRef(null);
@@ -24,7 +24,7 @@ export default function Interactive3DCard({ children, className = "", onClick })
     setGlarePos({
       x: (x / rect.width) * 100,
       y: (y / rect.height) * 100,
-      opacity: 0.15
+      opacity: 0.15,
     });
   };
 
@@ -41,9 +41,9 @@ export default function Interactive3DCard({ children, className = "", onClick })
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
       style={{
-        transformStyle: 'preserve-3d',
+        transformStyle: "preserve-3d",
         transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-        transition: 'transform 0.15s ease-out'
+        transition: "transform 0.15s ease-out",
       }}
       className={`relative overflow-hidden ${className}`}
     >
@@ -51,7 +51,7 @@ export default function Interactive3DCard({ children, className = "", onClick })
       <div
         className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-30"
         style={{
-          background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(255,255,255,${glarePos.opacity}), transparent 60%)`
+          background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(255,255,255,${glarePos.opacity}), transparent 60%)`,
         }}
       />
       {children}
