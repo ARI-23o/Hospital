@@ -36,7 +36,6 @@ import {
   ExternalLink,
 } from "lucide-react";
 import ThreeKidneyVisualizer from "../components/ThreeKidneyVisualizer";
-import Interactive3DCard from "../components/Interactive3DCard";
 import KidneyHealthCalculator from "../components/KidneyHealthCalculator";
 import LiveOpdQueue from "../components/LiveOpdQueue";
 import MarqueeTicker from "../components/MarqueeTicker";
@@ -487,7 +486,7 @@ export default function HomePage({ setActiveTab }) {
         </div>
       </section>
 
-      {/* 5. TWO SPECIALTIES 3D PERSPECTIVE CARDS */}
+      {/* 5. TWO CORE SPECIALTIES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-xl mx-auto mb-6">
           <span className="text-[11px] font-bold text-teal-700 bg-teal-50 px-3 py-1 rounded-full uppercase tracking-wider">
@@ -499,14 +498,14 @@ export default function HomePage({ setActiveTab }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Specialty 01: Nephrology 3D Card */}
-          <Interactive3DCard
+          {/* Specialty 01: Nephrology Card */}
+          <div
             onClick={() => {
               setActiveCategory("nephrology");
               const el = document.getElementById("services-section");
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
-            className="bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 cursor-pointer group flex flex-col justify-between"
+            className="bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 hover:border-teal-500/50 cursor-pointer group flex flex-col justify-between transition-all duration-300 hover:shadow-2xl"
           >
             <div className="h-44 sm:h-52 bg-gradient-to-tr from-[#0F2D59] via-teal-900 to-[#0A1D37] p-6 relative overflow-hidden flex items-center justify-between">
               <div className="space-y-1 relative z-10">
@@ -517,12 +516,9 @@ export default function HomePage({ setActiveTab }) {
                 <p className="text-xs text-teal-200">Kidney Health & Dialysis Care</p>
               </div>
 
-              <motion.div
-                whileHover={{ scale: 1.15, rotate: 5 }}
-                className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-5xl border border-white/20 shadow-inner relative z-10"
-              >
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-5xl border border-white/20 shadow-inner relative z-10 transition-transform duration-300 group-hover:scale-105">
                 🫘
-              </motion.div>
+              </div>
 
               <div className="absolute right-0 bottom-0 top-0 w-1/2 opacity-10 pointer-events-none flex items-center justify-center">
                 <HeartPulse className="w-56 h-56 text-teal-300" />
@@ -541,16 +537,16 @@ export default function HomePage({ setActiveTab }) {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
               </div>
             </div>
-          </Interactive3DCard>
+          </div>
 
-          {/* Specialty 02: Urology 3D Card */}
-          <Interactive3DCard
+          {/* Specialty 02: Urology Card */}
+          <div
             onClick={() => {
               setActiveCategory("urology");
               const el = document.getElementById("services-section");
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
-            className="bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 cursor-pointer group flex flex-col justify-between"
+            className="bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 hover:border-sky-500/50 cursor-pointer group flex flex-col justify-between transition-all duration-300 hover:shadow-2xl"
           >
             <div className="h-44 sm:h-52 bg-gradient-to-tr from-[#0F2D59] via-blue-950 to-teal-950 p-6 relative overflow-hidden flex items-center justify-between">
               <div className="space-y-1 relative z-10">
@@ -561,12 +557,9 @@ export default function HomePage({ setActiveTab }) {
                 <p className="text-xs text-sky-200">Urinary System & Voiding Health</p>
               </div>
 
-              <motion.div
-                whileHover={{ scale: 1.15, rotate: -5 }}
-                className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-5xl border border-white/20 shadow-inner relative z-10"
-              >
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-5xl border border-white/20 shadow-inner relative z-10 transition-transform duration-300 group-hover:scale-105">
                 🩺
-              </motion.div>
+              </div>
 
               <div className="absolute right-0 bottom-0 top-0 w-1/2 opacity-10 pointer-events-none flex items-center justify-center">
                 <Stethoscope className="w-56 h-56 text-sky-300" />
@@ -584,7 +577,7 @@ export default function HomePage({ setActiveTab }) {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
               </div>
             </div>
-          </Interactive3DCard>
+          </div>
         </div>
       </section>
 
@@ -633,7 +626,12 @@ export default function HomePage({ setActiveTab }) {
             {filteredServices.map((srv) => {
               const Icon = srv.icon;
               return (
-                <Interactive3DCard
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.25 }}
                   key={srv.id}
                   onClick={() => setActiveTab("services")}
                   className="bg-white rounded-2xl p-5 shadow-soft border border-slate-100 hover:border-teal-300 transition-all cursor-pointer flex flex-col justify-between group hover:shadow-card"
@@ -658,7 +656,7 @@ export default function HomePage({ setActiveTab }) {
                     <span>Clinical Protocols</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
                   </div>
-                </Interactive3DCard>
+                </motion.div>
               );
             })}
           </AnimatePresence>

@@ -17,7 +17,6 @@ import {
   Sparkles,
 } from "lucide-react";
 import MarqueeTicker from "../components/MarqueeTicker";
-import Interactive3DCard from "../components/Interactive3DCard";
 
 export default function ServicesPage({ setActiveTab }) {
   const [activeTabFilter, setActiveTabFilter] = useState("all");
@@ -291,12 +290,12 @@ export default function ServicesPage({ setActiveTab }) {
               const isExpanded = selectedService === srv.id;
 
               return (
-                <Interactive3DCard
+                <div
                   key={srv.id}
-                  className={`bg-white rounded-3xl p-6 shadow-soft border transition-all flex flex-col justify-between ${
+                  className={`bg-white rounded-3xl p-6 shadow-soft border transition-all duration-300 flex flex-col justify-between hover:shadow-card hover:-translate-y-1 ${
                     isExpanded
                       ? "border-teal-500 shadow-card ring-2 ring-teal-500/20"
-                      : "border-slate-100 hover:border-teal-200 hover:shadow-card"
+                      : "border-slate-100 hover:border-teal-200"
                   }`}
                 >
                   <div>
@@ -369,7 +368,7 @@ export default function ServicesPage({ setActiveTab }) {
                       <Calendar className="w-3.5 h-3.5" /> Book Consultation
                     </button>
                   </div>
-                </Interactive3DCard>
+                </div>
               );
             })}
           </AnimatePresence>

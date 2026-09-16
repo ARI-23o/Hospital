@@ -22,7 +22,6 @@ import {
   User,
 } from "lucide-react";
 import DoctorScheduleExplorer from "../components/DoctorScheduleExplorer";
-import Interactive3DCard from "../components/Interactive3DCard";
 import MarqueeTicker from "../components/MarqueeTicker";
 
 export default function DoctorProfilePage({ setActiveTab }) {
@@ -171,12 +170,12 @@ export default function DoctorProfilePage({ setActiveTab }) {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredDoctors.map((doc) => (
-            <Interactive3DCard
+            <div
               key={doc.id}
-              className={`bg-white rounded-3xl overflow-hidden shadow-soft border flex flex-col justify-between transition-all ${
+              className={`bg-white rounded-3xl overflow-hidden shadow-soft border flex flex-col justify-between transition-all duration-300 hover:shadow-card hover:-translate-y-1 ${
                 doc.isLead
                   ? "border-teal-400 ring-2 ring-teal-500/20 shadow-card"
-                  : "border-slate-100"
+                  : "border-slate-100 hover:border-teal-200"
               }`}
             >
               {/* Doctor Visual Header */}
@@ -270,7 +269,7 @@ export default function DoctorProfilePage({ setActiveTab }) {
                   <Calendar className="w-3.5 h-3.5" /> Book OPD
                 </button>
               </div>
-            </Interactive3DCard>
+            </div>
           ))}
         </div>
       </section>

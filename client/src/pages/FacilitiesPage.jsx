@@ -9,7 +9,6 @@ import {
   Clock,
   CheckCircle2,
 } from "lucide-react";
-import Interactive3DCard from "../components/Interactive3DCard";
 import MarqueeTicker from "../components/MarqueeTicker";
 
 export default function FacilitiesPage({ setActiveTab }) {
@@ -111,15 +110,15 @@ export default function FacilitiesPage({ setActiveTab }) {
         </div>
       </section>
 
-      {/* 2. Facility Gallery Cards (6 Grid with 3D perspective tilt) */}
+      {/* 2. Facility Gallery Cards (6 Grid Modern Cards) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {facilities.map((fac, idx) => {
             const Icon = fac.icon;
             return (
-              <Interactive3DCard
+              <div
                 key={idx}
-                className="bg-white rounded-3xl overflow-hidden shadow-soft border border-slate-100 hover:shadow-card transition flex flex-col justify-between group"
+                className="bg-white rounded-3xl overflow-hidden shadow-soft border border-slate-100 hover:border-teal-200 hover:shadow-card transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
               >
                 {/* Visual Header */}
                 <div className="bg-gradient-to-br from-slate-800 to-[#0F2D59] text-white p-6 relative overflow-hidden">
@@ -161,7 +160,7 @@ export default function FacilitiesPage({ setActiveTab }) {
                   <span>Chandrapur Kidney Care</span>
                   <span className="text-teal-600 font-bold">Standard of Care</span>
                 </div>
-              </Interactive3DCard>
+              </div>
             );
           })}
         </div>
