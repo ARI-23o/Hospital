@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, AlertCircle, MessageSquare } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, AlertCircle, MessageSquare, ExternalLink, Navigation } from 'lucide-react';
 
 export default function ContactPage({ setActiveTab }) {
   const [formData, setFormData] = useState({
@@ -10,6 +10,9 @@ export default function ContactPage({ setActiveTab }) {
     message: ''
   });
   const [status, setStatus] = useState({ loading: false, success: false, error: '' });
+
+  const MAP_URL = "https://maps.app.goo.gl/f1P5sEp6G8aWFc39A";
+  const MAP_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.662993132626!2d79.2959868!3d19.9495898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd2d56cd0476929%3A0x99b7c10995248e85!2sDr.%20Sagar%20Sarda&#39;s%20Chandrapur%20Kidney%20Care!5e0!3m2!1sen!2sin!4v1710565000000!5m2!1sen!2sin";
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -53,10 +56,10 @@ export default function ContactPage({ setActiveTab }) {
             Get in Touch
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight">
-            Contact Chandrapura Kidney Care
+            Contact Chandrapur Kidney Care
           </h1>
           <p className="text-sm sm:text-base text-teal-100 mt-2 font-normal leading-relaxed">
-            We are here to assist you with appointment scheduling, general inquiries, and kidney health guidance.
+            We are here to assist you with appointment scheduling, directions to our clinic, and kidney health guidance.
           </p>
         </div>
       </section>
@@ -65,7 +68,7 @@ export default function ContactPage({ setActiveTab }) {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           
-          {/* Left Column: Clinic Contact Info & Map Placeholder */}
+          {/* Left Column: Clinic Contact Info & Real Interactive Map */}
           <div className="lg:col-span-5 space-y-6">
             
             <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-card border border-slate-100 space-y-6">
@@ -80,7 +83,15 @@ export default function ContactPage({ setActiveTab }) {
                   </div>
                   <div>
                     <h4 className="font-bold text-slate-800">Hospital Location</h4>
-                    <p className="text-slate-500 mt-0.5">Behind LIC Office, Main Road, Chandrapura, Maharashtra, India</p>
+                    <p className="text-slate-500 mt-0.5">Behind LIC Office, Main Road, Chandrapur, Maharashtra, India</p>
+                    <a
+                      href={MAP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-teal-600 hover:text-teal-800 font-bold text-xs mt-1.5"
+                    >
+                      <Navigation className="w-3.5 h-3.5" /> Get Directions on Google Maps <ExternalLink className="w-3 h-3" />
+                    </a>
                   </div>
                 </div>
 
@@ -112,24 +123,52 @@ export default function ContactPage({ setActiveTab }) {
                   <div>
                     <h4 className="font-bold text-slate-800">Visiting & OPD Hours</h4>
                     <p className="text-slate-600 mt-0.5">Monday – Saturday: 9:00 AM – 7:00 PM</p>
-                    <p className="text-teal-700 font-semibold">Sunday: By Appointment</p>
+                    <p className="text-teal-700 font-semibold">Sunday: By Prior Appointment</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Interactive Map Visual */}
+            {/* Google Map Card with Live Link */}
             <div className="bg-white rounded-3xl p-6 shadow-soft border border-slate-100 overflow-hidden">
-              <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
-                Location Map • Chandrapura, Maharashtra
-              </h4>
-              <div className="h-44 rounded-2xl bg-gradient-to-tr from-sky-100 via-teal-50 to-blue-100 border border-slate-200 flex flex-col items-center justify-center text-center p-4 relative">
-                <MapPin className="w-10 h-10 text-rose-500 animate-bounce mb-1" />
-                <span className="font-bold text-xs text-[#0F2D59]">Chandrapura Kidney Care</span>
-                <span className="text-[11px] text-slate-500">Behind LIC Office, Chandrapura</span>
-                <div className="mt-2 bg-white/90 text-slate-700 text-[10px] font-semibold px-2.5 py-1 rounded shadow-sm">
-                  Easily accessible with parking & wheelchair access
-                </div>
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                  Location Map • Chandrapur
+                </h4>
+                <a
+                  href={MAP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-bold text-teal-600 hover:text-teal-800 flex items-center gap-1"
+                >
+                  Open in Google Maps <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+
+              <div className="rounded-2xl overflow-hidden border border-slate-200 relative">
+                <iframe
+                  title="Dr. Sagar Sarda's Chandrapur Kidney Care Location"
+                  src={MAP_EMBED_URL}
+                  width="100%"
+                  height="220"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-56"
+                ></iframe>
+              </div>
+
+              <div className="mt-3 text-center">
+                <a
+                  href={MAP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-[#0F2D59] font-bold text-xs py-2.5 px-4 rounded-xl transition"
+                >
+                  <MapPin className="w-4 h-4 text-rose-500" />
+                  Navigate to Dr. Sagar Sarda's Chandrapur Kidney Care
+                </a>
               </div>
             </div>
 
@@ -145,7 +184,7 @@ export default function ContactPage({ setActiveTab }) {
                 Have a Question for Our Team?
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 mb-6">
-                Fill out the form below and Dr. Sagar Sadar's clinic coordinator will respond promptly.
+                Fill out the form below and Dr. Sagar Sarda's clinic coordinator will respond promptly.
               </p>
 
               {status.success && (
@@ -153,7 +192,7 @@ export default function ContactPage({ setActiveTab }) {
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
                     <h5 className="font-bold">Message Sent Successfully!</h5>
-                    <p>Thank you for reaching out to Chandrapura Kidney Care. We will contact you shortly.</p>
+                    <p>Thank you for reaching out to Chandrapur Kidney Care. We will contact you shortly.</p>
                   </div>
                 </div>
               )}
