@@ -1,34 +1,24 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   Award,
   GraduationCap,
   Clock,
   CheckCircle2,
-  HeartHandshake,
-  ShieldCheck,
   Calendar,
   Phone,
   MapPin,
   Quote,
-  Star,
-  Sparkles,
-  UserCheck,
-  ChevronRight,
   Stethoscope,
-  Activity,
-  Building,
-  ArrowRight,
-  User,
 } from "lucide-react";
 import DoctorScheduleExplorer from "../components/DoctorScheduleExplorer";
-import MarqueeTicker from "../components/MarqueeTicker";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function DoctorProfilePage({ setActiveTab }) {
+  const { t, language } = useLanguage();
   const [selectedSpecialty, setSelectedSpecialty] = useState("all");
   const [selectedDoctorModal, setSelectedDoctorModal] = useState(null);
 
-  const doctorsList = [
+  const fallbackDoctors = [
     {
       id: "dr-sagar-sarda",
       name: "Dr. Sagar Damodar Sarda",
@@ -36,7 +26,7 @@ export default function DoctorProfilePage({ setActiveTab }) {
       degrees: "MBBS, MD Medicine, DM Nephrology",
       experience: "12+ Years Experience",
       sessions: "15,000+ Dialysis Sessions Supervised",
-      department: "Nephrology & Renal Medicine",
+      department: "NEPHROLOGY",
       category: "nephrology",
       isLead: true,
       image: "/doctor_sagar_sarda.jpg",
@@ -68,7 +58,7 @@ export default function DoctorProfilePage({ setActiveTab }) {
       degrees: "MS (General Surgery), MCh (Urology / DNB Urology)",
       experience: "10+ Years Surgical Experience",
       sessions: "Stone & Prostate Surgeries Supported",
-      department: "Urology & Urinary Tract Care",
+      department: "UROLOGY",
       category: "urology",
       isLead: false,
       image: null,
@@ -97,7 +87,7 @@ export default function DoctorProfilePage({ setActiveTab }) {
       degrees: "MBBS, Fellowship in Clinical Hemodialysis",
       experience: "24/7 Dedicated Renal Ward Support",
       sessions: "Continuous Bedside Monitoring",
-      department: "Dialysis Intensive Unit",
+      department: "DIALYSIS",
       category: "dialysis",
       isLead: false,
       image: null,
@@ -120,10 +110,21 @@ export default function DoctorProfilePage({ setActiveTab }) {
     },
   ];
 
+  const doctorsList = t("doctorPage.doctors", fallbackDoctors);
+
   const filteredDoctors =
     selectedSpecialty === "all"
       ? doctorsList
       : doctorsList.filter((d) => d.category === selectedSpecialty);
+
+  const leadDoctor = doctorsList.find((d) => d.isLead) || fallbackDoctors[0];
+
+  const specialtyTabs = [
+    { id: "all", label: t("doctorPage.tabAll", "All Specialists") },
+    { id: "nephrology", label: t("doctorPage.tabNephrology", "Nephrology (Kidney Care)") },
+    { id: "urology", label: t("doctorPage.tabUrology", "Visiting Urology Panel") },
+    { id: "dialysis", label: t("doctorPage.tabDialysis", "Dialysis Medical Unit") },
+  ];
 
   return (
     <div className="space-y-12 sm:space-y-16 pb-16">
@@ -131,25 +132,21 @@ export default function DoctorProfilePage({ setActiveTab }) {
       <section className="bg-gradient-to-r from-[#0F2D59] via-[#163D75] to-[#0D9488] text-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
           <span className="text-teal-300 font-bold text-[11px] sm:text-xs uppercase tracking-wider bg-white/10 px-3.5 py-1 rounded-full border border-white/10">
-            Specialist Medical Team
+            {t("doctorPage.badge", "Specialist Medical Team")}
           </span>
           <h1 className="text-2xl sm:text-4xl font-extrabold mt-3 tracking-tight">
-            Our Doctors & Specialist Panel
+            {t("doctorPage.title", "Our Doctors & Specialist Panel")}
           </h1>
           <p className="text-xs sm:text-base text-slate-200 mt-2 font-normal leading-relaxed">
-            Led by Senior Consultant Nephrologist & Kidney Transplant Physician Dr. Sagar Damodar
-            Sarda (MBBS, MD Medicine, DM Nephrology) alongside visiting urology consultants and
-            round-the-clock dialysis medical officers.
+            {t(
+              "doctorPage.subtitle",
+              "Led by Senior Consultant Nephrologist & Kidney Transplant Physician Dr. Sagar Damodar Sarda (MBBS, MD Medicine, DM Nephrology) alongside visiting urology consultants and round-the-clock dialysis medical officers."
+            )}
           </p>
 
-          {/* Specialty Filter Tabs (Sahyadri Hospital Style) */}
+          {/* Specialty Filter Tabs */}
           <div className="flex flex-wrap items-center justify-center gap-2 mt-6">
-            {[
-              { id: "all", label: "All Specialists" },
-              { id: "nephrology", label: "Nephrology (Kidney Care)" },
-              { id: "urology", label: "Visiting Urology Panel" },
-              { id: "dialysis", label: "Dialysis Medical Unit" },
-            ].map((tab) => (
+            {specialtyTabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setSelectedSpecialty(tab.id)}
@@ -166,7 +163,7 @@ export default function DoctorProfilePage({ setActiveTab }) {
         </div>
       </section>
 
-      {/* 2. Sahyadri Hospital-Style Multi-Doctor Cards Directory */}
+      {/* 2. Multi-Doctor Cards Directory */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredDoctors.map((doc) => (
@@ -197,7 +194,7 @@ export default function DoctorProfilePage({ setActiveTab }) {
                 <div className="min-w-0">
                   {doc.isLead && (
                     <span className="inline-block text-[10px] font-bold text-white bg-teal-600 px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1">
-                      Lead Consultant
+                      {t("common.leadConsultant", "Lead Consultant")}
                     </span>
                   )}
                   <h3 className="text-lg font-bold text-[#0F2D59] leading-snug">{doc.name}</h3>
@@ -211,16 +208,16 @@ export default function DoctorProfilePage({ setActiveTab }) {
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
                     <span className="text-[10px] text-slate-400 uppercase font-bold block">
-                      Experience
+                      {t("doctorPage.experienceLabel", "Experience")}
                     </span>
                     <span className="font-bold text-slate-800">{doc.experience}</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
                     <span className="text-[10px] text-slate-400 uppercase font-bold block">
-                      Department
+                      {t("doctorPage.departmentLabel", "Department")}
                     </span>
                     <span className="font-bold text-teal-700 truncate block">
-                      {doc.category.toUpperCase()}
+                      {doc.department || doc.category?.toUpperCase()}
                     </span>
                   </div>
                 </div>
@@ -239,17 +236,18 @@ export default function DoctorProfilePage({ setActiveTab }) {
                 {/* Core Expertise Tags */}
                 <div className="pt-2 border-t border-slate-100">
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                    Areas of Expertise:
+                    {t("doctorPage.areasOfExpertise", "Areas of Expertise:")}
                   </span>
                   <div className="flex flex-wrap gap-1">
-                    {doc.expertise.slice(0, 3).map((exp, i) => (
-                      <span
-                        key={i}
-                        className="text-[10px] font-medium bg-teal-50 text-teal-800 px-2 py-0.5 rounded-md border border-teal-100"
-                      >
-                        {exp}
-                      </span>
-                    ))}
+                    {doc.expertise &&
+                      doc.expertise.slice(0, 3).map((exp, i) => (
+                        <span
+                          key={i}
+                          className="text-[10px] font-medium bg-teal-50 text-teal-800 px-2 py-0.5 rounded-md border border-teal-100"
+                        >
+                          {exp}
+                        </span>
+                      ))}
                   </div>
                 </div>
               </div>
@@ -260,13 +258,13 @@ export default function DoctorProfilePage({ setActiveTab }) {
                   onClick={() => setSelectedDoctorModal(doc)}
                   className="w-1/2 bg-slate-100 hover:bg-slate-200 text-[#0F2D59] font-bold text-xs py-2.5 px-3 rounded-xl transition text-center"
                 >
-                  View Profile
+                  {t("doctorPage.viewFullProfile", "View Profile")}
                 </button>
                 <button
                   onClick={() => setActiveTab("appointment")}
                   className="w-1/2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 px-3 rounded-xl shadow-md transition flex items-center justify-center gap-1"
                 >
-                  <Calendar className="w-3.5 h-3.5" /> Book OPD
+                  <Calendar className="w-3.5 h-3.5" /> {t("common.bookAppointment", "Book OPD")}
                 </button>
               </div>
             </div>
@@ -284,26 +282,27 @@ export default function DoctorProfilePage({ setActiveTab }) {
                 <div className="w-full h-72 sm:h-80 mx-auto rounded-2xl bg-slate-900 overflow-hidden shadow-xl border-2 border-teal-500/40 relative group">
                   <img
                     src="/doctor_sagar_sarda.jpg"
-                    alt="Dr. Sagar Damodar Sarda Consultant Nephrologist & Kidney Transplant Physician"
+                    alt={`${leadDoctor.name} ${leadDoctor.designation}`}
                     className="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A1D37]/90 via-transparent to-transparent"></div>
                   <div className="absolute bottom-3 left-3 right-3 text-center text-white">
                     <span className="text-[10px] sm:text-[11px] font-bold bg-teal-500 text-white px-3 py-0.5 rounded-full uppercase shadow">
-                      Consultant Nephrologist & Transplant Physician
+                      {leadDoctor.designation}
                     </span>
                   </div>
                 </div>
 
                 <div className="mt-4">
                   <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F2D59]">
-                    Dr. Sagar Damodar Sarda
+                    {leadDoctor.name}
                   </h3>
                   <p className="text-teal-700 font-semibold text-xs sm:text-sm mt-0.5">
-                    MBBS, MD Medicine, DM Nephrology
+                    {leadDoctor.degrees}
                   </p>
                   <p className="text-xs text-slate-500">
-                    Chandrapur Kidney Care • Lead Nephrologist
+                    {t("common.hospitalName", "Chandrapur Kidney Care")} •{" "}
+                    {t("common.leadConsultant", "Lead Consultant")}
                   </p>
                 </div>
 
@@ -311,7 +310,11 @@ export default function DoctorProfilePage({ setActiveTab }) {
                   <div>
                     <span className="block text-lg sm:text-xl font-bold text-[#0F2D59]">12+</span>
                     <span className="text-[10px] text-slate-500 uppercase tracking-wide">
-                      Yrs Exp
+                      {language === "mr"
+                        ? "वर्षांचा अनुभव"
+                        : language === "hi"
+                          ? "वर्षों का अनुभव"
+                          : "Yrs Exp"}
                     </span>
                   </div>
                   <div className="border-r border-slate-200"></div>
@@ -320,7 +323,11 @@ export default function DoctorProfilePage({ setActiveTab }) {
                       15,000+
                     </span>
                     <span className="text-[10px] text-slate-500 uppercase tracking-wide">
-                      Sessions
+                      {language === "mr"
+                        ? "डायलिसिस सत्रे"
+                        : language === "hi"
+                          ? "डायलिसिस सत्र"
+                          : "Sessions"}
                     </span>
                   </div>
                   <div className="border-r border-slate-200"></div>
@@ -329,7 +336,11 @@ export default function DoctorProfilePage({ setActiveTab }) {
                       100%
                     </span>
                     <span className="text-[10px] text-slate-500 uppercase tracking-wide">
-                      Dedicated
+                      {language === "mr"
+                        ? "समर्पित सेवा"
+                        : language === "hi"
+                          ? "समर्पित देखभाल"
+                          : "Dedicated"}
                     </span>
                   </div>
                 </div>
@@ -340,59 +351,50 @@ export default function DoctorProfilePage({ setActiveTab }) {
             <div className="lg:col-span-7 space-y-5">
               <div className="bg-sky-50/70 border-l-4 border-teal-500 p-4 sm:p-5 rounded-r-2xl relative">
                 <Quote className="w-6 h-6 text-teal-400/40 absolute top-3 right-3" />
-                <p className="text-slate-800 italic text-xs sm:text-base leading-relaxed">
-                  "Our mission is to deliver world-class nephrology, dialysis management, and kidney
-                  transplant care with utmost compassion and clinical precision to the people of
-                  Chandrapur and Central India."
+                <p className="text-slate-800 italic text-xs sm:base leading-relaxed">
+                  {language === "mr"
+                    ? '"आमचे ध्येय चंद्रपूर आणि मध्य भारतातील नागरिकांना अत्याधुनिक नेफ्रोलॉजी, डायलिसिस व्यवस्थापन आणि मूत्रपिंड प्रत्यारोपण उपचार अत्यंत करुणा आणि क्लिनिकल अचूकतेने प्रदान करणे हे आहे."'
+                    : language === "hi"
+                      ? '"हमारा उद्देश्य चंद्रपुर और मध्य भारत के लोगों को अत्यंत करुणा और चिकित्सकीय सटीकता के साथ विश्वस्तरीय नेफ्रोलॉजिस्ट, डायलिसिस प्रबंधन और किडनी ट्रांसप्लांट देखभाल प्रदान करना है।"'
+                      : '"Our mission is to deliver world-class nephrology, dialysis management, and kidney transplant care with utmost compassion and clinical precision to the people of Chandrapur and Central India."'}
                 </p>
                 <p className="text-right text-xs font-bold text-[#0F2D59] mt-2">
-                  — Dr. Sagar Damodar Sarda
+                  — {leadDoctor.name}
                 </p>
               </div>
 
               <div>
                 <h4 className="font-bold text-[#0F2D59] text-sm sm:text-base mb-2 flex items-center gap-2">
-                  <GraduationCap className="w-4 h-4 text-teal-600" /> Academic & Clinical
-                  Qualifications
+                  <GraduationCap className="w-4 h-4 text-teal-600" />{" "}
+                  {t("doctorPage.qualificationsCredentials", "Academic & Clinical Qualifications")}
                 </h4>
                 <div className="space-y-1.5 text-xs sm:text-sm text-slate-600">
-                  {[
-                    "MBBS — Recognized Medical University",
-                    "MD (Medicine) — Advanced Physician Training",
-                    "DM (Nephrology) — Super-Specialist Kidney Care & Dialysis",
-                    "Consultant Nephrologist & Kidney Transplant Physician",
-                    "Supervised 15,000+ Hemodialysis Sessions with 0-compromise safety protocols",
-                    "Member of Indian Society of Nephrology (ISN)",
-                  ].map((cred, idx) => (
-                    <div key={idx} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span>{cred}</span>
-                    </div>
-                  ))}
+                  {leadDoctor.credentials &&
+                    leadDoctor.credentials.map((cred, idx) => (
+                      <div key={idx} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                        <span>{cred}</span>
+                      </div>
+                    ))}
                 </div>
               </div>
 
               <div>
                 <h4 className="font-bold text-[#0F2D59] text-sm sm:text-base mb-2 flex items-center gap-2">
-                  <Award className="w-4 h-4 text-teal-600" /> Areas of Expertise
+                  <Award className="w-4 h-4 text-teal-600" />{" "}
+                  {t("doctorPage.areasOfExpertise", "Areas of Expertise")}
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {[
-                    "Chronic Kidney Disease (CKD) Management",
-                    "Dialysis & Advanced Renal Care",
-                    "Hypertension & Renal Vascular Control",
-                    "Kidney Stone Medical Treatment & Prevention",
-                    "Glomerular Diseases & Nephrotic Syndrome",
-                    "Preventive Nephrology & Diabetic Screening",
-                  ].map((area, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-2 p-2 rounded-lg bg-slate-50 border border-slate-100 text-xs font-medium text-slate-800"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-                      {area}
-                    </div>
-                  ))}
+                  {leadDoctor.expertise &&
+                    leadDoctor.expertise.map((area, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center gap-2 p-2 rounded-lg bg-slate-50 border border-slate-100 text-xs font-medium text-slate-800"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
+                        {area}
+                      </div>
+                    ))}
                 </div>
               </div>
 
@@ -401,13 +403,15 @@ export default function DoctorProfilePage({ setActiveTab }) {
                   onClick={() => setActiveTab("appointment")}
                   className="bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2"
                 >
-                  <Calendar className="w-4 h-4" /> Book Consultation with Dr. Sarda
+                  <Calendar className="w-4 h-4" />{" "}
+                  {t("doctorPage.bookConsultationBtn", "Book Consultation with Dr. Sarda")}
                 </button>
                 <a
                   href="tel:+919876543210"
                   className="text-xs sm:text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 px-4 py-3 rounded-xl transition flex items-center justify-center gap-2"
                 >
-                  <Phone className="w-3.5 h-3.5 text-teal-600" /> Call Direct Line
+                  <Phone className="w-3.5 h-3.5 text-teal-600" />{" "}
+                  {t("common.callUs", "Call Direct Line")}
                 </a>
               </div>
             </div>
@@ -420,7 +424,7 @@ export default function DoctorProfilePage({ setActiveTab }) {
         <DoctorScheduleExplorer setActiveTab={setActiveTab} />
       </section>
 
-      {/* Doctor Modal (Sahyadri Hospital Style Details Popup) */}
+      {/* Doctor Modal */}
       {selectedDoctorModal && (
         <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl border border-slate-100 animate-scaleUp my-auto space-y-4">
@@ -443,25 +447,28 @@ export default function DoctorProfilePage({ setActiveTab }) {
 
             <div className="space-y-2 pt-2">
               <span className="text-xs font-bold text-slate-800 block">
-                Areas of Specialization:
+                {t("doctorPage.areasOfExpertise", "Areas of Specialization:")}
               </span>
               <ul className="space-y-1 text-xs text-slate-600">
-                {selectedDoctorModal.expertise.map((exp, i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 shrink-0" />
-                    <span>{exp}</span>
-                  </li>
-                ))}
+                {selectedDoctorModal.expertise &&
+                  selectedDoctorModal.expertise.map((exp, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                      <span>{exp}</span>
+                    </li>
+                  ))}
               </ul>
             </div>
 
             <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-1">
               <p>
-                <strong className="text-slate-700">OPD Timings:</strong>{" "}
+                <strong className="text-slate-700">{t("schedule.badge", "OPD Timings")}:</strong>{" "}
                 {selectedDoctorModal.opdTimings}
               </p>
               <p>
-                <strong className="text-slate-700">Languages:</strong>{" "}
+                <strong className="text-slate-700">
+                  {language === "mr" ? "भाषा" : language === "hi" ? "भाषाएं" : "Languages"}:
+                </strong>{" "}
                 {selectedDoctorModal.languages}
               </p>
             </div>
@@ -474,7 +481,8 @@ export default function DoctorProfilePage({ setActiveTab }) {
                 }}
                 className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition text-xs flex items-center justify-center gap-2"
               >
-                <Calendar className="w-4 h-4" /> Book Consultation Slot
+                <Calendar className="w-4 h-4" />{" "}
+                {t("homePage.bookConsultationSlot", "Book Consultation Slot")}
               </button>
             </div>
           </div>

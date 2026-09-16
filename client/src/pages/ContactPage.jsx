@@ -13,7 +13,7 @@ import {
 import { useLanguage } from "../context/LanguageContext";
 
 export default function ContactPage({ setActiveTab }) {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -37,7 +37,12 @@ export default function ContactPage({ setActiveTab }) {
       setStatus({
         loading: false,
         success: false,
-        error: "Please fill in Name, Email and Message.",
+        error:
+          language === "mr"
+            ? "कृपया नाव, ईमेल आणि संदेश भरा."
+            : language === "hi"
+              ? "कृपया नाम, ईमेल और संदेश भरें।"
+              : "Please fill in Name, Email and Message.",
       });
       return;
     }
@@ -194,8 +199,11 @@ export default function ContactPage({ setActiveTab }) {
               <div>
                 <h3 className="text-xl font-bold text-[#0F2D59]">{t("contact.sendInquiry")}</h3>
                 <p className="text-xs text-slate-500 mt-1">
-                  Have a question regarding kidney disease, dialysis, or stone treatment? Write to
-                  us.
+                  {language === "mr"
+                    ? "किडनीचे आजार, डायलिसिस किंवा स्टोन उपचारांबाबत काही प्रश्न असल्यास आम्हाला लिहा."
+                    : language === "hi"
+                      ? "किडनी रोग, डायलिसिस या पथरी के इलाज के संबंध में कोई प्रश्न है? हमें लिखें।"
+                      : "Have a question regarding kidney disease, dialysis, or stone treatment? Write to us."}
                 </p>
               </div>
 
@@ -203,10 +211,19 @@ export default function ContactPage({ setActiveTab }) {
                 <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-start gap-2.5">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                   <div>
-                    <h4 className="font-bold">Message Delivered Successfully!</h4>
+                    <h4 className="font-bold">
+                      {language === "mr"
+                        ? "संदेश यशस्वीरीत्या पाठवला!"
+                        : language === "hi"
+                          ? "संदेश सफलतापूर्वक भेजा गया!"
+                          : "Message Delivered Successfully!"}
+                    </h4>
                     <p className="mt-0.5">
-                      Thank you for contacting Chandrapur Kidney Care. Our team will get back to you
-                      shortly.
+                      {language === "mr"
+                        ? "चंद्रपूर किडनी केअरशी संपर्क साधल्याबद्दल धन्यवाद. आमची टीम लवकरच आपल्याशी संपर्क साधेल."
+                        : language === "hi"
+                          ? "चंद्रपुर किडनी केयर से संपर्क करने के लिए धन्यवाद। हमारी टीम जल्द ही आपसे संपर्क करेगी।"
+                          : "Thank you for contacting Chandrapur Kidney Care. Our team will get back to you shortly."}
                     </p>
                   </div>
                 </div>
@@ -266,13 +283,21 @@ export default function ContactPage({ setActiveTab }) {
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">Subject</label>
+                    <label className="block font-semibold text-slate-700 mb-1">
+                      {language === "mr" ? "विषय" : language === "hi" ? "विषय" : "Subject"}
+                    </label>
                     <input
                       type="text"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      placeholder="e.g. Dialysis Query, Doctor Appointment"
+                      placeholder={
+                        language === "mr"
+                          ? "उदा. डायलिसिस चौकशी, डॉक्टर अपॉइंटमेंट"
+                          : language === "hi"
+                            ? "उदा. डायलिसिस पूछताछ, डॉक्टर अपॉइंटमेंट"
+                            : "e.g. Dialysis Query, Doctor Appointment"
+                      }
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 bg-slate-50/50"
                     />
                   </div>
@@ -280,14 +305,25 @@ export default function ContactPage({ setActiveTab }) {
 
                 <div>
                   <label className="block font-semibold text-slate-700 mb-1">
-                    Your Message / Question <span className="text-rose-500">*</span>
+                    {language === "mr"
+                      ? "आपला संदेश / प्रश्न"
+                      : language === "hi"
+                        ? "आपका संदेश / प्रश्न"
+                        : "Your Message / Question"}{" "}
+                    <span className="text-rose-500">*</span>
                   </label>
                   <textarea
                     name="message"
                     rows="4"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Please describe your health query or question..."
+                    placeholder={
+                      language === "mr"
+                        ? "कृपया आपला प्रश्न किंवा विचारणा लिहा..."
+                        : language === "hi"
+                          ? "कृपया अपना प्रश्न या जानकारी लिखें..."
+                          : "Please describe your health query or question..."
+                    }
                     required
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 bg-slate-50/50"
                   ></textarea>

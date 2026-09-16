@@ -1,21 +1,10 @@
 import React, { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
-import {
-  Calendar,
-  Clock,
-  UserCheck,
-  ShieldCheck,
-  CheckCircle2,
-  AlertCircle,
-  HeartPulse,
-  Phone,
-  MapPin,
-  Check,
-} from "lucide-react";
+import { Calendar, AlertCircle, Phone, Check, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
 export default function AppointmentPage({ setActiveTab }) {
-  const { lang, t } = useLanguage();
+  const { language, t } = useLanguage();
   const [formData, setFormData] = useState({
     patient_name: "",
     phone: "",
@@ -73,7 +62,7 @@ export default function AppointmentPage({ setActiveTab }) {
     fetchBookedSlots();
   }, [formData.appointment_date]);
 
-  const consultationReasons = [
+  const fallbackReasons = [
     "Chronic Kidney Disease (CKD) Consultation",
     "High Blood Pressure / Hypertension Care",
     "Dialysis Guidance & Management",
@@ -84,6 +73,23 @@ export default function AppointmentPage({ setActiveTab }) {
     "Preventive Diabetic Kidney Screening",
     "Second Opinion on Kidney Reports",
   ];
+
+  const consultationReasons = t("appointment.reasons", fallbackReasons);
+
+  const fallbackWhyPoints = [
+    {
+      title: "Experienced Nephrologist",
+      desc: "Dr. Sagar Sarda (MD, DM) with 12+ years expertise.",
+    },
+    { title: "Personalized Care", desc: "Tailored medical and renal dietary plans." },
+    { title: "Minimal Waiting Time", desc: "Organized time-slot scheduling." },
+    {
+      title: "Clean & Modern Facility",
+      desc: "Strict hygiene and infection control standards.",
+    },
+  ];
+
+  const whyPoints = t("appointment.whyPoints", fallbackWhyPoints);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -100,7 +106,13 @@ export default function AppointmentPage({ setActiveTab }) {
       !formData.time_slot ||
       !formData.reason
     ) {
-      setError("Please fill in all mandatory fields (Name, Phone, Date, Time, Reason).");
+      setError(
+        language === "mr"
+          ? "कृपया सर्व आवश्यक माहिती भरा (नाव, फोन, तारीख, वेळ, कारण)."
+          : language === "hi"
+            ? "कृपया सभी आवश्यक जानकारी भरें (नाम, फोन, तारीख, समय, कारण)।"
+            : "Please fill in all mandatory fields (Name, Phone, Date, Time, Reason)."
+      );
       return;
     }
 
@@ -163,13 +175,18 @@ export default function AppointmentPage({ setActiveTab }) {
             <div className="bg-white rounded-3xl p-5 sm:p-8 shadow-card border border-slate-100">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-[#0F2D59]">Patient Details</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-[#0F2D59]">
+                    {t("appointment.patientDetails", "Patient Details")}
+                  </h3>
                   <p className="text-xs text-slate-500">
-                    Fill in patient information for OPD token
+                    {t(
+                      "appointment.patientDetailsSub",
+                      "Fill in patient information for OPD token"
+                    )}
                   </p>
                 </div>
                 <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 shrink-0">
-                  Instant Confirmation
+                  {t("appointment.instantConfirmation", "Instant Confirmation")}
                 </span>
               </div>
 
@@ -184,7 +201,8 @@ export default function AppointmentPage({ setActiveTab }) {
                 {/* Full Name */}
                 <div>
                   <label className="block font-semibold text-slate-700 mb-1 text-xs sm:text-sm">
-                    Patient Full Name <span className="text-rose-500">*</span>
+                    {t("appointment.fullName", "Patient Full Name")}{" "}
+                    <span className="text-rose-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -201,7 +219,8 @@ export default function AppointmentPage({ setActiveTab }) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block font-semibold text-slate-700 mb-1 text-xs sm:text-sm">
-                      Phone / Mobile Number <span className="text-rose-500">*</span>
+                      {t("appointment.phone", "Phone / Mobile Number")}{" "}
+                      <span className="text-rose-500">*</span>
                     </label>
                     <input
                       type="tel"
@@ -216,7 +235,7 @@ export default function AppointmentPage({ setActiveTab }) {
 
                   <div>
                     <label className="block font-semibold text-slate-700 mb-1 text-xs sm:text-sm">
-                      Email Address (Optional)
+                      {t("appointment.email", "Email Address (Optional)")}
                     </label>
                     <input
                       type="email"
@@ -233,7 +252,8 @@ export default function AppointmentPage({ setActiveTab }) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block font-semibold text-slate-700 mb-1 text-xs sm:text-sm">
-                      Preferred Date <span className="text-rose-500">*</span>
+                      {t("appointment.preferredDate", "Preferred Date")}{" "}
+                      <span className="text-rose-500">*</span>
                     </label>
                     <input
                       type="date"
@@ -249,11 +269,13 @@ export default function AppointmentPage({ setActiveTab }) {
                   <div>
                     <div className="flex items-center justify-between mb-1">
                       <label className="block font-semibold text-slate-700 text-xs sm:text-sm">
-                        Preferred Time Slot <span className="text-rose-500">*</span>
+                        {t("appointment.preferredTime", "Preferred Time Slot")}{" "}
+                        <span className="text-rose-500">*</span>
                       </label>
                       {bookedSlots.length > 0 && (
                         <span className="text-[10px] text-amber-600 font-bold bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
-                          {bookedSlots.length} slot(s) filled today
+                          {bookedSlots.length}{" "}
+                          {t("appointment.slotsFilled", "slot(s) filled today")}
                         </span>
                       )}
                     </div>
@@ -288,7 +310,8 @@ export default function AppointmentPage({ setActiveTab }) {
                 {/* Reason for Consultation */}
                 <div>
                   <label className="block font-semibold text-slate-700 mb-1 text-xs sm:text-sm">
-                    Reason for Consultation <span className="text-rose-500">*</span>
+                    {t("appointment.reason", "Reason for Consultation")}{" "}
+                    <span className="text-rose-500">*</span>
                   </label>
                   <select
                     name="reason"
@@ -308,14 +331,20 @@ export default function AppointmentPage({ setActiveTab }) {
                 {/* Notes */}
                 <div>
                   <label className="block font-semibold text-slate-700 mb-1 text-xs sm:text-sm">
-                    Symptoms or History (Optional)
+                    {t("appointment.notes", "Symptoms or History (Optional)")}
                   </label>
                   <textarea
                     name="notes"
                     rows="3"
                     value={formData.notes}
                     onChange={handleChange}
-                    placeholder="e.g. Swelling in feet, elevated serum creatinine, high blood pressure..."
+                    placeholder={
+                      language === "mr"
+                        ? "उदा. पायांवर सूज, वाढलेले सीरम क्रिएटिनिन, उच्च रक्तदाब..."
+                        : language === "hi"
+                          ? "उदा. पैरों में सूजन, बढ़ा हुआ सीरम क्रिएटिनिन, उच्च रक्तचाप..."
+                          : "e.g. Swelling in feet, elevated serum creatinine, high blood pressure..."
+                    }
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 bg-slate-50/50"
                   ></textarea>
                 </div>
@@ -327,7 +356,9 @@ export default function AppointmentPage({ setActiveTab }) {
                   className="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-emerald-600/25 transition flex items-center justify-center gap-2 text-base"
                 >
                   <Calendar className="w-5 h-5" />
-                  {loading ? "Submitting..." : "Confirm & Book Appointment"}
+                  {loading
+                    ? t("common.submitting", "Submitting...")
+                    : t("appointment.bookNowBtn", "Confirm & Book Appointment")}
                 </button>
               </form>
             </div>
@@ -337,22 +368,11 @@ export default function AppointmentPage({ setActiveTab }) {
           <div className="lg:col-span-4 space-y-4 sm:space-y-6">
             <div className="bg-white rounded-3xl p-5 sm:p-6 shadow-card border border-slate-100 space-y-4">
               <h3 className="text-base font-bold text-[#0F2D59] border-b border-slate-100 pb-2.5">
-                Why Choose Us?
+                {t("appointment.whyChooseUs", "Why Choose Us?")}
               </h3>
 
               <div className="space-y-3 text-xs sm:text-sm">
-                {[
-                  {
-                    title: "Experienced Nephrologist",
-                    desc: "Dr. Sagar Sarda (MD, DM) with 12+ years expertise.",
-                  },
-                  { title: "Personalized Care", desc: "Tailored medical and renal dietary plans." },
-                  { title: "Minimal Waiting Time", desc: "Organized time-slot scheduling." },
-                  {
-                    title: "Friendly Support Staff",
-                    desc: "Dedicated patient assistance & guidance.",
-                  },
-                ].map((item, idx) => (
+                {whyPoints.map((item, idx) => (
                   <div key={idx} className="flex items-start gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                     <div>
@@ -367,16 +387,25 @@ export default function AppointmentPage({ setActiveTab }) {
             {/* Direct Phone Assistance */}
             <div className="bg-teal-50 border border-teal-200 rounded-2xl p-4 sm:p-5">
               <h4 className="font-bold text-[#0F2D59] text-xs uppercase mb-1">
-                Prefer to Book by Phone?
+                {language === "mr"
+                  ? "फोनद्वारे थेट अपॉइंटमेंट हवी आहे का?"
+                  : language === "hi"
+                    ? "क्या फोन द्वारा सीधी अपॉइंटमेंट चाहते हैं?"
+                    : "Prefer to Book by Phone?"}
               </h4>
               <p className="text-xs text-slate-600 mb-3">
-                Call our reception desk directly for walk-in scheduling.
+                {language === "mr"
+                  ? "आमच्या रिसेप्शन डेस्कवर थेट संपर्क साधा."
+                  : language === "hi"
+                    ? "सीधे हमारे रिसेप्शन डेस्क पर संपर्क करें।"
+                    : "Call our reception desk directly for walk-in scheduling."}
               </p>
               <a
                 href="tel:+919876543210"
                 className="w-full inline-flex items-center justify-center gap-2 bg-[#0F2D59] hover:bg-teal-800 active:scale-95 text-white font-bold text-xs py-2.5 px-4 rounded-xl transition"
               >
-                <Phone className="w-3.5 h-3.5" /> Call +91 98765 43210
+                <Phone className="w-3.5 h-3.5" /> {t("common.callUs", "Call Clinic")} +91 98765
+                43210
               </a>
             </div>
           </div>
@@ -393,12 +422,17 @@ export default function AppointmentPage({ setActiveTab }) {
 
             <div className="text-center mb-4">
               <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full uppercase">
-                Confirmed
+                {language === "mr" ? "यशस्वी" : language === "hi" ? "सफल" : "Confirmed"}
               </span>
               <h3 className="text-xl sm:text-2xl font-bold text-[#0F2D59] mt-1.5">
-                Booking Successful!
+                {t("appointment.successTitle", "Booking Successful!")}
               </h3>
-              <p className="text-xs text-slate-500">Your consultation token has been generated.</p>
+              <p className="text-xs text-slate-500">
+                {t(
+                  "appointment.successDesc",
+                  "Our hospital reception team will call you shortly to confirm your consultation time."
+                )}
+              </p>
             </div>
 
             {/* Receipt Card */}
@@ -410,17 +444,21 @@ export default function AppointmentPage({ setActiveTab }) {
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-slate-500">Patient Name:</span>
+                <span className="text-slate-500">{t("appointment.fullName", "Patient Name")}:</span>
                 <span className="font-bold text-slate-800">
                   {confirmedBooking.appointment?.patient_name}
                 </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-slate-500">Doctor:</span>
-                <span className="font-bold text-[#0F2D59]">Dr. Sagar Sarda</span>
+                <span className="font-bold text-[#0F2D59]">
+                  {t("common.doctorName", "Dr. Sagar Damodar Sarda")}
+                </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-slate-500">Date & Slot:</span>
+                <span className="text-slate-500">
+                  {t("appointment.preferredDate", "Date & Slot")}:
+                </span>
                 <span className="font-bold text-teal-700">
                   {confirmedBooking.appointment?.appointment_date} (
                   {confirmedBooking.appointment?.time_slot})
@@ -437,7 +475,7 @@ export default function AppointmentPage({ setActiveTab }) {
                 }}
                 className="w-full bg-[#0F2D59] hover:bg-teal-800 active:scale-95 text-white font-bold py-3 rounded-xl transition text-xs"
               >
-                Back to Home Page
+                {t("nav.home", "Back to Home Page")}
               </button>
             </div>
           </div>

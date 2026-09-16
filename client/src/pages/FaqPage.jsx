@@ -1,24 +1,13 @@
 import React, { useState } from "react";
-import {
-  HelpCircle,
-  ChevronDown,
-  Search,
-  Phone,
-  Calendar,
-  Sparkles,
-  Stethoscope,
-  Activity,
-  Layers,
-  ArrowRight,
-} from "lucide-react";
+import { HelpCircle, ChevronDown, Search, Phone, Calendar } from "lucide-react";
 import { fullFaqsList } from "../data/faqsData";
 import { useLanguage } from "../context/LanguageContext";
 
 export default function FaqPage({ setActiveTab }) {
-  const { lang, t } = useLanguage();
+  const { language, t } = useLanguage();
   const [openFaq, setOpenFaq] = useState(null);
   const [faqSearch, setFaqSearch] = useState("");
-  const [selectedFaqCategory, setSelectedFaqCategory] = useState("nephrology"); // 'nephrology' | 'urology' | 'all'
+  const [selectedFaqCategory, setSelectedFaqCategory] = useState("nephrology");
 
   // Filter based on selected category and search query
   const categoryFiltered =
@@ -48,13 +37,17 @@ export default function FaqPage({ setActiveTab }) {
       <section className="bg-gradient-to-r from-[#0F2D59] via-[#163D75] to-[#0D9488] text-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
           <span className="text-teal-300 font-bold text-[11px] sm:text-xs uppercase tracking-wider bg-white/10 px-3.5 py-1 rounded-full border border-white/10 inline-flex items-center gap-1.5">
-            <HelpCircle className="w-3.5 h-3.5 text-teal-300" /> {t("faqsPage.badge")}
+            <HelpCircle className="w-3.5 h-3.5 text-teal-300" />{" "}
+            {t("faqsPage.badge", "Patient Knowledge Hub")}
           </span>
           <h1 className="text-2xl sm:text-4xl font-extrabold mt-3 tracking-tight">
-            {t("faqsPage.title")}
+            {t("faqsPage.title", "Frequently Asked Questions")}
           </h1>
           <p className="text-xs sm:text-base text-slate-200 mt-2 font-normal leading-relaxed">
-            {t("faqsPage.subtitle")}
+            {t(
+              "faqsPage.subtitle",
+              "Verified medical answers by DM Nephrologist Dr. Sagar Sarda regarding Kidney Disease, Dialysis, Transplantation, and Urology."
+            )}
           </p>
         </div>
       </section>
@@ -138,15 +131,35 @@ export default function FaqPage({ setActiveTab }) {
           <div className="flex items-center justify-between text-xs text-slate-500 px-1">
             <span className="font-semibold text-slate-700">
               {selectedFaqCategory === "nephrology" &&
-                "🫘 Showing Nephrology, CKD & Dialysis Questions"}
+                (language === "mr"
+                  ? "🫘 नेफ्रोलॉजी, सीकेडी व डायलिसिसचे प्रश्न"
+                  : language === "hi"
+                    ? "🫘 नेफ्रोलॉजी, सीकेडी और डायलिसिस के प्रश्न"
+                    : "🫘 Showing Nephrology, CKD & Dialysis Questions")}
               {selectedFaqCategory === "urology" &&
-                "🔬 Showing Urology, Stone & Surgical Questions"}
-              {selectedFaqCategory === "all" && "🌐 Showing All Nephrology & Urology Questions"}
+                (language === "mr"
+                  ? "🔬 युरॉलॉजी, मुतखडा व शस्त्रक्रिया प्रश्न"
+                  : language === "hi"
+                    ? "🔬 यूरोलॉजी, पथरी और सर्जरी प्रश्न"
+                    : "🔬 Showing Urology, Stone & Surgical Questions")}
+              {selectedFaqCategory === "all" &&
+                (language === "mr"
+                  ? "🌐 सर्व नेफ्रोलॉजी व युरॉलॉजी प्रश्न"
+                  : language === "hi"
+                    ? "🌐 सभी नेफ्रोलॉजी और यूरोलॉजी प्रश्न"
+                    : "🌐 Showing All Nephrology & Urology Questions")}
             </span>
-            <span>{filteredFaqs.length} questions matching</span>
+            <span>
+              {filteredFaqs.length}{" "}
+              {language === "mr"
+                ? "प्रश्न उपलब्ध"
+                : language === "hi"
+                  ? "प्रश्न उपलब्ध"
+                  : "questions matching"}
+            </span>
           </div>
 
-          {/* 2-Column FAQs Grid (Sahyadri Hospital Style) */}
+          {/* 2-Column FAQs Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
             {/* Left Column */}
             <div className="space-y-3">
@@ -217,11 +230,16 @@ export default function FaqPage({ setActiveTab }) {
           <div className="mt-8 p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-sky-50 to-teal-50 border border-teal-100 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <h4 className="text-sm font-bold text-[#0F2D59]">
-                Still have questions about your kidney or urinary health?
+                {t(
+                  "faqsPage.stillHaveQuestions",
+                  "Still have questions about your kidney or urinary health?"
+                )}
               </h4>
               <p className="text-xs text-slate-600 mt-0.5">
-                Our clinical team is available to assist you with consultation scheduling and
-                inquiries.
+                {t(
+                  "faqsPage.consultDoctor",
+                  "Consult Dr. Sagar Sarda directly at our Chandrapur clinic or book an appointment."
+                )}
               </p>
             </div>
             <div className="flex items-center gap-2 shrink-0">
@@ -229,13 +247,15 @@ export default function FaqPage({ setActiveTab }) {
                 onClick={() => setActiveTab("appointment")}
                 className="bg-[#0F2D59] hover:bg-[#163D75] text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition flex items-center gap-1.5"
               >
-                <Calendar className="w-3.5 h-3.5 text-teal-300" /> Book Consultation
+                <Calendar className="w-3.5 h-3.5 text-teal-300" />{" "}
+                {t("common.bookAppointment", "Book Consultation")}
               </button>
               <a
                 href="tel:+919876543210"
                 className="bg-white hover:bg-slate-50 text-[#0F2D59] border border-slate-200 font-bold text-xs px-4 py-2.5 rounded-xl transition flex items-center gap-1.5"
               >
-                <Phone className="w-3.5 h-3.5 text-teal-600" /> Call Helpdesk
+                <Phone className="w-3.5 h-3.5 text-teal-600" />{" "}
+                {t("common.callUs", "Call Helpdesk")}
               </a>
             </div>
           </div>
