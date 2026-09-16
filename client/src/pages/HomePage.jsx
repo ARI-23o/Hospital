@@ -17,6 +17,7 @@ import {
   Users,
   Star,
   ChevronRight,
+  ChevronDown,
   Microscope,
   Scale,
   Gauge,
@@ -29,6 +30,10 @@ import {
   Check,
   Layers,
   Zap,
+  GraduationCap,
+  HeartHandshake,
+  HelpCircle,
+  ExternalLink,
 } from "lucide-react";
 import ThreeKidneyVisualizer from "../components/ThreeKidneyVisualizer";
 import Interactive3DCard from "../components/Interactive3DCard";
@@ -37,6 +42,7 @@ import LiveOpdQueue from "../components/LiveOpdQueue";
 import MarqueeTicker from "../components/MarqueeTicker";
 import DoctorScheduleExplorer from "../components/DoctorScheduleExplorer";
 import { useLanguage } from "../context/LanguageContext";
+import { fullFaqsList } from "../data/faqsData";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -58,6 +64,14 @@ const itemVariants = {
 export default function HomePage({ setActiveTab }) {
   const { lang, t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("all"); // 'all' | 'nephrology' | 'urology'
+  const [faqCategory, setFaqCategory] = useState("nephrology");
+  const [openFaqId, setOpenFaqId] = useState(null);
+
+  const toggleFaq = (id) => {
+    setOpenFaqId(openFaqId === id ? null : id);
+  };
+
+  const filteredFaqs = fullFaqsList.filter((f) => f.category === faqCategory).slice(0, 6);
 
   const allServices = [
     // Nephrology
@@ -133,6 +147,57 @@ export default function HomePage({ setActiveTab }) {
       ? allServices
       : allServices.filter((s) => s.category === activeCategory || s.category === "both");
 
+  const facilities = [
+    {
+      title: "Modern Dialysis Unit",
+      desc: "Equipped with advanced hemodialysis machines, high-flux dialyzers, ultra-pure water treatment plant (RO), and strict infection control barrier protocols.",
+      icon: HeartPulse,
+      tag: "Specialized Care",
+      features: [
+        "High-Flux Dialyzers",
+        "Dedicated RO Water System",
+        "Individual Patient Monitoring",
+        "Emergency Backup",
+      ],
+    },
+    {
+      title: "Consultation Suites",
+      desc: "Private, comfortable, and well-lit doctor chambers designed for thorough clinical evaluation and patient-family counseling.",
+      icon: Users,
+      tag: "OPD Excellence",
+      features: [
+        "Ergonomic Examination Bed",
+        "Digital Health Record Station",
+        "Private Counseling Space",
+        "Air Conditioned Comfort",
+      ],
+    },
+    {
+      title: "Patient Waiting Area",
+      desc: "Spacious, clean, and tranquil reception lounge designed to minimize stress and waiting time for patients and accompanying relatives.",
+      icon: Clock,
+      tag: "Patient Comfort",
+      features: [
+        "Air Filtered Environment",
+        "Comfortable Seating Layout",
+        "Drinking Water Station",
+        "Wheelchair Accessibility",
+      ],
+    },
+    {
+      title: "Pathology & Diagnostic Support",
+      desc: "Rapid turn-around diagnostic support for Kidney Function Tests (KFT), Serum Creatinine, Electrolytes, Urine Microalbumin, and Blood Counts.",
+      icon: Microscope,
+      tag: "Fast Results",
+      features: [
+        "Kidney Function Tests (KFT)",
+        "Serum Electrolytes (Na/K)",
+        "Spot Urine Protein:Creatinine",
+        "Complete Hemogram & Blood Sugar",
+      ],
+    },
+  ];
+
   const stats = [
     { value: "15,000+", label: "Dialysis Sessions Supervised", icon: HeartPulse },
     { value: "100%", label: "Doctor-Led Consultations", icon: UserCheck },
@@ -171,7 +236,6 @@ export default function HomePage({ setActiveTab }) {
     <div className="space-y-12 sm:space-y-16 pb-12 overflow-hidden">
       {/* 1. HERO SECTION WITH 3D VISUALIZER */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#0A1D37] via-[#0F2D59] to-[#0A1A2F] text-white pt-8 pb-16 sm:pt-12 sm:pb-20">
-        {/* Subtle Ambient Background Gradients */}
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-teal-500/10 blur-[130px] pointer-events-none"></div>
         <div className="absolute bottom-10 right-10 w-[450px] h-[450px] rounded-full bg-sky-500/10 blur-[120px] pointer-events-none"></div>
 
@@ -195,7 +259,7 @@ export default function HomePage({ setActiveTab }) {
                 <span>{t("hero.badge")}</span>
               </motion.div>
 
-              {/* Headline with animated gradient */}
+              {/* Headline */}
               <motion.h1
                 variants={itemVariants}
                 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white leading-[1.18] tracking-tight"
@@ -206,7 +270,7 @@ export default function HomePage({ setActiveTab }) {
                 </span>
               </motion.h1>
 
-              {/* Supporting Text */}
+              {/* Subtitle */}
               <motion.p
                 variants={itemVariants}
                 className="text-xs sm:text-base text-slate-300 leading-relaxed font-normal max-w-xl"
@@ -232,7 +296,11 @@ export default function HomePage({ setActiveTab }) {
                 <motion.button
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  onClick={() => setActiveTab("services")}
+                  onClick={() => {
+                    const el = document.getElementById("services-section");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                    else setActiveTab("services");
+                  }}
                   className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-bold text-sm sm:text-base px-6 py-3.5 rounded-xl border border-white/20 shadow-xs text-center transition-all backdrop-blur-md"
                 >
                   {t("common.exploreServices")}
@@ -243,7 +311,11 @@ export default function HomePage({ setActiveTab }) {
               <motion.div
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
-                onClick={() => setActiveTab("doctor")}
+                onClick={() => {
+                  const el = document.getElementById("doctor-profile-section");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                  else setActiveTab("doctor");
+                }}
                 className="pt-3 border-t border-white/15 flex items-center gap-3.5 cursor-pointer group bg-white/5 backdrop-blur-md p-3 rounded-2xl border border-white/10 hover:border-teal-400/40 transition shadow-xs"
               >
                 <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-teal-400 to-blue-500 p-0.5 shadow-sm shrink-0 overflow-hidden group-hover:scale-105 transition-transform">
@@ -288,12 +360,134 @@ export default function HomePage({ setActiveTab }) {
         <LiveOpdQueue setActiveTab={setActiveTab} />
       </section>
 
-      {/* 4. DOCTOR SCHEDULE & OPD TIMINGS EXPLORER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <DoctorScheduleExplorer setActiveTab={setActiveTab} />
+      {/* 3. MARQUEE CLINICAL TICKER */}
+      <section className="w-full overflow-hidden">
+        <MarqueeTicker />
       </section>
 
-      {/* 5. TWO SPECIALTY 3D PERSPECTIVE CARDS */}
+      {/* 4. DOCTOR PROFILE & CLINICAL LEADERSHIP SPOTLIGHT */}
+      <section id="doctor-profile-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+        <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-100">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left: Doctor Photo and Quick Stats */}
+            <div className="lg:col-span-4 space-y-4">
+              <div className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-teal-500/30 bg-slate-100 aspect-4/5 max-w-sm mx-auto">
+                <img
+                  src="/doctor_sagar_sarda.jpg"
+                  alt="Dr. Sagar Damodar Sarda"
+                  className="w-full h-full object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1D37]/90 via-[#0A1D37]/20 to-transparent flex flex-col justify-end p-4 text-white">
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-teal-300">
+                    Lead Consultant & Director
+                  </span>
+                  <h3 className="text-lg font-extrabold">Dr. Sagar Damodar Sarda</h3>
+                  <p className="text-xs text-slate-200">MBBS, MD Medicine, DM Nephrology</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 text-center max-w-sm mx-auto">
+                <div className="bg-teal-50 p-2.5 rounded-xl border border-teal-100">
+                  <span className="text-lg font-black text-[#0F2D59]">12+ Yrs</span>
+                  <p className="text-[10px] text-slate-600 font-semibold">Clinical Experience</p>
+                </div>
+                <div className="bg-sky-50 p-2.5 rounded-xl border border-sky-100">
+                  <span className="text-lg font-black text-teal-700">15,000+</span>
+                  <p className="text-[10px] text-slate-600 font-semibold">Dialysis Supervised</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Detailed Biography, Expertise & Credentials */}
+            <div className="lg:col-span-8 space-y-6">
+              <div className="space-y-2">
+                <div className="inline-flex items-center gap-1.5 text-teal-700 bg-teal-50 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                  <GraduationCap className="w-4 h-4 text-teal-600" /> Super-Specialist Leadership
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F2D59] tracking-tight">
+                  Dedicated, Evidence-Based Renal Care in Chandrapur
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Dr. Sagar Damodar Sarda is a super-specialist Consultant Nephrologist & Kidney
+                  Transplant Physician with extensive clinical experience across top-tier tertiary
+                  institutes. He provides dedicated evaluation and personalized renoprotection for
+                  patients suffering from acute and chronic kidney disorders.
+                </p>
+              </div>
+
+              {/* Core Qualifications & Certifications */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                  <Award className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-xs sm:text-sm">
+                      MD (General Medicine) & DM (Nephrology)
+                    </h4>
+                    <p className="text-[11px] text-slate-500">
+                      Super-specialty training from apex medical institutes.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                  <HeartHandshake className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-xs sm:text-sm">
+                      Transplant Physician Guidance
+                    </h4>
+                    <p className="text-[11px] text-slate-500">
+                      Pre-transplant workup, donor matching, and post-transplant follow-up.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                  <Activity className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-xs sm:text-sm">
+                      High-Flux Hemodialysis Supervision
+                    </h4>
+                    <p className="text-[11px] text-slate-500">
+                      Vascular access (AV fistula) monitoring and adequacy optimization.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                  <ShieldCheck className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-xs sm:text-sm">
+                      Kidney Stone Metabolic Workup
+                    </h4>
+                    <p className="text-[11px] text-slate-500">
+                      24-hour urine chemistry and medical recurrence prevention protocols.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* OPD Consultation Timings Badge */}
+              <div className="bg-gradient-to-r from-teal-50 to-sky-50 p-4 rounded-2xl border border-teal-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5 text-xs text-slate-700">
+                  <Clock className="w-4 h-4 text-teal-600 shrink-0" />
+                  <span>
+                    <strong>OPD Timings:</strong> Mon - Sat (09:00 AM - 01:30 PM & 04:30 PM - 07:30
+                    PM)
+                  </span>
+                </div>
+                <button
+                  onClick={() => setActiveTab("appointment")}
+                  className="bg-[#0F2D59] hover:bg-teal-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-sm shrink-0"
+                >
+                  Book Consultation
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. TWO SPECIALTIES 3D PERSPECTIVE CARDS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-xl mx-auto mb-6">
           <span className="text-[11px] font-bold text-teal-700 bg-teal-50 px-3 py-1 rounded-full uppercase tracking-wider">
@@ -309,7 +503,8 @@ export default function HomePage({ setActiveTab }) {
           <Interactive3DCard
             onClick={() => {
               setActiveCategory("nephrology");
-              setActiveTab("services");
+              const el = document.getElementById("services-section");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
             className="bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 cursor-pointer group flex flex-col justify-between"
           >
@@ -352,7 +547,8 @@ export default function HomePage({ setActiveTab }) {
           <Interactive3DCard
             onClick={() => {
               setActiveCategory("urology");
-              setActiveTab("services");
+              const el = document.getElementById("services-section");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
             className="bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 cursor-pointer group flex flex-col justify-between"
           >
@@ -392,33 +588,8 @@ export default function HomePage({ setActiveTab }) {
         </div>
       </section>
 
-      {/* 6. CLINICAL eGFR & KIDNEY STONE CALCULATOR */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <KidneyHealthCalculator setActiveTab={setActiveTab} />
-      </section>
-
-      {/* 7. CLINICAL STATS SHOWCASE */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-soft border border-slate-100 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((s, idx) => {
-            const Icon = s.icon;
-            return (
-              <div key={idx} className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 flex items-center justify-center shrink-0">
-                  <Icon className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F2D59]">{s.value}</h3>
-                  <p className="text-xs text-slate-500 font-medium">{s.label}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 8. COMPREHENSIVE SERVICES DIRECTORY */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 6. COMPREHENSIVE SERVICES DIRECTORY */}
+      <section id="services-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
           <div className="inline-block text-[11px] font-bold text-teal-700 bg-teal-50 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
             Clinical Services Directory
@@ -494,7 +665,182 @@ export default function HomePage({ setActiveTab }) {
         </motion.div>
       </section>
 
-      {/* 9. PATIENT TESTIMONIALS */}
+      {/* 7. HOSPITAL FACILITIES & DIALYSIS UNIT SHOWCASE */}
+      <section id="facilities-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-slate-900 rounded-3xl p-6 sm:p-10 text-white border border-slate-800 shadow-xl space-y-8">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="inline-block text-[11px] font-bold text-teal-300 bg-teal-500/20 border border-teal-400/30 px-3 py-1 rounded-full uppercase tracking-wider">
+              Advanced Infrastructure
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+              State-of-the-Art Renal & Dialysis Facilities
+            </h2>
+            <p className="text-xs sm:text-slate-300">
+              Meticulously designed clinical spaces prioritizing patient safety, sterile protocols,
+              and comfort.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {facilities.map((fac, idx) => {
+              const Icon = fac.icon;
+              return (
+                <div
+                  key={idx}
+                  className="bg-slate-800/80 rounded-2xl p-5 border border-slate-700 space-y-4 hover:border-teal-500/50 transition"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center border border-teal-500/30">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h3 className="text-base font-bold text-white">{fac.title}</h3>
+                        <span className="text-[10px] font-semibold text-teal-400">{fac.tag}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-slate-300 leading-relaxed">{fac.desc}</p>
+
+                  <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-700/80">
+                    {fac.features.map((feat, fIdx) => (
+                      <div
+                        key={fIdx}
+                        className="flex items-center gap-1.5 text-[11px] text-slate-300"
+                      >
+                        <CheckCircle2 className="w-3.5 h-3.5 text-teal-400 shrink-0" />
+                        <span className="truncate">{feat}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. CLINICAL eGFR & KIDNEY STONE CALCULATOR */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <KidneyHealthCalculator setActiveTab={setActiveTab} />
+      </section>
+
+      {/* 9. DOCTOR SCHEDULE & OPD TIMINGS EXPLORER */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <DoctorScheduleExplorer setActiveTab={setActiveTab} />
+      </section>
+
+      {/* 10. CLINICAL STATS SHOWCASE */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-soft border border-slate-100 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {stats.map((s, idx) => {
+            const Icon = s.icon;
+            return (
+              <div key={idx} className="flex items-center gap-3.5">
+                <div className="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 flex items-center justify-center shrink-0">
+                  <Icon className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F2D59]">{s.value}</h3>
+                  <p className="text-xs text-slate-500 font-medium">{s.label}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 11. PATIENT GUIDE & CATEGORIZED FAQS ACCORDION */}
+      <section id="faqs-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-100 space-y-6">
+          <div className="text-center max-w-xl mx-auto space-y-2">
+            <span className="inline-block text-[11px] font-bold text-teal-700 bg-teal-50 px-3 py-1 rounded-full uppercase tracking-wider">
+              Patient Help & Education
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F2D59]">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xs sm:text-slate-600">
+              Clear clinical answers regarding kidney health, dialysis routines, and urology care.
+            </p>
+
+            {/* Category Switcher for FAQs */}
+            <div className="flex items-center justify-center gap-2 pt-2">
+              <button
+                onClick={() => setFaqCategory("nephrology")}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+                  faqCategory === "nephrology"
+                    ? "bg-[#0F2D59] text-white shadow-sm"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                }`}
+              >
+                Nephrology FAQs
+              </button>
+              <button
+                onClick={() => setFaqCategory("urology")}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+                  faqCategory === "urology"
+                    ? "bg-[#0F2D59] text-white shadow-sm"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                }`}
+              >
+                Urology FAQs
+              </button>
+            </div>
+          </div>
+
+          {/* Accordion FAQ items */}
+          <div className="max-w-3xl mx-auto space-y-3 pt-2">
+            {filteredFaqs.map((faq) => {
+              const isOpen = openFaqId === faq.id;
+              return (
+                <div
+                  key={faq.id}
+                  className="rounded-2xl border border-slate-200/90 overflow-hidden transition-all bg-slate-50/50"
+                >
+                  <button
+                    onClick={() => toggleFaq(faq.id)}
+                    className="w-full p-4 sm:p-4.5 text-left flex items-center justify-between gap-3 font-bold text-xs sm:text-sm text-[#0F2D59] hover:text-teal-700 transition"
+                  >
+                    <span>{faq.q}</span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-teal-600 shrink-0 transition-transform duration-200 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="px-4 pb-4 sm:px-4.5 sm:pb-4.5 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3 bg-white"
+                      >
+                        {faq.a}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="text-center pt-2">
+            <button
+              onClick={() => setActiveTab("faqs")}
+              className="text-xs font-bold text-teal-700 hover:text-[#0F2D59] inline-flex items-center gap-1 transition"
+            >
+              <span>View All Clinical FAQs & Patient Checklists</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 12. PATIENT TESTIMONIALS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-br from-slate-50 to-teal-50/50 rounded-3xl p-6 sm:p-10 border border-slate-200/80">
           <div className="text-center max-w-xl mx-auto mb-6">
@@ -536,7 +882,7 @@ export default function HomePage({ setActiveTab }) {
         </div>
       </section>
 
-      {/* 10. REGIONAL IMPACT & LOCATION */}
+      {/* 13. REGIONAL IMPACT, CLINIC LOCATION & DIRECT ACTIONS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0F2D59] via-[#163D75] to-[#0D9488] text-white p-6 sm:p-10 shadow-xl space-y-6">
           <div className="relative z-10 space-y-2 max-w-2xl">
@@ -568,6 +914,12 @@ export default function HomePage({ setActiveTab }) {
             >
               <MapPin className="w-4 h-4 text-teal-300" /> Open in Google Maps
             </a>
+            <button
+              onClick={() => setActiveTab("contact")}
+              className="bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl border border-white/20 transition flex items-center gap-2"
+            >
+              <Phone className="w-4 h-4 text-teal-300" /> Contact Clinic
+            </button>
           </div>
         </div>
       </section>
