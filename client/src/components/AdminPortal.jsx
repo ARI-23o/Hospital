@@ -2,10 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { 
   UserCheck, Calendar, Phone, Mail, Clock, FileText, CheckCircle2, 
   XCircle, RefreshCw, Search, MessageSquare, AlertCircle, Filter, 
-  Activity, ArrowRight, Play, Pause, Power, RotateCcw, Sparkles
+  Activity, ArrowRight, Play, Pause, Power, RotateCcw, Sparkles,
+  Lock, KeyRound, Eye, EyeOff, LogOut, ShieldCheck
 } from 'lucide-react';
 
 export default function AdminPortal({ setActiveTab }) {
+  // Authentication & Security State
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authChecking, setAuthChecking] = useState(true);
+  const [passcode, setPasscode] = useState('');
+  const [showPasscode, setShowPasscode] = useState(false);
+  const [authError, setAuthError] = useState('');
+  const [authLoading, setAuthLoading] = useState(false);
+  const [activeUser, setActiveUser] = useState(null);
+
+  // Appointments & Queue State
   const [appointments, setAppointments] = useState([]);
   const [inquiries, setInquiries] = useState([]);
   const [activeView, setActiveView] = useState('appointments');
@@ -23,6 +34,94 @@ export default function AdminPortal({ setActiveTab }) {
     status: 'active'
   });
   const [queueLoading, setQueueLoading] = useState(false);
+
+  // Verify existing session on mount
+  useEffect(() => {
+    const verifySession = async () => {
+      const savedToken = localStorage.getItem('ckc_admin_token') || sessionStorage.getItem('ckc_admin_token');
+      if (!savedToken) {
+        setAuthChecking(false);
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/auth/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: savedToken })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.valid) {
+            setIsAuthenticated(true);
+            setActiveUser(data.session);
+          } else {
+            localStorage.removeItem('ckc_admin_token');
+            sessionStorage.removeItem('ckc_admin_token');
+          }
+        }
+      } catch (err) {
+        console.error('Session verify error:', err);
+      } finally {
+        setAuthChecking(false);
+      }
+    };
+
+    verifySession();
+  }, []);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!passcode) {
+      setAuthError('Please enter your doctor / staff access passcode.');
+      return;
+    }
+
+    setAuthLoading(true);
+    setAuthError('');
+
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ passcode: passcode.trim() })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Authentication failed.');
+      }
+
+      // Save token
+      localStorage.setItem('ckc_admin_token', data.session.token);
+      setIsAuthenticated(true);
+      setActiveUser(data.session);
+      setPasscode('');
+      setMessage('Welcome Dr. Sagar Sarda — Portal unlocked!');
+      setTimeout(() => setMessage(''), 4000);
+    } catch (err) {
+      setAuthError(err.message);
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    const token = localStorage.getItem('ckc_admin_token');
+    try {
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token })
+      });
+    } catch (e) {
+      // Ignore network errors on logout
+    }
+    localStorage.removeItem('ckc_admin_token');
+    sessionStorage.removeItem('ckc_admin_token');
+    setIsAuthenticated(false);
+    setActiveUser(null);
+  };
 
   const fetchQueue = async () => {
     try {
@@ -87,10 +186,12 @@ export default function AdminPortal({ setActiveTab }) {
   };
 
   useEffect(() => {
-    fetchAppointments();
-    fetchInquiries();
-    fetchQueue();
-  }, [filterStatus, filterDate]);
+    if (isAuthenticated) {
+      fetchAppointments();
+      fetchInquiries();
+      fetchQueue();
+    }
+  }, [isAuthenticated, filterStatus, filterDate]);
 
   const updateStatus = async (id, newStatus) => {
     try {
@@ -119,6 +220,103 @@ export default function AdminPortal({ setActiveTab }) {
     );
   });
 
+  // 1. Loading State
+  if (authChecking) {
+    return (
+      <div className="max-w-md mx-auto my-20 p-8 text-center bg-white rounded-3xl shadow-card border border-slate-100">
+        <RefreshCw className="w-8 h-8 text-teal-600 animate-spin mx-auto mb-3" />
+        <p className="text-sm font-bold text-[#0F2D59]">Verifying Security Credentials...</p>
+      </div>
+    );
+  }
+
+  // 2. Doctor & Staff Login Screen (When Not Authenticated)
+  if (!isAuthenticated) {
+    return (
+      <div className="max-w-lg mx-auto my-12 sm:my-20 px-4">
+        <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-slate-100 relative overflow-hidden">
+          
+          {/* Top Decorative Banner */}
+          <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-teal-500 via-sky-500 to-[#0F2D59]"></div>
+          
+          <div className="text-center space-y-2 mb-6">
+            <div className="w-14 h-14 bg-gradient-to-tr from-[#0F2D59] to-teal-600 rounded-2xl flex items-center justify-center text-white mx-auto shadow-md">
+              <Lock className="w-7 h-7" />
+            </div>
+            <span className="text-[11px] font-bold text-teal-600 bg-teal-50 px-3 py-1 rounded-full uppercase tracking-wider inline-block">
+              Authorized Access Only
+            </span>
+            <h2 className="text-2xl font-extrabold text-[#0F2D59]">
+              Doctor & Reception Portal
+            </h2>
+            <p className="text-xs text-slate-500 max-w-sm mx-auto">
+              Please enter the clinical passcode to access patient appointments, records, and live OPD queue controller.
+            </p>
+          </div>
+
+          {authError && (
+            <div className="mb-5 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2.5 animate-shake">
+              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+              <p className="font-semibold">{authError}</p>
+            </div>
+          )}
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
+                Doctor / Staff Passcode <span className="text-rose-500">*</span>
+              </label>
+              <div className="relative">
+                <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type={showPasscode ? "text" : "password"}
+                  value={passcode}
+                  onChange={(e) => setPasscode(e.target.value)}
+                  placeholder="Enter Passcode (e.g. sarda@2026 or 123456)"
+                  autoFocus
+                  required
+                  className="w-full pl-10 pr-10 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 bg-slate-50/50 font-medium"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPasscode(!showPasscode)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                >
+                  {showPasscode ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={authLoading}
+              className="w-full bg-gradient-to-r from-[#0F2D59] to-teal-700 hover:from-[#163D75] hover:to-teal-800 text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition active:scale-98 flex items-center justify-center gap-2 text-sm disabled:opacity-70"
+            >
+              {authLoading ? (
+                <>
+                  <RefreshCw className="w-4 h-4 animate-spin" /> Verifying Access...
+                </>
+              ) : (
+                <>
+                  <ShieldCheck className="w-4 h-4 text-teal-300" /> Unlock Clinical Portal
+                </>
+              )}
+            </button>
+
+            {/* Quick Helper Credentials Note */}
+            <div className="pt-3 border-t border-slate-100 text-center">
+              <p className="text-[11px] text-slate-400">
+                Default Clinical Passcode: <span className="font-mono font-bold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded">sarda@2026</span> or <span className="font-mono font-bold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded">123456</span>
+              </p>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    );
+  }
+
+  // 3. Authenticated Doctor Management Portal
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-6 sm:space-y-8 pb-16">
       
@@ -129,14 +327,17 @@ export default function AdminPortal({ setActiveTab }) {
             <UserCheck className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-[10px] sm:text-xs font-bold bg-teal-400/20 text-teal-300 px-2 py-0.5 rounded-full border border-teal-400/30">
-              Doctor & Reception Desk
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] sm:text-xs font-bold bg-teal-400/20 text-teal-300 px-2 py-0.5 rounded-full border border-teal-400/30">
+                Verified Doctor Session
+              </span>
+              <span className="text-[10px] text-emerald-300 font-mono">● Active</span>
+            </div>
             <h2 className="text-xl sm:text-2xl font-extrabold text-white mt-1">
               Dr. Sagar Sarda — Clinical Portal
             </h2>
             <p className="text-xs text-slate-200">
-              Real-Time OPD Queue Control & Appointment Management
+              Logged in as: {activeUser?.user || "Dr. Sagar Damodar Sarda (DM Nephrology)"}
             </p>
           </div>
         </div>
@@ -153,6 +354,13 @@ export default function AdminPortal({ setActiveTab }) {
             className="flex-1 md:flex-initial bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition text-center"
           >
             + New Booking
+          </button>
+          <button
+            onClick={handleLogout}
+            className="bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 border border-rose-400/30 font-bold text-xs px-3 py-2.5 rounded-xl transition flex items-center gap-1.5"
+            title="Lock & Logout of Doctor Portal"
+          >
+            <LogOut className="w-3.5 h-3.5" /> Logout
           </button>
         </div>
       </div>

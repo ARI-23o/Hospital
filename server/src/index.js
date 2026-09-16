@@ -21,6 +21,80 @@ try {
   console.error("DB Init Error:", err);
 }
 
+// In-memory rate limiting and active sessions
+const failedAttempts = new Map();
+const activeSessions = new Map();
+const VALID_PASSCODES = ["sarda@2026", "123456", "admin2026", "sarda2026"];
+
+// 0. Doctor / Staff Authentication Endpoints
+app.post("/api/auth/login", (req, res) => {
+  const ip = req.ip || req.connection.remoteAddress || "client";
+  const { passcode } = req.body;
+
+  const userAttempts = failedAttempts.get(ip) || { count: 0, lockedUntil: 0 };
+  const now = Date.now();
+
+  if (userAttempts.lockedUntil > now) {
+    const remainingSecs = Math.ceil((userAttempts.lockedUntil - now) / 1000);
+    return res.status(429).json({ 
+      error: `Too many failed login attempts. Portal locked for security. Please try again in ${remainingSecs} seconds.` 
+    });
+  }
+
+  if (!passcode || !VALID_PASSCODES.includes(passcode.trim())) {
+    userAttempts.count += 1;
+    if (userAttempts.count >= 5) {
+      userAttempts.lockedUntil = now + (10 * 60 * 1000); // 10 minute lockout
+      failedAttempts.set(ip, userAttempts);
+      return res.status(429).json({ error: "Maximum attempts exceeded. Account locked for 10 minutes." });
+    }
+    failedAttempts.set(ip, userAttempts);
+    return res.status(401).json({ 
+      error: `Invalid Access Passcode. ${5 - userAttempts.count} attempt(s) remaining.` 
+    });
+  }
+
+  // Reset failed attempts on success
+  failedAttempts.delete(ip);
+
+  // Generate session token
+  const token = `ckc_auth_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`;
+  const sessionData = {
+    token,
+    user: "Dr. Sagar Damodar Sarda",
+    role: "Consultant Nephrologist & Admin",
+    created: now,
+    expiresAt: now + (12 * 60 * 60 * 1000) // 12 hours session
+  };
+
+  activeSessions.set(token, sessionData);
+
+  res.json({
+    success: true,
+    message: "Doctor Portal unlocked successfully.",
+    session: sessionData
+  });
+});
+
+app.post("/api/auth/verify", (req, res) => {
+  const { token } = req.body;
+  if (!token) return res.status(401).json({ valid: false });
+
+  const session = activeSessions.get(token);
+  if (!session || session.expiresAt < Date.now()) {
+    if (session) activeSessions.delete(token);
+    return res.status(401).json({ valid: false, error: "Session expired or invalid" });
+  }
+
+  res.json({ valid: true, session });
+});
+
+app.post("/api/auth/logout", (req, res) => {
+  const { token } = req.body;
+  if (token) activeSessions.delete(token);
+  res.json({ success: true, message: "Logged out successfully" });
+});
+
 // 1. Doctor & Clinic Information Endpoint
 app.get("/api/doctor", (req, res) => {
   res.json({
