@@ -388,7 +388,7 @@ if (distPath) {
 
 export default app;
 
-if (process.env.NODE_ENV !== "test") {
+if (!process.env.VITEST) {
   app.listen(PORT, "0.0.0.0", () => {
     console.log(`🏥 Chandrapura Kidney Care Server running on port ${PORT}`);
   });
