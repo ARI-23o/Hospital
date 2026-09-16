@@ -7,21 +7,38 @@ import MarqueeTicker from '../components/MarqueeTicker';
 import { fullFaqsList } from '../data/faqsData';
 
 export default function PatientInfoPage({ setActiveTab }) {
-  const [activeSection, setActiveSection] = useState('faqs');
+  const [activeSection, setActiveSection] = useState('nephrology-faqs');
   const [openFaq, setOpenFaq] = useState(null);
   const [faqSearch, setFaqSearch] = useState('');
+  const [selectedFaqCategory, setSelectedFaqCategory] = useState('nephrology'); // 'nephrology' | 'urology' | 'all'
 
   const sections = [
-    { id: 'faqs', label: 'All 36 FAQs', fullLabel: 'Complete Frequently Asked Questions (36 FAQs)', icon: HelpCircle },
+    { id: 'nephrology-faqs', label: 'Nephrology FAQs', fullLabel: 'Nephrology & Kidney Care FAQs', icon: HelpCircle, cat: 'nephrology' },
+    { id: 'urology-faqs', label: 'Urology FAQs', fullLabel: 'Urology & Urinary Tract FAQs', icon: HelpCircle, cat: 'urology' },
+    { id: 'all-faqs', label: 'All 38 FAQs', fullLabel: 'All Frequently Asked Questions (38 FAQs)', icon: HelpCircle, cat: 'all' },
     { id: 'before', label: 'Before Visit', fullLabel: 'Before Your Visit Checklist', icon: ClipboardList },
     { id: 'during', label: 'During Visit', fullLabel: 'During Your Visit & OPD Workflow', icon: Stethoscope },
     { id: 'after', label: 'After Visit', fullLabel: 'After Your Visit & Home Care', icon: FileCheck },
     { id: 'insurance', label: 'Insurance', fullLabel: 'Insurance & Payment Support', icon: Shield },
   ];
 
-  const filteredFaqs = faqSearch.trim() === ''
+  const handleSectionClick = (sec) => {
+    setActiveSection(sec.id);
+    if (sec.cat) {
+      setSelectedFaqCategory(sec.cat);
+    }
+  };
+
+  const isFaqSection = ['nephrology-faqs', 'urology-faqs', 'all-faqs', 'faqs'].includes(activeSection);
+
+  // Filter based on selected category and search query
+  const categoryFiltered = selectedFaqCategory === 'all'
     ? fullFaqsList
-    : fullFaqsList.filter(f => 
+    : fullFaqsList.filter(f => f.category === selectedFaqCategory);
+
+  const filteredFaqs = faqSearch.trim() === ''
+    ? categoryFiltered
+    : categoryFiltered.filter(f => 
         f.q.toLowerCase().includes(faqSearch.toLowerCase()) || 
         f.a.toLowerCase().includes(faqSearch.toLowerCase())
       );
@@ -29,6 +46,9 @@ export default function PatientInfoPage({ setActiveTab }) {
   const midpoint = Math.ceil(filteredFaqs.length / 2);
   const leftColumnFaqs = filteredFaqs.slice(0, midpoint);
   const rightColumnFaqs = filteredFaqs.slice(midpoint);
+
+  const nephrologyCount = fullFaqsList.filter(f => f.category === 'nephrology').length;
+  const urologyCount = fullFaqsList.filter(f => f.category === 'urology').length;
 
   return (
     <div className="space-y-10 sm:space-y-16 pb-16">
@@ -40,10 +60,10 @@ export default function PatientInfoPage({ setActiveTab }) {
             Patient Support & Knowledge Hub
           </span>
           <h1 className="text-2xl sm:text-4xl font-extrabold mt-3 tracking-tight">
-            Frequently Asked Questions ({fullFaqsList.length} Questions)
+            Frequently Asked Questions
           </h1>
           <p className="text-xs sm:text-base text-slate-200 mt-2 font-normal leading-relaxed">
-            All 36 clinical questions covering Nephrology, Urology, Dialysis, and preparing for your hospital visit.
+            Specialized clinical questions and guidance organized by Nephrology (Kidney Care) and Urology (Urinary Tract & Surgical Care).
           </p>
         </div>
       </section>
@@ -59,7 +79,7 @@ export default function PatientInfoPage({ setActiveTab }) {
             return (
               <button
                 key={sec.id}
-                onClick={() => setActiveSection(sec.id)}
+                onClick={() => handleSectionClick(sec)}
                 className={`whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0 ${
                   isActive
                     ? 'bg-[#0F2D59] text-white shadow-md'
@@ -86,7 +106,7 @@ export default function PatientInfoPage({ setActiveTab }) {
               return (
                 <button
                   key={sec.id}
-                  onClick={() => setActiveSection(sec.id)}
+                  onClick={() => handleSectionClick(sec)}
                   className={`w-full flex items-center gap-2.5 px-3.5 py-3 rounded-2xl text-xs sm:text-sm font-semibold transition-all text-left ${
                     isActive
                       ? 'bg-[#0F2D59] text-white shadow-md font-bold'
@@ -114,30 +134,90 @@ export default function PatientInfoPage({ setActiveTab }) {
           {/* Right Content Area */}
           <div className="lg:col-span-9 bg-white rounded-3xl p-5 sm:p-8 shadow-card border border-slate-100 min-h-[420px]">
             
-            {/* 1. Complete 36 FAQs Section (2-Column Grid matching Sahyadri Hospital screenshot) */}
-            {activeSection === 'faqs' && (
+            {/* 1. Complete Categorized FAQs Section (Nephrology vs Urology 2-Column Grid) */}
+            {isFaqSection && (
               <div className="space-y-6 animate-fadeIn">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-[#0F2D59]">
-                      Frequently Asked Questions
-                    </h3>
-                    <p className="text-xs text-slate-500 mt-0.5">
-                      Showing {filteredFaqs.length} of {fullFaqsList.length} total questions
-                    </p>
+                
+                {/* Specialty Toggle Segment Buttons */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      onClick={() => {
+                        setSelectedFaqCategory('nephrology');
+                        setActiveSection('nephrology-faqs');
+                      }}
+                      className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+                        selectedFaqCategory === 'nephrology'
+                          ? 'bg-[#0F2D59] text-white shadow-md'
+                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      }`}
+                    >
+                      <span>🫘 Nephrology FAQs</span>
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-extrabold ${
+                        selectedFaqCategory === 'nephrology' ? 'bg-teal-500 text-white' : 'bg-slate-200 text-slate-600'
+                      }`}>
+                        {nephrologyCount}
+                      </span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setSelectedFaqCategory('urology');
+                        setActiveSection('urology-faqs');
+                      }}
+                      className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+                        selectedFaqCategory === 'urology'
+                          ? 'bg-[#0F2D59] text-white shadow-md'
+                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      }`}
+                    >
+                      <span>🔬 Urology FAQs</span>
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-extrabold ${
+                        selectedFaqCategory === 'urology' ? 'bg-sky-500 text-white' : 'bg-slate-200 text-slate-600'
+                      }`}>
+                        {urologyCount}
+                      </span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setSelectedFaqCategory('all');
+                        setActiveSection('all-faqs');
+                      }}
+                      className={`px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                        selectedFaqCategory === 'all'
+                          ? 'bg-[#0F2D59] text-white shadow-md'
+                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      }`}
+                    >
+                      <span>All Questions</span>
+                      <span className="text-[10px] bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded-full">
+                        {fullFaqsList.length}
+                      </span>
+                    </button>
                   </div>
 
                   {/* FAQ Search Bar */}
-                  <div className="relative w-full sm:w-72">
+                  <div className="relative w-full sm:w-64">
                     <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                     <input
                       type="text"
-                      placeholder="Search across all 36 FAQs (e.g. stones, CKD, BPH)..."
+                      placeholder={`Search ${selectedFaqCategory === 'all' ? 'all' : selectedFaqCategory} FAQs...`}
                       value={faqSearch}
                       onChange={(e) => setFaqSearch(e.target.value)}
                       className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-teal-500"
                     />
                   </div>
+                </div>
+
+                {/* Status Bar */}
+                <div className="flex items-center justify-between text-xs text-slate-500">
+                  <span className="font-semibold text-slate-700">
+                    {selectedFaqCategory === 'nephrology' && '🫘 Showing Nephrology, CKD & Dialysis Questions'}
+                    {selectedFaqCategory === 'urology' && '🔬 Showing Urology, Stone & Surgical Questions'}
+                    {selectedFaqCategory === 'all' && '🌐 Showing All Nephrology & Urology Questions'}
+                  </span>
+                  <span>{filteredFaqs.length} questions available</span>
                 </div>
 
                 {/* 2-Column FAQs Grid (Exact Sahyadri Hospital Style) */}
