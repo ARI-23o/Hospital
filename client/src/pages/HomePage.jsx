@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   HeartPulse, Shield, UserCheck, Stethoscope, ArrowRight, CheckCircle2, 
-  Activity, Award, Building, Calendar, Phone, Sparkles, MapPin, Users
+  Activity, Award, Building, Calendar, Phone, Sparkles, MapPin, Users, Star
 } from 'lucide-react';
 
 export default function HomePage({ setActiveTab }) {
@@ -23,12 +23,12 @@ export default function HomePage({ setActiveTab }) {
     <div className="space-y-16 pb-12">
       
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-sky-50 via-white to-slate-50 pt-10 pb-16 lg:pt-16 lg:pb-24 border-b border-slate-100">
+      <section className="relative overflow-hidden bg-gradient-to-b from-sky-50 via-white to-slate-50 pt-8 pb-16 lg:pt-14 lg:pb-24 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
             
             {/* Left Column: Hero Text */}
-            <div className="lg:col-span-7 space-y-6">
+            <div className="lg:col-span-6 space-y-6">
               <div className="inline-flex items-center gap-2 bg-teal-50 border border-teal-200 text-teal-800 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase shadow-sm">
                 <Sparkles className="w-3.5 h-3.5 text-teal-600" />
                 Premier Kidney Clinic in Chandrapur, Maharashtra
@@ -38,44 +38,43 @@ export default function HomePage({ setActiveTab }) {
                 Expert Care for <span className="text-[#0D9488]">Healthier Kidneys,</span> Brighter Tomorrows
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl">
-                Compassionate, comprehensive, and evidence-based nephrology medical care led by <strong className="text-[#0F2D59]">Dr. Sagar Sarda</strong>. Specialized in slowing kidney disease, dialysis management, and blood pressure control.
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+                Compassionate, comprehensive, and evidence-based nephrology medical care led by <strong className="text-[#0F2D59]">Dr. Sagar Sarda</strong>. Dedicated to slowing kidney disease progression, high-flux dialysis supervision, and advanced blood pressure control.
               </p>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex flex-wrap items-center gap-4 pt-1">
                 <button
                   onClick={() => setActiveTab('appointment')}
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base px-7 py-3.5 rounded-xl shadow-lg shadow-emerald-600/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2.5"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base px-8 py-4 rounded-xl shadow-lg shadow-emerald-600/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2.5"
                 >
                   Book an Appointment <ArrowRight className="w-5 h-5" />
                 </button>
 
                 <button
                   onClick={() => setActiveTab('services')}
-                  className="bg-white hover:bg-slate-50 text-[#0F2D59] font-bold text-base px-6 py-3.5 rounded-xl border border-slate-300 shadow-sm transition-all"
+                  className="bg-white hover:bg-slate-50 text-[#0F2D59] font-bold text-base px-6 py-4 rounded-xl border border-slate-300 shadow-sm transition-all"
                 >
                   Explore Services
                 </button>
               </div>
 
-              {/* Trust Doctor Badge with Real Image */}
+              {/* Trust Doctor Mini Bar */}
               <div 
                 onClick={() => setActiveTab('doctor')} 
                 className="pt-4 border-t border-slate-200/80 flex items-center gap-4 cursor-pointer group"
               >
-                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#0F2D59] to-teal-500 p-0.5 shadow-md shrink-0 overflow-hidden group-hover:scale-105 transition-transform">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#0F2D59] to-teal-500 p-0.5 shadow-md shrink-0 overflow-hidden group-hover:scale-105 transition-transform">
                   <img
                     src="/doctor_sagar_sarda.jpg"
                     alt="Dr. Sagar Sarda"
                     className="w-full h-full object-cover object-top rounded-full"
-                    onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&auto=format&fit=crop&q=80'; }}
                   />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
                     <h4 className="font-bold text-[#0F2D59] text-base group-hover:text-teal-700 transition">Dr. Sagar Sarda</h4>
-                    <span className="bg-teal-100 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded">Consultant Nephrologist</span>
+                    <span className="bg-teal-100 text-teal-800 text-[11px] font-bold px-2 py-0.5 rounded">Nephrologist</span>
                   </div>
                   <p className="text-xs text-slate-500 font-medium">MD (General Medicine), DM (Nephrology) • Gold Standard Care</p>
                 </div>
@@ -83,51 +82,67 @@ export default function HomePage({ setActiveTab }) {
 
             </div>
 
-            {/* Right Column: Hero Doctor & Medical Visual Card */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-md bg-white rounded-3xl p-5 shadow-2xl border border-slate-100/80">
+            {/* Right Column: Hero Doctor Large Showcase Card */}
+            <div className="lg:col-span-6 relative">
+              <div className="relative mx-auto max-w-xl bg-white rounded-3xl p-5 sm:p-7 shadow-2xl border border-slate-100/90">
+                
                 {/* Decorative background glow */}
-                <div className="absolute -top-6 -right-6 w-48 h-48 bg-teal-400/15 rounded-full blur-2xl pointer-events-none"></div>
-                <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-blue-400/15 rounded-full blur-2xl pointer-events-none"></div>
+                <div className="absolute -top-10 -right-10 w-64 h-64 bg-teal-400/20 rounded-full blur-3xl pointer-events-none"></div>
+                <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-400/20 rounded-full blur-3xl pointer-events-none"></div>
 
-                {/* Doctor Portrait Visual Container */}
-                <div className="relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-100 group shadow-md">
+                {/* Main Large Doctor Image Container */}
+                <div className="relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-100 group shadow-lg">
                   <img
                     src="/doctor_sagar_sarda.jpg"
-                    alt="Dr. Sagar Sarda Nephrologist"
-                    className="w-full h-72 object-cover object-top transition duration-500 group-hover:scale-105"
-                    onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&auto=format&fit=crop&q=80'; }}
+                    alt="Dr. Sagar Sarda Senior Nephrologist"
+                    className="w-full h-[430px] sm:h-[490px] object-cover object-top transition duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A1D37] via-transparent to-transparent"></div>
                   
-                  <div className="absolute bottom-4 left-4 right-4 text-white">
-                    <div className="flex items-center justify-between">
+                  {/* Subtle Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A1D37] via-[#0A1D37]/20 to-transparent"></div>
+                  
+                  {/* Floating Experience Badge */}
+                  <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md text-[#0F2D59] px-3.5 py-1.5 rounded-full shadow-lg border border-white/40 flex items-center gap-1.5 text-xs font-bold animate-fadeIn">
+                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                    <span>12+ Years Clinical Excellence</span>
+                  </div>
+
+                  {/* Doctor Info Overlay at Bottom of Image */}
+                  <div className="absolute bottom-5 left-5 right-5 text-white">
+                    <div className="flex items-end justify-between">
                       <div>
-                        <span className="bg-teal-500 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">Senior Consultant</span>
-                        <h3 className="text-lg font-bold text-white mt-1">Dr. Sagar Sarda</h3>
-                        <p className="text-xs text-teal-200">MD, DM (Nephrology)</p>
+                        <span className="bg-emerald-500 text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                          Senior Consultant
+                        </span>
+                        <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1.5 tracking-tight">
+                          Dr. Sagar Sarda
+                        </h3>
+                        <p className="text-sm font-semibold text-teal-200 mt-0.5">
+                          MD (Gen. Med), DM (Nephrology)
+                        </p>
                       </div>
-                      <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-xl">
+
+                      <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl border border-white/30 shadow-inner">
                         🩺
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Consultation Card snippet */}
-                <div className="mt-4 p-4 rounded-xl bg-slate-50 border border-slate-200/70 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
-                      <Calendar className="w-5 h-5" />
+                {/* Consultation Card Strip below image */}
+                <div className="mt-4 p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <div className="flex items-center gap-3 w-full sm:w-auto">
+                    <div className="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold shrink-0">
+                      <Calendar className="w-6 h-6" />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-slate-800">Daily OPD Consultation</p>
-                      <p className="text-[11px] text-slate-500">Mon - Sat: 9:00 AM - 7:00 PM</p>
+                      <p className="text-sm font-bold text-slate-900">Daily OPD Consultation</p>
+                      <p className="text-xs text-slate-500 font-medium">Mon - Sat: 9:00 AM - 7:00 PM</p>
                     </div>
                   </div>
                   <button
                     onClick={() => setActiveTab('appointment')}
-                    className="text-xs bg-[#0F2D59] hover:bg-teal-700 text-white font-semibold px-3 py-1.5 rounded-lg transition"
+                    className="w-full sm:w-auto bg-[#0F2D59] hover:bg-teal-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl transition shadow-md whitespace-nowrap"
                   >
                     Book Slot
                   </button>
