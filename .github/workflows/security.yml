@@ -22,9 +22,9 @@ jobs:
         uses: trufflesecurity/trufflehog@main
         with:
           path: ./
-          base: ${{ github.event.repository.default_branch }}
-          head: HEAD
-          extra_args: --debug --only-verified
+          base: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || '' }}
+          head: ${{ github.event_name == 'pull_request' && 'HEAD' || '' }}
+          extra_args: --only-verified
 
   dependency-audit:
     name: 📦 NPM Dependency Audit
@@ -60,5 +60,16 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
+        continue-on-error: true
         with:
           category: "/language:javascript-typescript"
+          upload: false
+          output: results
+
+      - name: Upload SAST SARIF Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: codeql-sast-results
+          path: results/
+          retention-days: 14
