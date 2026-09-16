@@ -7,21 +7,21 @@ export default function Footer({ setActiveTab }) {
   const quickNav = [
     { label: 'Home', id: 'home' },
     { label: 'About Us', id: 'about' },
-    { label: 'Nephrology Services', id: 'services' },
     { label: 'Doctor Profile', id: 'doctor' },
     { label: 'Facilities', id: 'facilities' },
-    { label: 'Patient Information', id: 'patient-info' },
-    { label: 'Book Appointment', id: 'appointment' },
-    { label: 'Contact Us', id: 'contact' },
   ];
 
-  const keyTreatments = [
-    'Chronic Kidney Disease (CKD)',
-    'Hemodialysis Care & Guidance',
-    'Hypertension Management',
-    'Kidney Stone Evaluation',
-    'Glomerular & Proteinuria Care',
-    'Preventive Diabetic Screening'
+  const specialtyLinks = [
+    { label: 'Nephrology & Kidney Care', id: 'services' },
+    { label: 'Urology & Urinary Care', id: 'services' },
+    { label: 'Hemodialysis Unit', id: 'facilities' },
+    { label: 'All Services & Treatments', id: 'services' },
+  ];
+
+  const patientLinks = [
+    { label: 'Book Appointment', id: 'appointment' },
+    { label: 'Patient Information & FAQs', id: 'patient-info' },
+    { label: 'Contact & Location', id: 'contact' },
   ];
 
   const handleNav = (id) => {
@@ -47,25 +47,25 @@ export default function Footer({ setActiveTab }) {
                   Chandrapur <span className="text-teal-400">Kidney Care</span>
                 </span>
                 <p className="text-[10px] text-slate-400 uppercase tracking-wider">
-                  Dr. Sagar Sarda • Nephrologist
+                  Kidney & Urology Care • Chandrapur
                 </p>
               </div>
             </div>
             
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              Comprehensive non-transplant kidney clinic and hemodialysis center in Chandrapur, Maharashtra. Dedicated to evidence-based renal preservation and patient-centered medical care.
+              Comprehensive center for kidney and urinary health under Dr. Sagar Sarda (MD, DM Nephrology). Dedicated to evidence-based nephrology and urology care in Chandrapur, Maharashtra.
             </p>
 
             <div className="inline-flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700 text-[11px] text-teal-300">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>Doctor-Led Specialized Kidney Care</span>
+              <span>Specialist Kidney & Urology Consultations</span>
             </div>
           </div>
 
-          {/* Column 2: Quick Navigation (lg:col-span-3) */}
-          <div className="lg:col-span-3 space-y-3">
+          {/* Column 2: Quick Navigation (lg:col-span-2) */}
+          <div className="lg:col-span-2 space-y-3">
             <h4 className="text-xs font-bold text-teal-400 uppercase tracking-wider">
-              Quick Navigation
+              Navigation
             </h4>
             <ul className="space-y-1.5 text-xs">
               {quickNav.map((item) => (
@@ -82,16 +82,21 @@ export default function Footer({ setActiveTab }) {
             </ul>
           </div>
 
-          {/* Column 3: Kidney Care Services (lg:col-span-2) */}
-          <div className="lg:col-span-2 space-y-3">
+          {/* Column 3: Specialties (lg:col-span-3) */}
+          <div className="lg:col-span-3 space-y-3">
             <h4 className="text-xs font-bold text-teal-400 uppercase tracking-wider">
-              Specialized Care
+              Specialties & Care
             </h4>
-            <ul className="space-y-1.5 text-xs text-slate-400">
-              {keyTreatments.map((t, idx) => (
-                <li key={idx} className="flex items-center gap-1.5">
-                  <span className="w-1 h-1 rounded-full bg-teal-400 shrink-0"></span>
-                  <span>{t}</span>
+            <ul className="space-y-1.5 text-xs">
+              {specialtyLinks.map((item, idx) => (
+                <li key={idx}>
+                  <button
+                    onClick={() => handleNav(item.id)}
+                    className="text-slate-400 hover:text-white transition flex items-center gap-1.5 py-0.5 group"
+                  >
+                    <ChevronRight className="w-3 h-3 text-teal-500 group-hover:translate-x-1 transition-transform" />
+                    <span>{item.label}</span>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -113,7 +118,7 @@ export default function Footer({ setActiveTab }) {
                 <MapPin className="w-4 h-4 text-teal-400 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                 <p className="leading-relaxed">
                   Behind LIC Office, Main Road, Chandrapur, Maharashtra
-                  <span className="text-[10px] text-teal-400 block font-semibold flex items-center gap-0.5 mt-0.5">
+                  <span className="text-[10px] text-teal-400 font-semibold flex items-center gap-0.5 mt-0.5">
                     Open in Google Maps <ExternalLink className="w-2.5 h-2.5" />
                   </span>
                 </p>
@@ -147,7 +152,7 @@ export default function Footer({ setActiveTab }) {
           <div className="flex items-center space-x-3">
             <span>Chandrapur, Maharashtra</span>
             <span>•</span>
-            <span className="text-teal-400 font-medium">Caring Today for Healthier Tomorrows</span>
+            <span className="text-teal-400 font-medium">Complete Kidney & Urology Care</span>
           </div>
         </div>
 

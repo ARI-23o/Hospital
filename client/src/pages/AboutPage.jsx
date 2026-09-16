@@ -1,165 +1,355 @@
 import React from 'react';
-import { Target, Eye, ShieldCheck, Heart, Award, CheckCircle, Clock, Building, Users } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { 
+  Target, Eye, ShieldCheck, HeartPulse, Stethoscope, CheckCircle2, 
+  ArrowRight, Phone, Calendar, Sparkles, Building, Activity, Users
+} from 'lucide-react';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+  }
+};
 
 export default function AboutPage({ setActiveTab }) {
   return (
-    <div className="space-y-14 pb-16">
+    <div className="space-y-12 sm:space-y-16 pb-16 overflow-hidden">
       
-      {/* 1. Header Banner */}
-      <section className="bg-gradient-to-r from-[#0F2D59] to-[#0D9488] text-white py-14">
+      {/* 1. TOP HERO SECTION (Refined Dual-Specialty Focus & Smooth Motion) */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-sky-50/70 via-white to-slate-50/80 py-10 sm:py-14 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
-          <span className="text-teal-300 font-bold text-xs uppercase tracking-wider bg-white/10 px-3.5 py-1 rounded-full border border-white/10">
-            About Chandrapur Kidney Care
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight">
-            Committed to Better Kidney Health for a Healthier Community
-          </h1>
-          <p className="text-sm sm:text-base text-slate-200 mt-3 font-normal leading-relaxed">
-            A doctor-led nephrology center founded with the vision of providing compassionate, evidence-based, and accessible kidney care in Chandrapur, Maharashtra.
-          </p>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-3"
+          >
+            <motion.span 
+              variants={itemVariants}
+              className="inline-block text-teal-700 bg-teal-50 border border-teal-200/80 font-bold text-[11px] sm:text-xs uppercase tracking-wider px-3.5 py-1 rounded-full shadow-xs"
+            >
+              About Chandrapur Kidney Care
+            </motion.span>
+            
+            <motion.h1 
+              variants={itemVariants}
+              className="text-2xl sm:text-4xl font-extrabold text-[#0F2D59] tracking-tight leading-[1.2]"
+            >
+              Comprehensive Kidney & Urology Care for Our Community
+            </motion.h1>
+            
+            <motion.p 
+              variants={itemVariants}
+              className="text-xs sm:text-base text-slate-600 mt-2 font-normal leading-relaxed max-w-2xl mx-auto"
+            >
+              Providing compassionate, evidence-based care for kidney and urinary health in Chandrapur, Maharashtra.
+            </motion.p>
+          </motion.div>
         </div>
       </section>
 
-      {/* 2. Our Journey & Clinic Overview */}
+      {/* 2. OUR JOURNEY & CLINIC OVERVIEW SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          <div className="lg:col-span-7 space-y-5">
-            <div className="inline-flex items-center gap-2 text-teal-700 bg-teal-50 font-bold text-xs px-3 py-1 rounded-full uppercase">
-              Our Journey
+          {/* Left: Journey Narrative & Dual Specialty Feature Cards */}
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-7 space-y-5"
+          >
+            <div className="inline-flex items-center gap-1.5 text-teal-700 bg-teal-50 font-bold text-xs px-3 py-1 rounded-full uppercase">
+              <Sparkles className="w-3.5 h-3.5 text-teal-600" /> Our Story & Purpose
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F2D59]">
-              Pioneering Doctor-Led Kidney Care in Chandrapur
+
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F2D59] leading-snug">
+              Building Better Kidney & Urology Care in Chandrapur
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              <strong>Chandrapur Kidney Care</strong> was founded by <strong>Dr. Sagar Sarda (MD, DM Nephrology)</strong> with a deep conviction: every patient facing renal disease deserves prompt, empathetic, and scientifically backed medical guidance without the need for excessive travel.
-            </p>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              We specialize in the non-invasive and medical preservation of renal function, meticulous management of chronic kidney disease (CKD), high-flux dialysis supervision, and difficult-to-control hypertension.
-            </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-sm font-bold text-slate-900">Dr. Sagar Sarda Leadership</h4>
-                  <p className="text-xs text-slate-500">Every treatment protocol is directly supervised by our Senior Nephrologist.</p>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-sm font-bold text-slate-900">Dedicated Nephrology Care</h4>
-                  <p className="text-xs text-slate-500">Focused non-transplant renal care with personalized dietary and medical regimens.</p>
-                </div>
-              </div>
+            <div className="space-y-3 text-slate-600 text-xs sm:text-sm leading-relaxed">
+              <p>
+                <strong>Chandrapur Kidney Care</strong> is dedicated to providing accessible, compassionate, and patient-centered care for kidney and urinary health in Chandrapur, Maharashtra.
+              </p>
+              <p>
+                Founded under the guidance of <strong className="text-[#0F2D59]">Dr. Sagar Sarda</strong> (Consultant Nephrologist, MD, DM Nephrology), our goal is to help patients understand their conditions, receive appropriate specialist care, and make informed decisions about their health.
+              </p>
+              <p>
+                Our services cover Nephrology and Urology, with care tailored to the needs of each patient. From kidney disease management and dialysis guidance to urological consultations, we aim to make quality healthcare easier to access.
+              </p>
             </div>
 
-          </div>
+            {/* 3. TWO FEATURE CARDS (Nephrology Care & Urology Care) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: 0.1 }}
+                whileHover={{ y: -3 }}
+                className="p-4 rounded-2xl bg-white border border-slate-200 shadow-soft hover:shadow-card transition flex items-start gap-3"
+              >
+                <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center shrink-0">
+                  <HeartPulse className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900">Nephrology Care</h4>
+                  <p className="text-xs text-slate-500 mt-0.5">Kidney disease evaluation, medical management, and dialysis guidance.</p>
+                </div>
+              </motion.div>
 
-          <div className="lg:col-span-5">
-            <div className="bg-white p-4 rounded-3xl shadow-card border border-slate-100">
-              <div className="rounded-2xl overflow-hidden bg-slate-900 relative shadow-md">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: 0.2 }}
+                whileHover={{ y: -3 }}
+                className="p-4 rounded-2xl bg-white border border-slate-200 shadow-soft hover:shadow-card transition flex items-start gap-3"
+              >
+                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
+                  <Stethoscope className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900">Urology Care</h4>
+                  <p className="text-xs text-slate-500 mt-0.5">Specialist evaluation and treatment for urinary system conditions.</p>
+                </div>
+              </motion.div>
+            </div>
+
+          </motion.div>
+
+          {/* Right: Verified Doctor Portrait Card */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-5"
+          >
+            <div className="bg-white p-4 sm:p-5 rounded-3xl shadow-card border border-slate-100 max-w-md mx-auto">
+              <div className="rounded-2xl overflow-hidden bg-slate-900 relative shadow-md group">
                 <img
                   src="/doctor_sagar_sarda.jpg"
-                  alt="Dr. Sagar Sarda"
-                  className="w-full h-80 object-cover object-top"
-                  onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&auto=format&fit=crop&q=80'; }}
+                  alt="Dr. Sagar Sarda Consultant Nephrologist"
+                  className="w-full h-80 sm:h-96 object-cover object-top transition duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F2D59] via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F2D59] via-[#0F2D59]/20 to-transparent"></div>
+                
                 <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h3 className="text-lg font-bold">Dr. Sagar Sarda</h3>
-                  <p className="text-xs text-teal-200">Consultant Nephrologist • Chandrapur Kidney Care</p>
+                  <span className="text-[10px] font-bold bg-teal-500 text-white px-2.5 py-0.5 rounded-full uppercase">
+                    Lead Consultant
+                  </span>
+                  <h3 className="text-xl font-bold mt-1">Dr. Sagar Sarda</h3>
+                  <p className="text-xs text-teal-200">Consultant Nephrologist • MD, DM (Nephrology)</p>
+                  <p className="text-[11px] text-slate-300 mt-1">Chandrapur Kidney Care</p>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </section>
 
-      {/* 3. Mission, Vision, and Values Cards */}
+      {/* 4. MISSION, VISION & CORE VALUES (Consistent Heights & Staggered Motion) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
           
-          {/* Mission */}
-          <div className="bg-white rounded-2xl p-7 shadow-soft border border-slate-100 hover:shadow-card transition flex flex-col justify-between">
+          {/* 01 Mission */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            whileHover={{ y: -4 }}
+            className="bg-white rounded-3xl p-6 shadow-soft border border-slate-100 hover:shadow-card transition flex flex-col justify-between"
+          >
             <div>
-              <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center mb-5">
-                <Target className="w-6 h-6" />
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center">
+                  <Target className="w-5 h-5" />
+                </div>
+                <span className="text-sm font-extrabold text-slate-300">01</span>
               </div>
-              <h3 className="text-lg font-bold text-[#0F2D59] mb-2">Our Mission</h3>
+              <h3 className="text-base sm:text-lg font-bold text-[#0F2D59] mb-2">Our Mission</h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                To deliver evidence-based, patient-centered kidney care with compassion and integrity, empowering patients with knowledge and tailored therapeutics to safeguard renal function.
+                To provide compassionate, evidence-based kidney and urology care that supports patient well-being, informed decisions, and accessible specialist consultations.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-blue-700">
-              Compassionate • Scientific • Accessible
+            <div className="mt-5 pt-3 border-t border-slate-100 text-xs font-semibold text-blue-700 flex items-center gap-1">
+              <span>Compassionate • Evidence-Based</span>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Vision */}
-          <div className="bg-white rounded-2xl p-7 shadow-soft border border-slate-100 hover:shadow-card transition flex flex-col justify-between">
+          {/* 02 Vision */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            whileHover={{ y: -4 }}
+            className="bg-white rounded-3xl p-6 shadow-soft border border-slate-100 hover:shadow-card transition flex flex-col justify-between"
+          >
             <div>
-              <div className="w-12 h-12 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center mb-5">
-                <Eye className="w-6 h-6" />
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-11 h-11 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center">
+                  <Eye className="w-5 h-5" />
+                </div>
+                <span className="text-sm font-extrabold text-slate-300">02</span>
               </div>
-              <h3 className="text-lg font-bold text-[#0F2D59] mb-2">Our Vision</h3>
+              <h3 className="text-base sm:text-lg font-bold text-[#0F2D59] mb-2">Our Vision</h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                To be the most trusted and respected center for kidney health in Maharashtra, advancing preventive nephrology, enhancing dialysis patient comfort, and eliminating preventable kidney failure.
+                To build a trusted center for kidney and urinary health in Chandrapur, offering coordinated specialist care and a patient-friendly healthcare experience.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-teal-700">
-              Healthier Kidneys • Stronger Communities
+            <div className="mt-5 pt-3 border-t border-slate-100 text-xs font-semibold text-teal-700 flex items-center gap-1">
+              <span>Trusted Healthcare Partner</span>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Values */}
-          <div className="bg-white rounded-2xl p-7 shadow-soft border border-slate-100 hover:shadow-card transition flex flex-col justify-between">
+          {/* 03 Core Values */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            whileHover={{ y: -4 }}
+            className="bg-white rounded-3xl p-6 shadow-soft border border-slate-100 hover:shadow-card transition flex flex-col justify-between"
+          >
             <div>
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-5">
-                <ShieldCheck className="w-6 h-6" />
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <span className="text-sm font-extrabold text-slate-300">03</span>
               </div>
-              <h3 className="text-lg font-bold text-[#0F2D59] mb-2">Our Core Values</h3>
-              <ul className="text-xs sm:text-sm text-slate-600 space-y-2">
+              <h3 className="text-base sm:text-lg font-bold text-[#0F2D59] mb-2">Our Core Values</h3>
+              <ul className="text-xs sm:text-sm text-slate-600 space-y-1.5">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <strong>Patient First:</strong> Uncompromising dedication to comfort.
+                  <span>Patient-centered care</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <strong>Ethical Practice:</strong> Honest, transparent guidance.
+                  <span>Ethical and transparent practice</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <strong>Continuous Learning:</strong> Adopting latest nephrology advances.
+                  <span>Respect and compassion</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  <span>Evidence-based medical guidance</span>
                 </li>
               </ul>
             </div>
-            <div className="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-emerald-700">
-              Integrity & Clinical Excellence
+            <div className="mt-5 pt-3 border-t border-slate-100 text-xs font-semibold text-emerald-700 flex items-center gap-1">
+              <span>Integrity & Clinical Excellence</span>
             </div>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* 5. NEW SECTION: OUR SPECIALTIES (Two Specialties. One Commitment.) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-slate-900 rounded-3xl p-6 sm:p-10 text-white shadow-xl space-y-8">
+          
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-teal-300 text-xs font-bold uppercase tracking-wider bg-white/10 px-3 py-1 rounded-full border border-white/10">
+              Our Specialties
+            </span>
+            <h2 className="text-xl sm:text-3xl font-extrabold text-white">
+              Two Specialties. One Commitment to Care.
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-300">
+              Dedicated care for kidney and urinary health, under one hospital.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            {/* Nephrology Box */}
+            <div className="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center">
+                <HeartPulse className="w-5 h-5" />
+              </div>
+              <h3 className="text-lg font-bold text-white">Nephrology</h3>
+              <p className="text-xs text-teal-200 font-semibold">Kidney health and medical kidney care</p>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                CKD management, dialysis care, hypertension-related kidney care, glomerular diseases, and medical renal evaluation.
+              </p>
+            </div>
+
+            {/* Urology Box */}
+            <div className="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-blue-500/20 text-sky-300 flex items-center justify-center">
+                <Stethoscope className="w-5 h-5" />
+              </div>
+              <h3 className="text-lg font-bold text-white">Urology</h3>
+              <p className="text-xs text-sky-200 font-semibold">Urinary system and urological care</p>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Urological consultations and treatment for conditions of the urinary tract, stone medical evaluation, and voiding health.
+              </p>
+            </div>
+
+          </div>
+
+          <div className="text-center pt-2">
+            <motion.button
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setActiveTab('services')}
+              className="bg-teal-500 hover:bg-teal-600 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl transition shadow-md inline-flex items-center gap-2"
+            >
+              <span>Explore All Specialties & Services</span>
+              <ArrowRight className="w-4 h-4" />
+            </motion.button>
           </div>
 
         </div>
       </section>
 
-      {/* 4. Call to Action */}
+      {/* 6. UPDATED CTA SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-slate-900 rounded-3xl p-8 sm:p-10 text-white text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
-          <div>
-            <h3 className="text-xl sm:text-2xl font-bold">Have Questions About Your Kidney Health?</h3>
-            <p className="text-xs sm:text-sm text-slate-300 mt-1">
-              Consult with Dr. Sagar Sarda for personalized advice on your reports and treatment path.
+        <div className="bg-teal-50 border border-teal-200/80 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+          <div className="space-y-1.5">
+            <span className="text-teal-700 text-[11px] font-bold uppercase tracking-wider block">
+              Need Specialist Care?
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold text-[#0F2D59]">
+              Questions About Your Kidney or Urinary Health?
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-xl">
+              Connect with the appropriate specialist at Chandrapur Kidney Care and understand your next steps.
             </p>
           </div>
-          <button
-            onClick={() => setActiveTab('appointment')}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm px-6 py-3 rounded-xl transition shadow-lg shrink-0"
-          >
-            Schedule Consultation
-          </button>
+          
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
+            <button
+              onClick={() => setActiveTab('appointment')}
+              className="bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl transition shadow-md flex items-center justify-center gap-2"
+            >
+              <Calendar className="w-4 h-4" /> Book an Appointment
+            </button>
+            <button
+              onClick={() => setActiveTab('contact')}
+              className="bg-white hover:bg-slate-100 text-[#0F2D59] font-bold text-xs sm:text-sm px-5 py-3 rounded-xl border border-slate-200 transition text-center"
+            >
+              Contact Us
+            </button>
+          </div>
         </div>
       </section>
 
