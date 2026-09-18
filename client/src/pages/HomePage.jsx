@@ -25,9 +25,11 @@ import {
   GraduationCap,
   HeartHandshake,
   ShieldCheck,
+  Utensils,
 } from "lucide-react";
 import ThreeKidneyVisualizer from "../components/ThreeKidneyVisualizer";
 import KidneyHealthCalculator from "../components/KidneyHealthCalculator";
+import RenalDietModal from "../components/RenalDietModal";
 import LiveOpdQueue from "../components/LiveOpdQueue";
 import MarqueeTicker from "../components/MarqueeTicker";
 import DoctorScheduleExplorer from "../components/DoctorScheduleExplorer";
@@ -70,6 +72,7 @@ export default function HomePage({ setActiveTab }) {
   const [activeCategory, setActiveCategory] = useState("all"); // 'all' | 'nephrology' | 'urology'
   const [faqCategory, setFaqCategory] = useState("nephrology");
   const [openFaqId, setOpenFaqId] = useState(null);
+  const [isDietModalOpen, setIsDietModalOpen] = useState(false);
 
   const toggleFaq = (id) => {
     setOpenFaqId(openFaqId === id ? null : id);
@@ -599,6 +602,47 @@ export default function HomePage({ setActiveTab }) {
         <KidneyHealthCalculator setActiveTab={setActiveTab} />
       </section>
 
+      {/* 8.5. PATIENT RENAL DIET & FLUID GUIDE BANNER */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-r from-emerald-900 via-teal-900 to-[#0F2D59] rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden border border-emerald-700/40">
+          <div className="absolute right-0 top-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="space-y-2 max-w-2xl">
+              <span className="inline-block text-[11px] font-bold text-emerald-300 bg-emerald-500/20 border border-emerald-400/30 px-3 py-1 rounded-full uppercase tracking-wider">
+                {t("dietGuide.modalTitle", "Kidney Diet & Fluid Guide")}
+              </span>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-white">
+                {lang === "mr"
+                  ? "किडनी रुग्णांसाठी संपूर्ण आहार व पाणी नियंत्रण चार्ट"
+                  : lang === "hi"
+                    ? "किडनी मरीजों के लिए संपूर्ण आहार एवं तरल पदार्थ प्रबंधन चार्ट"
+                    : "Complete Renal Diet & Fluid Intake Protocol"}
+              </h2>
+              <p className="text-xs sm:text-sm text-emerald-100 font-light leading-relaxed">
+                {lang === "mr"
+                  ? "पोटॅशियम, फॉस्फरस, मीठ आणि दैनंदिन पाणी सेवनाचे सविस्तर नियम वाचा आणि प्रिंट/सेव्ह करा."
+                  : lang === "hi"
+                    ? "पोटेशियम, फास्फोरस, नमक और दैनिक तरल सेवन के विस्तृत नियम देखें एवं प्रिंट/सेव करें।"
+                    : "Evidence-based guidelines on low-potassium foods, phosphorus restriction, safe salt intake, and stage-wise fluid quotas."}
+              </p>
+            </div>
+            <button
+              onClick={() => setIsDietModalOpen(true)}
+              className="bg-white text-emerald-950 hover:bg-emerald-50 font-bold text-xs sm:text-sm px-6 py-3 rounded-2xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center gap-2.5 shrink-0 cursor-pointer"
+            >
+              <Utensils className="w-4 h-4 text-emerald-700" />
+              <span>
+                {lang === "mr"
+                  ? "आहार चार्ट उघडा / प्रिंट करा"
+                  : lang === "hi"
+                    ? "डाइट चार्ट खोलें / प्रिंट करें"
+                    : "Open & Print Diet Chart"}
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* 9. DOCTOR SCHEDULE & OPD TIMINGS EXPLORER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <DoctorScheduleExplorer setActiveTab={setActiveTab} />
@@ -798,6 +842,9 @@ export default function HomePage({ setActiveTab }) {
           </div>
         </div>
       </section>
+
+      {/* Renal Diet Modal */}
+      <RenalDietModal isOpen={isDietModalOpen} onClose={() => setIsDietModalOpen(false)} />
     </div>
   );
 }

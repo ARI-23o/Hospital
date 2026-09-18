@@ -7,12 +7,15 @@ import {
   HelpCircle,
   CheckCircle2,
   Phone,
+  Utensils,
 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import RenalDietModal from "../components/RenalDietModal";
 
 export default function PatientInfoPage({ setActiveTab }) {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const [activeSection, setActiveSection] = useState("before");
+  const [isDietModalOpen, setIsDietModalOpen] = useState(false);
 
   const iconMap = {
     before: ClipboardList,
@@ -335,6 +338,44 @@ export default function PatientInfoPage({ setActiveTab }) {
         </div>
       </section>
 
+      {/* 2.5 Renal Diet & Fluid Guide Banner */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-r from-emerald-800 to-teal-900 rounded-3xl p-6 sm:p-8 text-white shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="space-y-1.5 max-w-2xl">
+            <span className="text-[10px] font-bold text-emerald-300 bg-white/10 px-3 py-1 rounded-full uppercase tracking-wider">
+              {t("dietGuide.modalTitle", "Kidney Diet & Fluid Guide")}
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold text-white">
+              {lang === "mr"
+                ? "किडनी रुग्णांसाठी संपूर्ण आहार व पाणी नियंत्रण चार्ट"
+                : lang === "hi"
+                  ? "किडनी मरीजों के लिए संपूर्ण आहार एवं तरल पदार्थ प्रबंधन चार्ट"
+                  : "Renal Diet & Fluid Restriction Guidelines"}
+            </h3>
+            <p className="text-xs sm:text-sm text-emerald-100 font-light">
+              {lang === "mr"
+                ? "कमी पोटॅशियम, फॉस्फरस नियंत्रण आणि सुरक्षित मीठ प्रमाणाचे नियम वाचा व प्रिंट करा."
+                : lang === "hi"
+                  ? "कम पोटेशियम, फास्फोरस प्रतिबंध और सुरक्षित नमक की मात्रा के नियम देखें व प्रिंट करें।"
+                  : "Clinical dietary advice for CKD, Dialysis & Kidney Stone patients. Print or save your daily chart."}
+            </p>
+          </div>
+          <button
+            onClick={() => setIsDietModalOpen(true)}
+            className="bg-white text-emerald-950 hover:bg-emerald-50 font-bold text-xs sm:text-sm px-6 py-3 rounded-2xl shadow-md transition flex items-center gap-2 shrink-0 cursor-pointer"
+          >
+            <Utensils className="w-4 h-4 text-emerald-700" />
+            <span>
+              {lang === "mr"
+                ? "आहार चार्ट उघडा / प्रिंट करा"
+                : lang === "hi"
+                  ? "डाइट चार्ट खोलें / प्रिंट करें"
+                  : "Open & Print Diet Chart"}
+            </span>
+          </button>
+        </div>
+      </section>
+
       {/* 3. Bottom Quote */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="bg-sky-50 rounded-2xl p-4 sm:p-6 border border-sky-100 max-w-2xl mx-auto">
@@ -349,6 +390,9 @@ export default function PatientInfoPage({ setActiveTab }) {
           </p>
         </div>
       </section>
+
+      {/* Renal Diet Modal */}
+      <RenalDietModal isOpen={isDietModalOpen} onClose={() => setIsDietModalOpen(false)} />
     </div>
   );
 }

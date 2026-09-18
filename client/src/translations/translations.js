@@ -1060,6 +1060,113 @@ export const translations = {
         },
       ],
     },
+    dietGuide: {
+      badge: "Clinical Renal Nutrition Guide",
+      title: "Kidney Diet & Fluid Management Chart",
+      subtitle:
+        "Evidence-based dietary recommendations for CKD, Hemodialysis, and Kidney Stone prevention under Dr. Sagar Sarda.",
+      tabToEat: "🟢 Foods to Favor",
+      tabToAvoid: "🔴 Foods to Restrict / Avoid",
+      tabFluid: "💧 Daily Fluid & Water Plan",
+      tabSalt: "🧂 Salt & Sodium Control",
+      printBtn: "Print / Save Diet Chart",
+      closeBtn: "Close Guide",
+      openGuideBtn: "Open Kidney Diet & Fluid Chart",
+      guideTeaserTitle: "Renal Diet & Fluid Nutrition Guide",
+      guideTeaserSubtitle:
+        "Download or view kidney-friendly dietary foods, potassium limits, and daily water quotas.",
+      disclaimer:
+        "Medical Disclaimer: These guidelines are general nephrology recommendations. Always consult Dr. Sagar Sarda for individualized electrolyte adjustments based on your monthly KFT blood reports.",
+      favorHeading: "Foods to Favor (Low Potassium / Low Sodium)",
+      favorDesc:
+        "These foods help maintain kidney balance without overloading potassium or phosphorus.",
+      favorItems: [
+        {
+          category: "Fruits",
+          items:
+            "Apples, Papaya, Guava (seeds removed), Pears, Pineapple, Berries, Watermelon (moderate portion).",
+        },
+        {
+          category: "Vegetables",
+          items:
+            "Bottle Gourd (Lauki/Doodhi), Ridge Gourd (Turai/Dodka), Bitter Gourd (Karela), Cabbage, Cauliflower, Cucumber, Capsicum.",
+        },
+        {
+          category: "Grains & Cereals",
+          items:
+            "White Rice, Poha, Semolina (Rava), Refined Wheat Flour (in moderation), Sago (Sabudana).",
+        },
+        {
+          category: "Proteins (As Prescribed)",
+          items:
+            "Egg whites (boiled), Paneer (fresh/homemade, controlled portion), Washed and well-boiled Moong Dal.",
+        },
+      ],
+      avoidHeading: "Foods to Restrict / Avoid (High Potassium & Phosphorus)",
+      avoidDesc:
+        "High potassium foods can cause dangerous cardiac arrhythmias in kidney impairment.",
+      avoidItems: [
+        {
+          category: "High Potassium Fruits",
+          items:
+            "Coconut Water (Nariyal Pani), Bananas, Mangoes, Oranges/Mausambi, Pomegranate, Dry Fruits (Almonds, Cashews, Raisins).",
+        },
+        {
+          category: "High Potassium Vegetables",
+          items:
+            "Spinach (Palak), Raw Tomatoes (excess), Potatoes & Sweet Potatoes (unless boiled & leached), Green Leafy Vegetables.",
+        },
+        {
+          category: "Processed & Salty Foods",
+          items:
+            "Pickles (Achar), Papad, Commercial Namkeen, Potato Chips, Instant Noodles, Canned Soups, Bakery items with baking soda.",
+        },
+        {
+          category: "Phosphorus-Rich Items",
+          items:
+            "Cola drinks/sodas, Processed cheese, Organ meats, Packaged chocolate drinks, Beer and alcohol.",
+        },
+      ],
+      fluidHeading: "Daily Fluid & Water Management",
+      fluidDesc: "Fluid intake must match your kidney filtering capacity and urine output.",
+      fluidCards: [
+        {
+          stage: "CKD Stages 1-3 & Kidney Stone Patients",
+          target: "2.5 – 3.0 Liters / Day",
+          advice:
+            "Good hydration prevents crystal deposition and helps flush metabolic waste. Maintain steady fluid intake throughout the day.",
+        },
+        {
+          stage: "Dialysis & CKD Stage 4-5 (With Swelling / Low Urine)",
+          target: "1.0 – 1.2 Liters / Day (Or Urine Output + 500 mL)",
+          advice:
+            "Strict fluid restriction is essential to prevent dangerous water accumulation in lungs (pulmonary edema) and high blood pressure.",
+        },
+      ],
+      fluidTipsHeading: "Golden Rules for Fluid Restriction:",
+      fluidTips: [
+        "Measure daily water in a dedicated 1-liter bottle so you know exact consumption.",
+        "Include tea, milk, dal water, soups, and fruit juices in your total daily fluid count.",
+        "Use ice cubes or gargle with cold water to quench dry mouth without swallowing excess volume.",
+      ],
+      saltHeading: "Salt & Sodium Control Protocol",
+      saltDesc:
+        "Excess sodium elevates blood pressure and worsens swelling around ankles and face.",
+      saltRules: [
+        {
+          title: "Limit to 1 Small Teaspoon (3-4g) Daily",
+          desc: "Add minimal salt while cooking. Do not keep a salt shaker on the dining table.",
+        },
+        {
+          title: "Avoid 'Rock Salt / Sendha Namak' & Low-Sodium Salt Substitutes",
+          desc: "Crucial Warning: Low-sodium 'diet salts' replace sodium with Potassium, which can cause lethal potassium buildup (Hyperkalemia) in kidney patients.",
+        },
+        {
+          title: "Use Natural Flavor Enhancers",
+          desc: "Enhance taste with lemon juice (small amount), cumin, coriander, ginger, garlic, and fresh mint instead of extra salt.",
+        },
+      ],
+    },
   },
 
   mr: {
@@ -2113,6 +2220,106 @@ export const translations = {
         },
       ],
     },
+    dietGuide: {
+      badge: "क्लिनिकल किडनी आहार व पोषण मार्गदर्शक",
+      title: "किडनी आहार व दैनंदिन पाणी नियोजन तक्ता",
+      subtitle:
+        "डॉ. सागर सारडा यांच्या मार्गदर्शनाखाली सीकेडी, डायलिसिस व मुतखडा रुग्णांसाठी वैज्ञानिक आहार नियमावली.",
+      tabToEat: "🟢 खाण्यायोग्य पदार्थ",
+      tabToAvoid: "🔴 टाळावयाचे पदार्थ",
+      tabFluid: "💧 पाणी व द्रवांचे नियोजन",
+      tabSalt: "🧂 मीठ व सोडियम नियंत्रण",
+      printBtn: "तक्ता प्रिंट / सेव्ह करा",
+      closeBtn: "तक्ता बंद करा",
+      openGuideBtn: "किडनी आहार व पाणी नियोजन तक्ता उघडा",
+      guideTeaserTitle: "किडनी आहार व दैनंदिन पाणी मार्गदर्शक",
+      guideTeaserSubtitle:
+        "किडनीसाठी सुरक्षित आहार, पोटॅशियम मर्यादा आणि दररोजच्या पाण्याचे प्रमाण समजून घ्या व सेव्ह करा.",
+      disclaimer:
+        "वैद्यकीय सूचना: ही सामान्य मार्गदर्शक माहिती आहे. रुग्णाच्या मासिक केएफटी (KFT) रक्त तपासणीनुसार डॉ. सागर सारडा यांच्या सल्ल्याने आहारात योग्य बदल करावेत.",
+      favorHeading: "खाण्यायोग्य पदार्थ (कमी पोटॅशियम / कमी मीठ)",
+      favorDesc: "हे पदार्थ शरीरातील पोटॅशियम किंवा फॉस्फरस न वाढवता शरीराचे पोषण योग्य ठेवतात.",
+      favorItems: [
+        {
+          category: "फळे",
+          items: "सफरचंद, पपई, पेरू (बिया काढून), नासपती, अननस, कलिंगड (मर्यादित प्रमाणात).",
+        },
+        {
+          category: "भाज्या",
+          items: "दूधी भोपळा (लौकी), दोडका (तोरई), कारले, कोबी, फ्लॉवर, काकडी, शिमला मिरची.",
+        },
+        {
+          category: "धान्य व कडधान्ये",
+          items: "पांढरा भात, पोहे, रवा, मर्यादित गव्हाची चपाती, साबुदाणा.",
+        },
+        {
+          category: "प्रथिने (प्रोटिन - सल्ल्यानुसार)",
+          items:
+            "उकडलेल्या अंड्याचा पांढरा भाग, ताजे घरगुती पनीर (मर्यादित), उकडलेली व धुतलेली मूग डाळ.",
+        },
+      ],
+      avoidHeading: "टाळावयाचे / वर्ज्य पदार्थ (उच्च पोटॅशियम व फॉस्फरस)",
+      avoidDesc:
+        "किडनीच्या रुग्णांमध्ये रक्तातील पोटॅशियम वाढल्यास हृदयाच्या ठोक्यांवर गंभीर परिणाम होऊ शकतो.",
+      avoidItems: [
+        {
+          category: "उच्च पोटॅशियम फळे",
+          items:
+            "शहाळ्याचे पाणी (नारळ पाणी), केळी, आंबा, संत्री/मोसंबी, डाळिंब, सुका मेवा (बदाम, काजू, मनुके).",
+        },
+        {
+          category: "उच्च पोटॅशियम भाज्या",
+          items:
+            "पालक व पालेभाज्या, कच्चा टोमॅटो (जास्त प्रमाणात), बटाटा व रताळे (उकळून पाणी काढल्याशिवाय खाऊ नये).",
+        },
+        {
+          category: "खारट व प्रक्रिया केलेले अन्न",
+          items: "लोणचे, पापड, फरसाण/नमकीन, चिप्स, मॅगी/नूडल्स, बेकिंग सोडा असलेले बेकरी पदार्थ.",
+        },
+        {
+          category: "फॉस्फरसयुक्त पेये",
+          items: "कोला/कोल्ड्रिंक्स, पॅकेज्ड ज्यूस, प्रोसेस्ड चीज, मद्यपान व बिअर.",
+        },
+      ],
+      fluidHeading: "दैनंदिन पाणी व द्रव पदार्थांचे नियोजन",
+      fluidDesc: "पाण्याचे प्रमाण लघवीच्या प्रमाणावर व किडनीच्या अवस्थेवर अवलंबून असावे.",
+      fluidCards: [
+        {
+          stage: "सीकेडी स्टेज १-३ आणि मुतखडा रुग्ण",
+          target: "२.५ ते ३.० लिटर / दररोज",
+          advice:
+            "भरपूर पाणी पिल्याने खडे बनण्यास प्रतिबंध होतो आणि शरीरातील विषारी घटक बाहेर पडतात.",
+        },
+        {
+          stage: "डायलिसिस व स्टेज ४-५ रुग्ण (सूज / लघवी कमी असल्यास)",
+          target: "१.० ते १.२ लिटर / दररोज (किंवा २४ तासांची लघवी + ५०० मिली)",
+          advice:
+            "पाणी जास्त पिल्यास फुफ्फुसात पाणी साचणे (दम लागणे) व रक्तदाब वाढण्याचा धोका असतो, म्हणून कडक नियंत्रण ठेवा.",
+        },
+      ],
+      fluidTipsHeading: "पाणी नियंत्रणाचे महत्त्वाचे नियम:",
+      fluidTips: [
+        "दररोज सकाळी १ लिटरच्या स्वतंत्र बाटलीत पाणी भरून ठेवा, जेणेकरून दिवसभरातील प्रमाणाचा अचूक अंदाज येईल.",
+        "चहा, दूध, डाळीचे पाणी, सूप आणि औषधांसोबतचे पाणी हे सर्व एकूण द्रव मर्यादेतच मोजावे.",
+        "तोंड सुकल्यास जास्त पाणी पिण्याऐवजी बर्फाचा छोटा तुकडा तोंडात ठेवा किंवा थंड पाण्याने गुळणी करा.",
+      ],
+      saltHeading: "मीठ व सोडियम नियंत्रणाचे नियम",
+      saltDesc: "अतिरिक्त मीठामुळे रक्तदाब वाढतो आणि पाय व चेहऱ्यावर सूज येते.",
+      saltRules: [
+        {
+          title: "दिवसभरात केवळ १ लहान चमचा (३-४ ग्रॅम) मीठ वापरा",
+          desc: "जेवणात वरून कधीही मीठ घेऊ नका. टेबलवर मिठाची बरणी ठेवू नका.",
+        },
+        {
+          title: "सेंधव मीठ व 'लो-सोडियम मीठ' पूर्णपणे टाळा",
+          desc: "महत्त्वाची चेतावणी: लो-सोडियम मिठामध्ये सोडियम ऐवजी 'पोटॅशियम' असते, जे किडनीच्या रुग्णांसाठी अतिशय घातक ठरू शकते.",
+        },
+        {
+          title: "नैसर्गिक चवीचा वापर करा",
+          desc: "मिठाचे प्रमाण कमी करून जेवणात लिंबाचा रस (थोड्या प्रमाणात), जिरे, धने, आले, लसूण व पुदिना वापरून चव वाढवा.",
+        },
+      ],
+    },
   },
 
   hi: {
@@ -3162,6 +3369,105 @@ export const translations = {
           affordableBannerTitle: "किफायती नेफ्रोलॉजी देखभाल",
           affordableBannerDesc:
             "परामर्श शुल्क और जांच के दाम पूरी तरह पारदर्शी और उचित रखे गए हैं।",
+        },
+      ],
+    },
+    dietGuide: {
+      badge: "क्लिनिकल रीनल न्यूट्रिशन गाइड",
+      title: "किडनी आहार एवं दैनिक जल प्रबंधन चार्ट",
+      subtitle:
+        "डॉ. सागर सारडा के मार्गदर्शन में सीकेडी, डायलिसिस और पथरी के रोगियों के लिए साक्ष्य-आधारित आहार नियम।",
+      tabToEat: "🟢 खाने योग्य पदार्थ",
+      tabToAvoid: "🔴 परहेज करने योग्य पदार्थ",
+      tabFluid: "💧 जल एवं तरल प्रबंधन",
+      tabSalt: "🧂 नमक एवं सोडियम नियंत्रण",
+      printBtn: "चार्ट प्रिंट / सेव करें",
+      closeBtn: "चार्ट बंद करें",
+      openGuideBtn: "किडनी आहार एवं जल प्रबंधन चार्ट खोलें",
+      guideTeaserTitle: "किडनी आहार एवं दैनिक जल मार्गदर्शिका",
+      guideTeaserSubtitle:
+        "किडनी-अनुकूल आहार, पोटेशियम सीमा और दैनिक जल की मात्रा समझें व सुरक्षित रखें।",
+      disclaimer:
+        "चिकित्सीय सूचना: यह सामान्य नेफ्रोलॉजी दिशानिर्देश हैं। अपनी मासिक केएफटी (KFT) रक्त रिपोर्ट के आधार पर डॉ. सागर सारडा से व्यक्तिगत सलाह अवश्य लें।",
+      favorHeading: "खाने योग्य खाद्य पदार्थ (कम पोटेशियम / कम सोडियम)",
+      favorDesc:
+        "यह खाद्य पदार्थ बिना पोटेशियम या फास्फोरस बढ़ाए शरीर को आवश्यक पोषण प्रदान करते हैं।",
+      favorItems: [
+        {
+          category: "फल",
+          items: "सेब, पपीता, अमरूद (बीज निकालकर), नाशपाती, अनानास, तरबूज (सीमित मात्रा में)।",
+        },
+        {
+          category: "सब्जियां",
+          items: "लौकी (घिया), तोरई (तुरई), करेला, पत्तागोभी, फूलगोभी, खीरा, शिमला मिर्च।",
+        },
+        {
+          category: "अनाज",
+          items: "सफेद चावल, पोहा, सूजी/रवा, सीमित गेहूं की रोटी, साबूदाना।",
+        },
+        {
+          category: "प्रोटीन (सलाह अनुसार)",
+          items: "उबले अंडे का सफेद भाग, ताजा घर का बना पनीर (सीमित), अच्छी तरह उबली हुई मूंग दाल।",
+        },
+      ],
+      avoidHeading: "परहेज करने योग्य खाद्य पदार्थ (उच्च पोटेशियम एवं फास्फोरस)",
+      avoidDesc:
+        "किडनी के रोगियों में पोटेशियम का उच्च स्तर दिल की धड़कन पर गंभीर प्रभाव डाल सकता है।",
+      avoidItems: [
+        {
+          category: "उच्च पोटेशियम फल",
+          items: "नारियल पानी, केला, आम, संतरा/मौसमी, अनार, सूखे मेवे (बादाम, काजू, किशमिश)।",
+        },
+        {
+          category: "उच्च पोटेशियम सब्जियां",
+          items:
+            "पालक एवं हरी पत्तेदार सब्जियां, कच्चा टमाटर (अधिक मात्रा में), आलू एवं शकरकंद (बिना उबाले)।",
+        },
+        {
+          category: "नमकीन एवं प्रसंस्कृत भोजन",
+          items: "अचार, पापड़, नमकीन/मिक्सचर, आलू चिप्स, नूडल्स, बेकिंग सोडा युक्त बेकरी उत्पाद।",
+        },
+        {
+          category: "फास्फोरस युक्त पेय",
+          items: "कोला/कोल्ड ड्रिंक्स, पैकेज्ड जूस, प्रोसेस्ड चीज, शराब एवं बियर।",
+        },
+      ],
+      fluidHeading: "दैनिक जल एवं तरल पदार्थ प्रबंधन",
+      fluidDesc: "तरल पदार्थों की मात्रा मूत्र की मात्रा और किडनी की स्थिति के अनुसार होनी चाहिए।",
+      fluidCards: [
+        {
+          stage: "सीकेडी स्टेज 1-3 और पथरी के रोगी",
+          target: "2.5 से 3.0 लीटर / प्रतिदिन",
+          advice:
+            "पर्याप्त पानी पीने से पथरी बनने से बचाव होता है और अपशिष्ट पदार्थ शरीर से बाहर निकलते हैं।",
+        },
+        {
+          stage: "डायलिसिस और स्टेज 4-5 (सूजन / कम पेशाब होने पर)",
+          target: "1.0 से 1.2 लीटर / प्रतिदिन (या 24 घंटे का पेशाब + 500 मिली)",
+          advice:
+            "अधिक पानी पीने से फेफड़ों में पानी भरने और रक्तचाप बढ़ने का खतरा रहता है, इसलिए सख्त नियंत्रण रखें।",
+        },
+      ],
+      fluidTipsHeading: "जल नियंत्रण के स्वर्णिम नियम:",
+      fluidTips: [
+        "प्रतिदिन सुबह 1 लीटर की अलग बोतल में पानी रखें, जिससे दैनिक मात्रा का सटीक हिसाब रहे।",
+        "चाय, दूध, दाल का पानी, सूप और दवाइयों के साथ लिया गया पानी भी कुल तरल सीमा में ही गिनें।",
+        "मुंह सूखने पर अधिक पानी पीने के बजाय बर्फ का छोटा टुकड़ा मुंह में रखें या ठंडे पानी से कुल्ला करें।",
+      ],
+      saltHeading: "नमक एवं सोडियम नियंत्रण नियम",
+      saltDesc: "अतिरिक्त नमक से रक्तचाप बढ़ता है और पैरों व चेहरे पर सूजन आती है।",
+      saltRules: [
+        {
+          title: "दिनभर में केवल 1 छोटा चम्मच (3-4 ग्राम) नमक उपयोग करें",
+          desc: "पके हुए भोजन पर ऊपर से कभी भी नमक न छिड़कें। डाइनिंग टेबल पर नमकदानी न रखें।",
+        },
+        {
+          title: "सेंधा नमक एवं 'लो-सोडियम नमक' से बचें",
+          desc: "महत्वपूर्ण चेतावनी: लो-सोडियम नमक में सोडियम की जगह 'पोटेशियम' होता है, जो किडनी रोगियों के लिए जानलेवा हो सकता है।",
+        },
+        {
+          title: "प्राकृतिक स्वाद का उपयोग करें",
+          desc: "नमक कम करके नींबू का रस (सीमित), जीरा, धनिया, अदरक, लहसुन और पुदीना से स्वाद बढ़ाएं।",
         },
       ],
     },
