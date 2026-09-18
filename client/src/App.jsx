@@ -4,6 +4,7 @@ import { LanguageProvider } from "./context/LanguageContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MobileBottomNav from "./components/MobileBottomNav";
+import WhatsAppFloatingButton from "./components/WhatsAppFloatingButton";
 import AdminPortal from "./components/AdminPortal";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
@@ -72,6 +73,9 @@ function MainAppContent() {
 
       {/* Persistent Responsive Medical Footer */}
       <Footer setActiveTab={setActiveTab} />
+
+      {/* Floating WhatsApp Direct Chat & Second Opinion Hotline */}
+      <WhatsAppFloatingButton />
 
       {/* Floating Sticky Mobile Quick Action Bar */}
       <MobileBottomNav setActiveTab={setActiveTab} />

@@ -1167,6 +1167,23 @@ export const translations = {
         },
       ],
     },
+    whatsappFloat: {
+      buttonLabel: "Chat with Doctor",
+      title: "Chandrapura Kidney Care",
+      subtitle: "Direct Doctor & OPD Support",
+      onlineStatus: "Dr. Sagar Damodar Sarda • Available",
+      shareReportBtn: "Share Reports for 2nd Opinion",
+      shareReportMsg:
+        "Hello Dr. Sagar Sarda, I want to share my kidney function / ultrasound reports for a clinical second opinion.",
+      dialysisInquiryBtn: "Emergency Dialysis / OPD Slot",
+      dialysisInquiryMsg:
+        "Hello Chandrapura Kidney Care, I need urgent assistance regarding dialysis / OPD appointment slots.",
+      generalInquiryBtn: "General Question / Location",
+      generalInquiryMsg:
+        "Hello, I have an inquiry about Chandrapura Kidney Care hospital services and OPD timings.",
+      callHelpline: "Direct Emergency Call",
+      disclaimer: "For life-threatening emergencies, please call the emergency hotline directly.",
+    },
   },
 
   mr: {
@@ -2320,6 +2337,23 @@ export const translations = {
         },
       ],
     },
+    whatsappFloat: {
+      buttonLabel: "डॉक्टरांशी संपर्क करा",
+      title: "चंद्रपूर किडनी केअर",
+      subtitle: "थेट डॉक्टर व ओपीडी सहाय्यता",
+      onlineStatus: "डॉ. सागर दामोदर सारडा • उपलब्ध",
+      shareReportBtn: "किडनी रिपोर्ट्स तपासा / सेकंड ओपिनियन",
+      shareReportMsg:
+        "नमस्कार डॉ. सागर सारडा, मला माझे किडनी रिपोर्ट्स / केएफटी चाचणी सेकंड ओपिनियनसाठी पाठवायचे आहेत.",
+      dialysisInquiryBtn: "तातडीचे डायलिसिस / ओपीडी वेळ चौकशी",
+      dialysisInquiryMsg:
+        "नमस्कार चंद्रपूर किडनी केअर, मला डायलिसिस आणि ओपीडी अपॉइंटमेंटबद्दल तातडीची माहिती हवी आहे.",
+      generalInquiryBtn: "सामान्य चौकशी / पत्ता",
+      generalInquiryMsg:
+        "नमस्कार, मला चंद्रपूर किडनी केअरच्या ओपीडी वेळा व सुविधांविषयी माहिती हवी आहे.",
+      callHelpline: "तातडीने थेट फोन करा",
+      disclaimer: "अतितातडीच्या वैद्यकीय प्रसंगी कृपया थेट हेल्पलाईन नंबरवर कॉल करा.",
+    },
   },
 
   hi: {
@@ -3470,6 +3504,23 @@ export const translations = {
           desc: "नमक कम करके नींबू का रस (सीमित), जीरा, धनिया, अदरक, लहसुन और पुदीना से स्वाद बढ़ाएं।",
         },
       ],
+    },
+    whatsappFloat: {
+      buttonLabel: "डॉक्टर से बात करें",
+      title: "चंद्रपुर किडनी केयर",
+      subtitle: "सीधे डॉक्टर एवं ओपीडी सहायता",
+      onlineStatus: "डॉ. सागर दामोदर सारदा • उपलब्ध",
+      shareReportBtn: "किडनी रिपोर्ट्स चेक करवाएं / सेकंड ओपिनियन",
+      shareReportMsg:
+        "नमस्ते डॉ. सागर सारदा, मैं अपने किडनी रिपोर्ट्स / केएफटी जांच सेकंड ओपिनियन हेतु भेजना चाहता हूँ।",
+      dialysisInquiryBtn: "आपातकालीन डायलिसिस / ओपीडी स्लॉट",
+      dialysisInquiryMsg:
+        "नमस्ते चंद्रपुर किडनी केयर, मुझे डायलिसिस और ओपीडी अपॉइंटमेंट की तुरंत जानकारी चाहिए।",
+      generalInquiryBtn: "सामान्य जानकारी / पता",
+      generalInquiryMsg:
+        "नमस्ते, मुझे चंद्रपुर किडनी केयर के ओपीडी समय एवं सेवाओं के बारे में जानकारी चाहिए।",
+      callHelpline: "सीधे आपातकालीन कॉल करें",
+      disclaimer: "अति-आपातकालीन स्थिति में कृपया सीधे हेल्पलाइन नंबर पर कॉल करें।",
     },
   },
 };
