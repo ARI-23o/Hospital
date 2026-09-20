@@ -26,7 +26,7 @@ const failedAttempts = new Map();
 const activeSessions = new Map();
 const VALID_PASSCODES = process.env.ADMIN_PASSCODES
   ? process.env.ADMIN_PASSCODES.split(",").map((p) => p.trim())
-  : [process.env.ADMIN_PASSCODE || "admin2026", "sarda2026"];
+  : [process.env.ADMIN_PASSCODE || "admin2026", "sarda@2026", "sarda2026"];
 
 // 0. Doctor / Staff Authentication Endpoints
 app.post("/api/auth/login", (req, res) => {

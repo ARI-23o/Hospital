@@ -20,6 +20,38 @@ if (typeof window !== "undefined") {
 
   // Mock scrollTo
   window.scrollTo = () => {};
+
+  // Mock fetch for JSDOM relative URLs
+  globalThis.fetch = vi.fn().mockImplementation(async (url) => {
+    const urlStr = String(url);
+    if (urlStr.includes("/api/opd/queue")) {
+      return {
+        ok: true,
+        status: 200,
+        headers: new Headers({ "content-type": "application/json" }),
+        json: async () => ({
+          current_token: 14,
+          next_token: 18,
+          estimated_wait_mins: 20,
+          status: "active",
+        }),
+      };
+    }
+    if (urlStr.includes("/api/appointments/booked-slots")) {
+      return {
+        ok: true,
+        status: 200,
+        headers: new Headers({ "content-type": "application/json" }),
+        json: async () => [],
+      };
+    }
+    return {
+      ok: true,
+      status: 200,
+      headers: new Headers({ "content-type": "application/json" }),
+      json: async () => ({}),
+    };
+  });
 }
 
 // Global Framer Motion mock for reliable JSDOM rendering
@@ -33,6 +65,9 @@ vi.mock("framer-motion", () => {
         transition: _transition,
         whileHover: _whileHover,
         whileTap: _whileTap,
+        whileInView: _whileInView,
+        viewport: _viewport,
+        layout: _layout,
         ...rest
       } = props;
       return React.createElement(Tag, { ref, ...rest });

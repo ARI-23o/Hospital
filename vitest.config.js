@@ -9,11 +9,6 @@ export default defineConfig({
     environment: "jsdom",
     fileParallelism: false,
     testTimeout: 15000,
-    poolOptions: {
-      forks: {
-        singleFork: true,
-      },
-    },
     setupFiles: ["./tests/setup.js"],
     include: ["tests/unit/**/*.test.{js,jsx}", "tests/integration/**/*.test.{js,jsx}"],
     coverage: {
