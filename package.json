@@ -1,7 +1,7 @@
 {
   "name": "chandrapura-kidney-care",
   "version": "1.0.0",
-  "description": "Hospital Management & Multi-page Portal for Chandrapura Kidney Care - Dr. Sagar Sadar",
+  "description": "Hospital Management & Multi-page Portal for Chandrapura Kidney Care - Dr. Sagar Damodar Sarda",
   "type": "module",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",

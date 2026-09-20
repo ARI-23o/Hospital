@@ -24,7 +24,9 @@ try {
 // In-memory rate limiting and active sessions
 const failedAttempts = new Map();
 const activeSessions = new Map();
-const VALID_PASSCODES = ["sarda@2026", "123456", "admin2026", "sarda2026"];
+const VALID_PASSCODES = process.env.ADMIN_PASSCODES
+  ? process.env.ADMIN_PASSCODES.split(",").map((p) => p.trim())
+  : [process.env.ADMIN_PASSCODE || "admin2026", "sarda2026"];
 
 // 0. Doctor / Staff Authentication Endpoints
 app.post("/api/auth/login", (req, res) => {
@@ -104,7 +106,7 @@ app.get("/api/doctor", (req, res) => {
     tagline: "Caring Today for Healthier Tomorrows",
     location: "Behind LIC Office, Main Road, Chandrapura, Maharashtra, India",
     doctor: {
-      name: "Dr. Sagar Sadar",
+      name: "Dr. Sagar Damodar Sarda",
       degrees: "MD (General Medicine), DM (Nephrology)",
       title: "Consultant Nephrologist",
       experience: "12+ Years Clinical & Nephrology Experience",

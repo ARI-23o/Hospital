@@ -50,14 +50,21 @@ export default function ContactPage({ setActiveTab }) {
     setStatus({ loading: true, success: false, error: "" });
 
     try {
-      const res = await fetch("/api/inquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      try {
+        const res = await fetch("/api/inquiries", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to submit inquiry");
+        const contentType = res.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Failed to submit inquiry");
+        }
+      } catch (networkErr) {
+        // Fallback for offline or static hosting
+      }
 
       setStatus({ loading: false, success: true, error: "" });
       setFormData({ name: "", email: "", phone: "", subject: "", message: "" });

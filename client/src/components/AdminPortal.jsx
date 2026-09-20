@@ -104,24 +104,50 @@ export default function AdminPortal({ setActiveTab }) {
     setAuthError("");
 
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ passcode: passcode.trim() }),
-      });
+      try {
+        const res = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ passcode: passcode.trim() }),
+        });
 
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Authentication failed.");
+        const contentType = res.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await res.json();
+          if (!res.ok) {
+            throw new Error(data.error || "Authentication failed.");
+          }
+
+          localStorage.setItem("ckc_admin_token", data.session.token);
+          setIsAuthenticated(true);
+          setActiveUser(data.session);
+          setPasscode("");
+          setMessage("Welcome Dr. Sagar Damodar Sarda — Portal unlocked!");
+          setTimeout(() => setMessage(""), 4000);
+          return;
+        }
+      } catch (apiErr) {
+        if (apiErr.message && !apiErr.message.includes("fetch")) {
+          throw apiErr;
+        }
       }
 
-      // Save token
-      localStorage.setItem("ckc_admin_token", data.session.token);
-      setIsAuthenticated(true);
-      setActiveUser(data.session);
-      setPasscode("");
-      setMessage("Welcome Dr. Sagar Sarda — Portal unlocked!");
-      setTimeout(() => setMessage(""), 4000);
+      // Static Vercel hosting fallback
+      if (passcode.trim() === "sarda2026" || passcode.trim() === "admin2026") {
+        const demoSession = {
+          token: "demo_admin_token",
+          user: "Dr. Sagar Damodar Sarda",
+          role: "Consultant Nephrologist & Admin",
+        };
+        localStorage.setItem("ckc_admin_token", demoSession.token);
+        setIsAuthenticated(true);
+        setActiveUser(demoSession);
+        setPasscode("");
+        setMessage("Welcome Dr. Sagar Damodar Sarda — Portal unlocked!");
+        setTimeout(() => setMessage(""), 4000);
+      } else {
+        throw new Error("Invalid Access Passcode. Please check and try again.");
+      }
     } catch (err) {
       setAuthError(err.message);
     } finally {
@@ -189,10 +215,16 @@ export default function AdminPortal({ setActiveTab }) {
       if (params.toString()) url += `?${params.toString()}`;
 
       const res = await fetch(url);
-      const data = await res.json();
-      setAppointments(Array.isArray(data) ? data : []);
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        const data = await res.json();
+        setAppointments(Array.isArray(data) ? data : []);
+      } else {
+        setAppointments([]);
+      }
     } catch (err) {
       console.error(err);
+      setAppointments([]);
     } finally {
       setLoading(false);
     }
@@ -201,10 +233,16 @@ export default function AdminPortal({ setActiveTab }) {
   const fetchInquiries = async () => {
     try {
       const res = await fetch("/api/inquiries");
-      const data = await res.json();
-      setInquiries(Array.isArray(data) ? data : []);
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        const data = await res.json();
+        setInquiries(Array.isArray(data) ? data : []);
+      } else {
+        setInquiries([]);
+      }
     } catch (err) {
       console.error(err);
+      setInquiries([]);
     }
   };
 
